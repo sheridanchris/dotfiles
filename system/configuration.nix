@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, inputs, ... }:
 {
   imports =
     [
@@ -8,6 +8,12 @@
   # Flakes!
   nix.package = pkgs.nixFlakes;
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
+
+  # Home manager
+  home-manager.useGlobalPkgs = true;
+  home-manager.useUserPackages = true;
+  home-manager.extraSpecialArgs = { inherit inputs; };
+  home-manager.users.christian = import ../users/christian/home.nix;
 
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -32,6 +38,17 @@
     LC_TIME = "en_US.UTF-8";
   };
 
+  programs.hyprland = {
+    enable = true;
+    package = pkgs.hyprland;
+    xwayland.enable = true;
+  };
+
+  programs.waybar = {
+    enable = true;
+    package = pkgs.waybar-hyprland;
+  };
+
   services.xserver = {
     enable = true;
     layout = "us";
@@ -39,18 +56,18 @@
     displayManager = {
       gdm = {
         enable = true;
-        wayland = false;
+        wayland = true;
       };
       autoLogin = {
         enable = true;
         user = "christian";
       };
     };
-    desktopManager = {
-      gnome = {
-        enable = true;
-      };
-    };
+    # desktopManager = {
+    #   gnome = {
+    #     enable = true;
+    #   };
+    # };
   };
 
   services.printing.enable = true;
@@ -79,6 +96,8 @@
 
   nixpkgs.config.allowUnfree = true;
 
+  # This environment variable fixes some x11 apps on wayland (wlroots)
+  environment.sessionVariables.NIXOS_OZONE_WL = "1";
   environment.systemPackages = with pkgs; [];
 
   hardware.opengl = {
@@ -91,6 +110,31 @@
     modesetting.enable = true;
     nvidiaSettings = true;
     package = config.boot.kernelPackages.nvidiaPackages.stable;
+  };
+
+  fonts = {
+    enableDefaultFonts = true;
+    fonts = with pkgs; [
+        liberation_ttf
+        dejavu_fonts
+        noto-fonts
+        noto-fonts-lgc-plus
+        jetbrains-mono
+        twitter-color-emoji
+        font-awesome
+      (nerdfonts.override { 
+        fonts = [ "JetBrainsMono" ];
+      })
+    ];
+
+    fontconfig = {
+      defaultFonts = {
+        serif = [ "DejaVu Math TeX Gyre" "DejaVu Serif" "Noto Serif" ];
+        sansSerif = [ "DejaVu Sans" "Noto Sans" ];
+        monospace = [ "JetBrainsMono Nerd Font" "DejaVu Sans Mono" ];
+        emoji = [ "Twitter Color Emoji" "Noto Color Emoji" "Noto Emoji" ];
+      };
+    };
   };
 
   system.stateVersion = "23.05";

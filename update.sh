@@ -1,2 +1,2 @@
 #!/bin/sh
-exec nix flake update
+exec sudo nix flake update

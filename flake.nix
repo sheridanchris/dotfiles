@@ -1,13 +1,14 @@
 {
   description = "Christian Sheridan's NixOS System and User Configuration";
   inputs = {
-    nixpkgs.url = "nixpkgs/nixos-23.05";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     home-manager = {
-      url = "github:nix-community/home-manager/release-23.05";
+      url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    hyprland.url = "github:hyprwm/Hyprland";
   };
-  outputs = { self, nixpkgs, home-manager, ... }: 
+  outputs = { self, nixpkgs, home-manager, hyprland, ... }@inputs: 
     let
       system = "x86_64-linux";
       pkgs = import nixpkgs {
@@ -15,18 +16,21 @@
         config = { allowUnfree = true; };
       };
       lib = nixpkgs.lib;
+      overlays = [
+        hyprland.overlays.default
+      ];
     in {
       nixosConfigurations = {
         nixos = lib.nixosSystem {
-          inherit system pkgs;
+          inherit system;
+          specialArgs = { inherit inputs; };
           modules = [
-            ./system/configuration.nix
-            home-manager.nixosModules.home-manager
             {
-              home-manager.useGlobalPkgs = true;
-              home-manager.useUserPackages = true;
-              home-manager.users.christian = import ./users/christian/home.nix;
+              nixpkgs.overlays = overlays;
             }
+
+            home-manager.nixosModules.home-manager
+            (import ./system/configuration.nix)
           ];
         };
       };
