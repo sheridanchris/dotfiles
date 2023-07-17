@@ -44,10 +44,10 @@
     xwayland.enable = true;
   };
 
-  programs.waybar = {
-    enable = true;
-    package = pkgs.waybar-hyprland;
-  };
+  # programs.waybar = {
+  #   enable = true;
+  #   package = pkgs.waybar-hyprland;
+  # };
 
   services.xserver = {
     enable = true;
@@ -63,11 +63,6 @@
         user = "christian";
       };
     };
-    # desktopManager = {
-    #   gnome = {
-    #     enable = true;
-    #   };
-    # };
   };
 
   services.printing.enable = true;

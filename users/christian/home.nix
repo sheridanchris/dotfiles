@@ -59,6 +59,47 @@
     };
   };
 
+  programs.waybar = {
+    enable = true;
+    package = pkgs.waybar-hyprland;
+    settings = [
+      {
+        layer = "top";
+        position = "top";
+        height = 30;
+        output = [ "DP-1" ];
+        modules-left = ["wlr/workspaces"];
+        modules-center = [];
+        modules-right = ["clock" "tray"];
+      }
+    ];
+    style = ''
+      * {
+        font-family: Source Code Pro;
+        font-size: 13px;
+      }
+      window#waybar {
+        background: #16191C;
+        color: #AAB2BF;
+      }
+      #workspaces button {
+        padding: 0 5px;
+        color: #ffffff;
+      }
+
+      #clock,
+      #tray {
+        padding: 0 10px;
+        color: #ffffff;
+      }
+
+      button:hover {
+        background: inherit;
+        box-shadow: inset 0 -3px #ffffff;
+      }
+    '';
+  };
+
   gtk = {
     enable = true;
     theme = {
