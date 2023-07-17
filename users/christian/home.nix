@@ -3,7 +3,6 @@
   home.homeDirectory = "/home/christian";
 
   programs.home-manager.enable = true;
-  #programs.vscode.enable = true;
 
   programs.git = {
     enable = true;
@@ -13,13 +12,30 @@
 
   programs.zsh = {
     enable = true;
-    #enableAutoSuggestions = true;
-    #enableSyntaxHighlighting = true;
+    enableAutosuggestions = true;
+    enableCompletion = true;
+    enableSyntaxHighlighting = true;
+  };
+
+  programs.alacritty = {
+    enable = true;
+    settings = {
+      shell = {
+        program = "zsh";
+      };
+    };
   };
 
   programs.vscode = {
     enable = true;
     package = pkgs.vscode.fhs;
+    extensions = with pkgs.vscode-extensions; [
+      ms-dotnettools.csharp
+      ionide.ionide-fsharp
+      bbenoist.nix
+      eamodio.gitlens
+      vscode-icons-team.vscode-icons
+    ];
   };
 
   gtk = {

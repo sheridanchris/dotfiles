@@ -16,14 +16,6 @@
       };
       lib = nixpkgs.lib;
     in {
-      #homeManagerConfigurations = {
-      #  christian = home-manager.lib.homeManagerConfiguration {
-      #    inherit pkgs;
-      #    modules = [
-      #      ./users/christian/home.nix
-      #    ];
-      # };
-      #};
       nixosConfigurations = {
         nixos = lib.nixosSystem {
           inherit system pkgs;
