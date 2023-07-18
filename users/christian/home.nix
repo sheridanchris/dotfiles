@@ -13,6 +13,11 @@
     userEmail = "christiansheridan@outlook.com";
   };
 
+  programs.starship = {
+    enable = true;
+    enableZshIntegration = true;
+  };
+
   programs.zsh = {
     enable = true;
     enableAutosuggestions = true;
@@ -82,9 +87,19 @@
         background: #16191C;
         color: #AAB2BF;
       }
+
       #workspaces button {
         padding: 0 5px;
         color: #ffffff;
+      }
+
+      #workspaces button.focused {
+        background-color: #64727D;
+        box-shadow: inset 0 -3px #ffffff;
+      }
+
+      #workspaces button.urgent {
+        background-color: #eb4d4b;
       }
 
       #clock,
@@ -108,8 +123,8 @@
   };
 
   home.packages = with pkgs; [
-    firefox
-    discord
+    firefox-wayland
+    discord-canary
     thunderbird
     gnome.nautilus
     bitwarden
@@ -161,7 +176,7 @@
         bind = SUPER_CONTROL_SHIFT, Q, exit
         bind = SUPER, Return, exec, alacritty
         bind = SUPER_SHIFT, Return, exec, nautilus
-        bind = SUPER, O, exec, wofi --show run
+        bind = SUPER, O, exec, wofi --show drun
         bind = SUPER_SHIFT, W, exec, firefox
         bind = SUPER, mouse_down, split-workspace, e+1
         bind = SUPER, mouse_up, split-workspace, e-1

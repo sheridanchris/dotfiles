@@ -93,7 +93,7 @@
 
   # This environment variable fixes some x11 apps on wayland (wlroots)
   environment.sessionVariables.NIXOS_OZONE_WL = "1";
-  environment.systemPackages = with pkgs; [];
+  environment.systemPackages = with pkgs; [ direnv ];
 
   hardware.opengl = {
     enable = true;
@@ -105,6 +105,14 @@
     modesetting.enable = true;
     nvidiaSettings = true;
     package = config.boot.kernelPackages.nvidiaPackages.stable;
+  };
+
+  xdg.portal = {
+    enable = true;
+    extraPortals = with pkgs; [
+      xdg-desktop-portal-hyprland
+      xdg-desktop-portal-gtk
+    ];
   };
 
   fonts = {
