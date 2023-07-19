@@ -23,6 +23,9 @@
     enableAutosuggestions = true;
     enableCompletion = true;
     syntaxHighlighting.enable = true;
+    initExtra = ''
+      eval "$(direnv hook zsh)"
+    '';
   };
 
   programs.alacritty = {
@@ -49,13 +52,14 @@
       bbenoist.nix
       eamodio.gitlens
       vscode-icons-team.vscode-icons
+      mkhl.direnv
     ];
     userSettings = {
       "workbench.iconTheme" = "vscode-icons";
       "gitlens.codelens.enabled" = true;
       "editor.formatOnSave" = true;
       "editor.mouseWheelZoom" = true;
-      "editor.fontSize" = 13;
+      "editor.fontSize" = 15;
       "editor.fontFamily" = "'JetBrains Mono', 'Font Awesome 6 Free', 'monospace', monospace";
       "FSharp.inlayHints.enabled" = false;
       "FSharp.inlayHints.typeAnnotations" = false;
@@ -83,6 +87,7 @@
         font-family: Source Code Pro;
         font-size: 13px;
       }
+      
       window#waybar {
         background: #16191C;
         color: #AAB2BF;
@@ -93,7 +98,7 @@
         color: #ffffff;
       }
 
-      #workspaces button.focused {
+      #workspaces button.active {
         background-color: #64727D;
         box-shadow: inset 0 -3px #ffffff;
       }
@@ -124,13 +129,16 @@
 
   home.packages = with pkgs; [
     firefox-wayland
-    discord-canary
+    discord
     thunderbird
     gnome.nautilus
     bitwarden
     flameshot
     wofi
     wofi-emoji
+    (kodi-wayland.withPackages (kodiPkgs: with kodiPkgs; [ netflix ]))
+    easyeffects
+    hyprpaper
   ];
 
   wayland.windowManager.hyprland =
@@ -168,6 +176,7 @@
       ];
       extraConfig = ''
         exec-once = waybar
+        exec-once = hyprpaper
         env = XCURSOR_SIZE,24
         env = WLR_NO_HARDWARE_CURSORS,1
         monitor = DP-1,1920x1080@144,0x0,1

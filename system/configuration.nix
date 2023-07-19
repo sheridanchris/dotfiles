@@ -44,10 +44,7 @@
     xwayland.enable = true;
   };
 
-  # programs.waybar = {
-  #   enable = true;
-  #   package = pkgs.waybar-hyprland;
-  # };
+  programs.dconf.enable = true;
 
   services.xserver = {
     enable = true;
@@ -109,10 +106,7 @@
 
   xdg.portal = {
     enable = true;
-    extraPortals = with pkgs; [
-      xdg-desktop-portal-hyprland
-      xdg-desktop-portal-gtk
-    ];
+    extraPortals = with pkgs; [ xdg-desktop-portal-hyprland ];
   };
 
   fonts = {
