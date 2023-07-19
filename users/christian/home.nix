@@ -77,12 +77,12 @@
         position = "top";
         height = 30;
         output = [ "DP-1" ];
-        modules-left = ["hyprland/window" "hyprland/workspaces"];
+        modules-left = ["hyprland/workspaces" "hyprland/window"];
         modules-center = [];
         modules-right = ["clock" "tray"];
 
         "clock" = {
-          "format" = " {:%I:%M %p}";
+          "format" = "{: %a %B %d %G  %I:%M %p}";
         };
       }
     ];
@@ -193,9 +193,7 @@
         bind = SUPER_SHIFT, Return, exec, nautilus
         bind = SUPER, O, exec, wofi --show drun
         bind = SUPER_SHIFT, W, exec, firefox
-        bind = SUPER, mouse_down, split-workspace, e+1
-        bind = SUPER, mouse_up, split-workspace, e-1
-        bind = SUPER, print, exec, grim -g "$(slurp)"
+        bind = SUPER, Print, exec, grim -g "$(slurp)"
         bind = SUPER, 1, split-workspace, 1
         bind = SUPER, 2, split-workspace, 2
         bind = SUPER, 3, split-workspace, 3

@@ -78,7 +78,7 @@
   users.users.christian = {
     isNormalUser = true;
     description = "Christian Sheridan";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [ "docker" "networkmanager" "wheel" ];
     packages = with pkgs; [];
   };
 
@@ -108,6 +108,8 @@
     enable = true;
     extraPortals = with pkgs; [ xdg-desktop-portal-hyprland ];
   };
+
+  virtualisation.docker.enable = true;
 
   fonts = {
     enableDefaultFonts = true;
