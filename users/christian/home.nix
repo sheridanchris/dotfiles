@@ -77,9 +77,13 @@
         position = "top";
         height = 30;
         output = [ "DP-1" ];
-        modules-left = ["wlr/workspaces"];
+        modules-left = ["hyprland/window" "hyprland/workspaces"];
         modules-center = [];
         modules-right = ["clock" "tray"];
+
+        "clock" = {
+          "format" = " {:%I:%M %p}";
+        };
       }
     ];
     style = ''
@@ -98,24 +102,24 @@
         color: #ffffff;
       }
 
+      #workspaces button:hover {
+        background-color: #2986cc;
+      }
+
       #workspaces button.active {
-        background-color: #64727D;
-        box-shadow: inset 0 -3px #ffffff;
+        background-color: #2986cc;
       }
 
       #workspaces button.urgent {
         background-color: #eb4d4b;
       }
 
+      #window,
+      #workspaces,
       #clock,
       #tray {
         padding: 0 10px;
         color: #ffffff;
-      }
-
-      button:hover {
-        background: inherit;
-        box-shadow: inset 0 -3px #ffffff;
       }
     '';
   };
@@ -139,6 +143,8 @@
     (kodi-wayland.withPackages (kodiPkgs: with kodiPkgs; [ netflix ]))
     easyeffects
     hyprpaper
+    grim
+    slurp
   ];
 
   wayland.windowManager.hyprland =
@@ -189,6 +195,7 @@
         bind = SUPER_SHIFT, W, exec, firefox
         bind = SUPER, mouse_down, split-workspace, e+1
         bind = SUPER, mouse_up, split-workspace, e-1
+        bind = SUPER, print, exec, grim -g "$(slurp)"
         bind = SUPER, 1, split-workspace, 1
         bind = SUPER, 2, split-workspace, 2
         bind = SUPER, 3, split-workspace, 3
