@@ -45,7 +45,9 @@
 
   programs.vscode = {
     enable = true;
-    package = pkgs.vscode;
+    enableUpdateCheck = false;
+    enableExtensionUpdateCheck = false;
+    package = pkgs.vscode.fhs;
     extensions = with pkgs.vscode-extensions; [
       ms-dotnettools.csharp
       ionide.ionide-fsharp
