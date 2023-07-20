@@ -45,6 +45,7 @@
   };
 
   programs.dconf.enable = true;
+  security.polkit.enable = true;
 
   services.xserver = {
     enable = true;
@@ -74,7 +75,6 @@
     alsa.support32Bit = true;
     pulse.enable = true;
   };
-
   users.users.christian = {
     isNormalUser = true;
     description = "Christian Sheridan";
@@ -107,7 +107,10 @@
   xdg = {
     portal = {
       enable = true;
-      extraPortals = with pkgs; [ xdg-desktop-portal-hyprland ];
+      extraPortals = with pkgs; [
+        xdg-desktop-portal-hyprland
+        xdg-desktop-portal-gtk
+     ];
     };
   };
 

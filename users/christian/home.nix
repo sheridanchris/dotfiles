@@ -204,6 +204,21 @@
                 url = "https://nur.nix-community.org/";
                 tags = [ "nix" ];
               }
+              {
+                name = "Nix Manual";
+                url = "https://nixos.org/manual/nix/stable/";
+                tags = [ "nix" "manual" ];
+              }
+              {
+                name = "Nixpkgs Manual";
+                url = "https://nixos.org/manual/nixpkgs/stable/";
+                tags = [ "nix" "manual" ];
+              }
+              {
+                name = "NixOS Manual";
+                url = "https://nixos.org/manual/nixos/stable/";
+                tags = [ "nix" "nix-os" "manual" ];
+              }
             ];
 	        }
           {
@@ -219,6 +234,11 @@
                 url = "https://talesfrom.dev/";
                 tags = [ "blogs" "programming" ];
               }
+              {
+                name = "F# Weekly";
+                url = "https://sergeytihon.com/fsharp-weekly/";
+                tags = [ "blogs" "f#" "programming" ];
+              }
             ];
           }
           {
@@ -233,6 +253,11 @@
                 name = "F# Core Library Documentation";
                 url = "https://fsharp.github.io/fsharp-core-docs/";
                 tags = [ "docs" "f#" "programming" ];
+              }
+              {
+                name = "Fable";
+                url = "https://fable.io/";
+                tags = [ "f#" "programming" "web-development" ];
               }
             ];
           }
@@ -270,6 +295,7 @@
     hyprpaper
     grim
     slurp
+    dunst
   ];
 
   wayland.windowManager.hyprland =
@@ -308,6 +334,7 @@
       extraConfig = ''
         exec-once = waybar
         exec-once = hyprpaper
+        exec-once = dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
         env = XCURSOR_SIZE,24
         env = WLR_NO_HARDWARE_CURSORS,1
         monitor = DP-1,1920x1080@144,0x0,1
