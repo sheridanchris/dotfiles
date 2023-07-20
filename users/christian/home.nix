@@ -138,9 +138,8 @@
     enable = true;
     package = pkgs.wrapFirefox pkgs.firefox-unwrapped {
       extraPolicies = {
-	      OfferToSaveLogins = false;
-	      OfferToSaveLoginsDefault = false;
-        NoDefaultBookmarks = true;
+        OfferToSaveLogins = false;
+        OfferToSaveLoginsDefault = false;
         DisableFirefoxStudies = true;
         DisablePocket = true;
         DisableTelemetry = true;
