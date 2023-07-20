@@ -7,8 +7,9 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     hyprland.url = "github:hyprwm/Hyprland";
+    nur.url = "github:nix-community/NUR";
   };
-  outputs = { self, nixpkgs, home-manager, hyprland, ... }@inputs: 
+  outputs = { self, nixpkgs, home-manager, hyprland, nur, ... }@inputs: 
     let
       system = "x86_64-linux";
       pkgs = import nixpkgs {
@@ -19,6 +20,7 @@
       overlays = [
         hyprland.overlays.default
       ];
+      nurpkgs = import nixpkgs { inherit system; };
     in {
       nixosConfigurations = {
         nixos = lib.nixosSystem {
@@ -28,6 +30,14 @@
             {
               nixpkgs.overlays = overlays;
             }
+            {
+              nixpkgs.config.packageOverrides = pkgs: {
+                  nur = import nur {
+                    inherit pkgs nurpkgs;
+                    repoOverrides = {};
+                  };
+                };
+              }
 
             home-manager.nixosModules.home-manager
             (import ./system/configuration.nix)

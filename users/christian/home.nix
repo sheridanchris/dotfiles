@@ -28,6 +28,13 @@
     '';
   };
 
+  programs.exa = {
+    enable = true;
+    git = true;
+    icons = true;
+    enableAliases = true;
+  };
+
   programs.alacritty = {
     enable = true;
     settings = {
@@ -45,9 +52,9 @@
 
   programs.vscode = {
     enable = true;
+    package = pkgs.vscode.fhs;
     enableUpdateCheck = false;
     enableExtensionUpdateCheck = false;
-    package = pkgs.vscode.fhs;
     extensions = with pkgs.vscode-extensions; [
       ms-dotnettools.csharp
       ionide.ionide-fsharp
@@ -55,6 +62,7 @@
       eamodio.gitlens
       vscode-icons-team.vscode-icons
       mkhl.direnv
+      ms-azuretools.vscode-docker
     ];
     userSettings = {
       "workbench.iconTheme" = "vscode-icons";
@@ -126,6 +134,123 @@
     '';
   };
 
+  programs.firefox = {
+    enable = true;
+    package = pkgs.wrapFirefox pkgs.firefox-unwrapped {
+      extraPolicies = {
+	      OfferToSaveLogins = false;
+	      OfferToSaveLoginsDefault = false;
+        NoDefaultBookmarks = true;
+        DisableFirefoxStudies = true;
+        DisablePocket = true;
+        DisableTelemetry = true;
+      };
+    };
+    profiles = {
+      christian = {
+        id = 0;
+        name = "Christian";
+        isDefault = true;
+        settings = {
+          "browser.startup.homepage" = "https://duckduckgo.com/";
+        };
+       
+        search = {
+          force = true;
+          default = "DuckDuckGo";
+          order = [
+            "DuckDuckGo"
+            "Google"
+            "Nix Packages"
+            "NixOS Wiki"
+          ];
+          engines = {
+            "Nix Packages" = {
+              urls = [{
+                template = "https://search.nixos.org/packages";
+                params = [
+                  { name = "type"; value = "packages"; }
+                  { name = "query"; value = "{searchTerms}"; }
+                ];
+              }];
+
+              icon = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
+              definedAliases = [ "@np" ];
+            };
+
+            "NixOS Wiki" = {
+              urls = [{ template = "https://nixos.wiki/index.php?search={searchTerms}"; }];
+              iconUpdateURL = "https://nixos.wiki/favicon.png";
+              updateInterval = 24 * 60 * 60 * 1000; # every day
+              definedAliases = [ "@nw" ];
+            };
+          };
+        };
+        bookmarks = [
+          {
+            name = "Nix";
+            bookmarks = [
+              {
+                name = "NixOS Wiki";
+                url = "https://nixos.wiki/";
+                tags = [ "nix" "nix-os" "wiki" ];
+              }
+              {
+                name = "Home Manager Options";
+                url = "https://nix-community.github.io/home-manager/options.html";
+                tags = [ "nix" "home-manager" ];
+              }
+              {
+                name = "Nix User Repositories";
+                url = "https://nur.nix-community.org/";
+                tags = [ "nix" ];
+              }
+            ];
+	        }
+          {
+            name = "Blogs";
+            bookmarks = [
+              {
+                name = "Ploeh";
+                url = "https://blog.ploeh.dk/";
+                tags = [ "blogs" "programming" ];
+              }
+              {
+                name = "Tales from Dev";
+                url = "https://talesfrom.dev/";
+                tags = [ "blogs" "programming" ];
+              }
+            ];
+          }
+          {
+            name = "F#";
+            bookmarks = [
+              {
+                name = "F# Docs";
+                url = "https://learn.microsoft.com/en-us/dotnet/fsharp/";
+                tags = [ "docs" "f#" "programming" ];
+              }
+              {
+                name = "F# Core Library Documentation";
+                url = "https://fsharp.github.io/fsharp-core-docs/";
+                tags = [ "docs" "f#" "programming" ];
+              }
+            ];
+          }
+        ];
+        extensions = with pkgs.nur.repos.rycee.firefox-addons; [
+          bitwarden
+          ublock-origin
+          duckduckgo-privacy-essentials
+          privacy-badger
+          sponsorblock
+          clearurls
+          istilldontcareaboutcookies
+        ];
+      };
+    };
+  };
+
   gtk = {
     enable = true;
     theme = {
@@ -134,7 +259,6 @@
   };
 
   home.packages = with pkgs; [
-    firefox-wayland
     discord
     thunderbird
     gnome.nautilus

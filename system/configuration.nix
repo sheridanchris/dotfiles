@@ -104,9 +104,11 @@
     package = config.boot.kernelPackages.nvidiaPackages.stable;
   };
 
-  xdg.portal = {
-    enable = true;
-    extraPortals = with pkgs; [ xdg-desktop-portal-hyprland ];
+  xdg = {
+    portal = {
+      enable = true;
+      extraPortals = with pkgs; [ xdg-desktop-portal-hyprland ];
+    };
   };
 
   virtualisation.docker.enable = true;
