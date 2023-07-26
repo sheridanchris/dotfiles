@@ -92,7 +92,7 @@
         modules-right = ["clock" "tray"];
 
         "clock" = {
-          "format" = "{: %a %B %d %G  %I:%M %p}";
+          "format" = "{:%a %B %d %G %I:%M %p}";
         };
       }
     ];
@@ -187,8 +187,43 @@
         };
         bookmarks = [
           {
+            name = "DuckDuckGo";
+            url = "https://duckduckgo.com/";
+            tags = [ "search" ];
+          }
+          {
+            name = "GitHub";
+            url = "https://github.com";
+            tags = [ "social" "programming" ];
+          }
+          {
+            name = "YouTube";
+            url = "https://youtube.com";
+            tags = [ "social" "entertainment" ];
+          }
+          {
+            name = "Feedly";
+            url = "https://feedly.com/";
+            tags = [ "reading" ];
+          }
+          {
             name = "Nix";
             bookmarks = [
+              {
+                name = "Nix Manual";
+                url = "https://nixos.org/manual/nix/stable/";
+                tags = [ "nix" "manual" ];
+              }
+              {
+                name = "Nixpkgs Manual";
+                url = "https://nixos.org/manual/nixpkgs/stable/";
+                tags = [ "nix" "manual" ];
+              }
+              {
+                name = "NixOS Manual";
+                url = "https://nixos.org/manual/nixos/stable/";
+                tags = [ "nix" "nix-os" "manual" ];
+              }
               {
                 name = "NixOS Wiki";
                 url = "https://nixos.wiki/";
@@ -205,19 +240,9 @@
                 tags = [ "nix" ];
               }
               {
-                name = "Nix Manual";
-                url = "https://nixos.org/manual/nix/stable/";
-                tags = [ "nix" "manual" ];
-              }
-              {
-                name = "Nixpkgs Manual";
-                url = "https://nixos.org/manual/nixpkgs/stable/";
-                tags = [ "nix" "manual" ];
-              }
-              {
-                name = "NixOS Manual";
-                url = "https://nixos.org/manual/nixos/stable/";
-                tags = [ "nix" "nix-os" "manual" ];
+                name = "Zero to Nix";
+                url = "https://zero-to-nix.com/";
+                tags = [ "nix" "learning" ];
               }
             ];
 	        }
@@ -239,11 +264,21 @@
                 url = "https://sergeytihon.com/fsharp-weekly/";
                 tags = [ "blogs" "f#" "programming" ];
               }
+              {
+                name = "F# for fun and profit";
+                url = "https://fsharpforfunandprofit.com/";
+                tags = [ "learning" "f#" "programming" ];
+              }
             ];
           }
           {
             name = "F#";
             bookmarks = [
+              {
+                name = "F# Software Foundation";
+                url = "https://fsharp.org/";
+                tags = [ "f#" ];
+              }
               {
                 name = "F# Docs";
                 url = "https://learn.microsoft.com/en-us/dotnet/fsharp/";
@@ -296,6 +331,8 @@
     grim
     slurp
     dunst
+    mpv
+    yt-dlp
   ];
 
   wayland.windowManager.hyprland =
