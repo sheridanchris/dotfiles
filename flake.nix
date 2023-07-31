@@ -32,12 +32,12 @@
             }
             {
               nixpkgs.config.packageOverrides = pkgs: {
-                  nur = import nur {
-                    inherit pkgs nurpkgs;
-                    repoOverrides = {};
-                  };
+                nur = import nur {
+                  inherit pkgs nurpkgs;
+                  repoOverrides = {};
                 };
-              }
+              };
+            }
 
             home-manager.nixosModules.home-manager
             (import ./system/configuration.nix)

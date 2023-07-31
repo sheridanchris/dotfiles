@@ -117,15 +117,15 @@
   virtualisation.docker.enable = true;
 
   fonts = {
-    enableDefaultFonts = true;
-    fonts = with pkgs; [
-        liberation_ttf
-        dejavu_fonts
-        noto-fonts
-        noto-fonts-lgc-plus
-        jetbrains-mono
-        twitter-color-emoji
-        font-awesome
+    enableDefaultPackages = true;
+    packages = with pkgs; [
+      liberation_ttf
+      dejavu_fonts
+      noto-fonts
+      noto-fonts-lgc-plus
+      jetbrains-mono
+      twitter-color-emoji
+      font-awesome
       (nerdfonts.override { 
         fonts = [ "JetBrainsMono" ];
       })
