@@ -333,6 +333,7 @@
     dunst
     mpv
     yt-dlp
+    obsidian
   ];
 
   wayland.windowManager.hyprland =
