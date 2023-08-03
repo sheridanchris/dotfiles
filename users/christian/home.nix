@@ -207,6 +207,11 @@
             tags = [ "reading" ];
           }
           {
+            name = "Hypermedia Systems";
+            url = "https://hypermedia.systems/";
+            tags = [ "htmx" "hypermedia" "reading" "programming" "web-development" ];
+          }
+          {
             name = "Nix";
             bookmarks = [
               {
@@ -228,6 +233,11 @@
                 name = "NixOS Wiki";
                 url = "https://nixos.wiki/";
                 tags = [ "nix" "nix-os" "wiki" ];
+              }
+              {
+                name = "Noogle";
+                url = "https://noogle.dev/";
+                tags = [ "nix" "search" ];
               }
               {
                 name = "Home Manager Options";
