@@ -1,4 +1,4 @@
-{ config, pkgs, inputs, ...}: {
+{ config, pkgs, inputs, ... }: {
   imports = [
     inputs.hyprland.homeManagerModules.default
   ];
@@ -87,9 +87,9 @@
         position = "top";
         height = 30;
         output = [ "DP-1" ];
-        modules-left = ["hyprland/workspaces" "hyprland/window"];
-        modules-center = [];
-        modules-right = ["clock" "tray"];
+        modules-left = [ "hyprland/workspaces" "hyprland/window" ];
+        modules-center = [ ];
+        modules-right = [ "clock" "tray" ];
 
         "clock" = {
           "format" = "{:%a %B %d %G %I:%M %p}";
@@ -153,7 +153,7 @@
         settings = {
           "browser.startup.homepage" = "https://duckduckgo.com/";
         };
-       
+
         search = {
           force = true;
           default = "DuckDuckGo";
@@ -255,7 +255,7 @@
                 tags = [ "nix" "learning" ];
               }
             ];
-	        }
+          }
           {
             name = "Blogs";
             bookmarks = [
@@ -306,6 +306,26 @@
               }
             ];
           }
+          {
+            name = "Hyprland";
+            bookmarks = [
+              {
+                name = "Hyprland";
+                url = "https://hyprland.org/";
+                tags = [ "hyprland" ];
+              }
+              {
+                name = "Hyprland Repo";
+                url = "https://github.com/hyprwm/Hyprland";
+                tags = [ "hyprland" "github-repo" ];
+              }
+              {
+                name = "Awesome Hyprland";
+                url = "https://github.com/hyprland-community/awesome-hyprland";
+                tags = [ "hyprland" "awesome" "linux" ];
+              }
+            ];
+          }
         ];
         extensions = with pkgs.nur.repos.rycee.firefox-addons; [
           bitwarden
@@ -344,10 +364,12 @@
     mpv
     yt-dlp
     obsidian
+    wl-clipboard
+    clipman
   ];
 
   wayland.windowManager.hyprland =
-    let 
+    let
       split-monitor-workspaces = pkgs.stdenv.mkDerivation {
         pname = "split-monitor-workspaces";
         version = "0.1";
@@ -372,17 +394,18 @@
           cp split-monitor-workspaces.so $out/lib/libsplit-monitor-workspaces.so
         '';
       };
-    in 
+    in
     {
       enable = true;
       package = pkgs.hyprland;
-      plugins = [ 
+      plugins = [
         split-monitor-workspaces
       ];
       extraConfig = ''
         exec-once = waybar
         exec-once = hyprpaper
         exec-once = dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
+        exec-once = wl-paste -t text --watch clipman store --no-persist
         env = XCURSOR_SIZE,24
         env = WLR_NO_HARDWARE_CURSORS,1
         monitor = DP-1,1920x1080@144,0x0,1
@@ -392,6 +415,7 @@
         bind = SUPER, Return, exec, alacritty
         bind = SUPER_SHIFT, Return, exec, nautilus
         bind = SUPER, O, exec, wofi --show drun
+        bind = SUPER, C, exec, clipman pick -t wofi
         bind = SUPER_SHIFT, W, exec, firefox
         bind = SUPER, Print, exec, grim -g "$(slurp)"
         bind = SUPER, 1, split-workspace, 1
@@ -415,7 +439,7 @@
         bind = SUPER_SHIFT, 9, split-movetoworkspacesilent, 9
         bind = SUPER_SHIFT, 0, split-movetoworkspacesilent, 10
       '';
-  };
- 
+    };
+
   home.stateVersion = "23.05";
 }

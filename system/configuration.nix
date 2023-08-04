@@ -50,7 +50,7 @@
   services.xserver = {
     enable = true;
     layout = "us";
-    videoDrivers = ["nvidia"];
+    videoDrivers = [ "nvidia" ];
     displayManager = {
       gdm = {
         enable = true;
@@ -79,7 +79,7 @@
     isNormalUser = true;
     description = "Christian Sheridan";
     extraGroups = [ "docker" "networkmanager" "wheel" ];
-    packages = with pkgs; [];
+    packages = with pkgs; [ ];
   };
 
   # Workaround for GNOME autologin: https://github.com/NixOS/nixpkgs/issues/103746#issuecomment-945091229
@@ -95,7 +95,7 @@
   hardware.opengl = {
     enable = true;
     driSupport = true;
-    driSupport32Bit = true; 
+    driSupport32Bit = true;
   };
 
   hardware.nvidia = {
@@ -110,7 +110,7 @@
       extraPortals = with pkgs; [
         xdg-desktop-portal-hyprland
         xdg-desktop-portal-gtk
-     ];
+      ];
     };
   };
 
@@ -126,7 +126,7 @@
       jetbrains-mono
       twitter-color-emoji
       font-awesome
-      (nerdfonts.override { 
+      (nerdfonts.override {
         fonts = [ "JetBrainsMono" ];
       })
     ];
