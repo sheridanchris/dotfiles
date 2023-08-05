@@ -328,6 +328,7 @@
           }
         ];
         extensions = with pkgs.nur.repos.rycee.firefox-addons; [
+          multi-account-containers
           bitwarden
           ublock-origin
           duckduckgo-privacy-essentials
@@ -335,9 +336,19 @@
           sponsorblock
           clearurls
           istilldontcareaboutcookies
+          terms-of-service-didnt-read
+          user-agent-string-switcher
+          don-t-fuck-with-paste
         ];
       };
     };
+  };
+
+  programs.obs-studio = {
+    enable = true;
+    plugins = with pkgs.obs-studio-plugins; [
+      wlrobs
+    ];
   };
 
   gtk = {
@@ -366,6 +377,7 @@
     obsidian
     wl-clipboard
     clipman
+    btop
   ];
 
   wayland.windowManager.hyprland =
@@ -414,6 +426,7 @@
         bind = SUPER_CONTROL_SHIFT, Q, exit
         bind = SUPER, Return, exec, alacritty
         bind = SUPER_SHIFT, Return, exec, nautilus
+        bind = SUPER, P, exec, alacritty --command btop
         bind = SUPER, O, exec, wofi --show drun
         bind = SUPER, C, exec, clipman pick -t wofi
         bind = SUPER_SHIFT, W, exec, firefox
