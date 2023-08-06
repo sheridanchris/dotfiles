@@ -63,6 +63,19 @@
       vscode-icons-team.vscode-icons
       mkhl.direnv
       ms-azuretools.vscode-docker
+    ] ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
+      {
+        name = "vscode-template-fsharp-highlight";
+        publisher = "alfonsogarciacaro";
+        version = "1.7.0";
+        sha256 = "sha256-yht+l6PcGK1w+xShv6psrQ4WP1pV7B5ALSyTqn9oE6g=";
+      }
+      {
+        name = "vscode-nuget-gallery";
+        publisher = "patcx";
+        version = "0.0.24";
+        sha256 = "sha256-qinjKSc0890V/uNGhd23pcY05WxWRWEGO4yjMIpMj70=";
+      }
     ];
     userSettings = {
       "workbench.iconTheme" = "vscode-icons";
@@ -207,11 +220,6 @@
             tags = [ "reading" ];
           }
           {
-            name = "Hypermedia Systems";
-            url = "https://hypermedia.systems/";
-            tags = [ "htmx" "hypermedia" "reading" "programming" "web-development" ];
-          }
-          {
             name = "Nix";
             bookmarks = [
               {
@@ -307,6 +315,36 @@
             ];
           }
           {
+            name = "OCaml";
+            bookmarks = [
+              {
+                name = "OCaml";
+                url = "https://ocaml.org/";
+                tags = [ "ocaml" ];
+              }
+              {
+                name = "OCaml Programming: Correct + Efficient + Beautiful";
+                url = "https://cs3110.github.io/textbook/cover.html";
+                tags = [ "ocaml" "reading" "learning" ];
+              }
+            ];
+          }
+          {
+            name = "Htmx";
+            bookmarks = [
+              {
+                name = "Htmx";
+                url = "https://htmx.org";
+                tags = [ "htmx" "hypermedia" "programming" "web-development" ];
+              }
+              {
+                name = "Hypermedia Systems";
+                url = "https://hypermedia.systems/";
+                tags = [ "htmx" "hypermedia" "reading" "programming" "web-development" ];
+              }
+            ];
+          }
+          {
             name = "Hyprland";
             bookmarks = [
               {
@@ -358,27 +396,131 @@
     };
   };
 
-  home.packages = with pkgs; [
-    discord
-    thunderbird
-    gnome.nautilus
-    bitwarden
-    flameshot
-    wofi
-    wofi-emoji
-    (kodi-wayland.withPackages (kodiPkgs: with kodiPkgs; [ netflix ]))
-    easyeffects
-    hyprpaper
-    grim
-    slurp
-    dunst
-    mpv
-    yt-dlp
-    obsidian
-    wl-clipboard
-    clipman
-    btop
-  ];
+  home.packages =
+    # TODO: This program results in an error, need to fix.
+    let
+      xwaylandvideobridge = pkgs.stdenv.mkDerivation {
+        pname = "xwaylandvideobridge";
+        version = "2023-08-02-git";
+
+        # https://github.com/KDE/xwaylandvideobridge
+        src = pkgs.fetchFromGitHub {
+          owner = "KDE";
+          repo = "xwaylandvideobridge";
+          rev = "5103ac";
+          sha256 = "sha256-nvhpxNxOye5iIBnW5H4bYs/FZFweWpOPLByoA5esFEQ=";
+        };
+
+        nativeBuildInputs = with pkgs; [
+          cmake
+          extra-cmake-modules
+          libsForQt5.kdoctools
+          libsForQt5.qt5.wrapQtAppsHook
+        ];
+
+        buildInputs = with pkgs; [
+          libsForQt5.qt5.qtx11extras
+          libsForQt5.kio
+          (libsForQt5.kpipewire.overrideAttrs (oldAttrs: {
+            version = "5.27.7";
+            src = pkgs.fetchFromGitHub {
+              owner = "KDE";
+              repo = "kpipewire";
+              rev = "92778d5";
+              sha256 = "sha256-Ec/YWgrHt7lVKXS2Nb5yjesVpJ0FSwuBqAnbIS+bviU=";
+            };
+          }))
+        ];
+
+        patches = [
+          (
+            pkgs.fetchpatch {
+              url = "https://aur.archlinux.org/cgit/aur.git/plain/cursor-mode.patch?h=xwaylandvideobridge-cursor-mode-2-git";
+              sha256 = "sha256-649kCs3Fsz8VCgGpZ952Zgl8txAcTgakLoMusaJQYa4=";
+            }
+          )
+        ];
+      };
+    in
+    with pkgs; [
+      discord
+      thunderbird
+      gnome.nautilus
+      bitwarden
+      (kodi-wayland.withPackages (kodiPkgs: with kodiPkgs; [ netflix ]))
+      easyeffects
+      hyprpaper
+      grim
+      slurp
+      dunst
+      mpv
+      yt-dlp
+      obsidian
+      wl-clipboard
+      clipman
+      btop
+      xwaylandvideobridge
+    ];
+
+  programs.wofi = {
+    enable = true;
+    # This style.css was yoinked and modified from:
+    # https://github.com/lokesh-krishna/dotfiles/blob/main/tokyo-night/config/wofi/style.css
+    style = ''
+      window {
+        margin: 0px;
+        border: 2px solid #48494E;
+        border-radius: 5px;
+        background-color: #000000;
+        font-family: monospace;
+        font-size: 12px;
+      }
+    
+      #input {
+        margin: 5px;
+        border: 1px solid #000000;
+        color: #ffffff;
+        background-color: #000000;
+      }
+
+      #input image {
+          color: #ffffff;
+      }
+
+      #inner-box {
+        margin: 5px;
+        border: none;
+        background-color: #000000;
+      }
+
+      #outer-box {
+        margin: 5px;
+        border: none;
+        background-color: #000000;
+      }
+
+      #scroll {
+        margin: 0px;
+        border: none;
+      }
+
+      #text {
+        margin: 5px;
+        border: none;
+        color: #ffffff;
+      } 
+
+      #entry:selected {
+          background-color: #334FCE;
+          font-weight: normal;
+      }
+
+      #text:selected {
+          background-color: #334FCE;
+          font-weight: normal;
+      }
+    '';
+  };
 
   wayland.windowManager.hyprland =
     let
@@ -416,10 +558,16 @@
       extraConfig = ''
         exec-once = waybar
         exec-once = hyprpaper
+        exec-once = systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
         exec-once = dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
         exec-once = wl-paste -t text --watch clipman store --no-persist
+        exec-once = xwaylandvideobridge
         env = XCURSOR_SIZE,24
         env = WLR_NO_HARDWARE_CURSORS,1
+        windowrulev2 = opacity 0.0 override 0.0 override,class:^(xwaylandvideobridge)$
+        windowrulev2 = noanim,class:^(xwaylandvideobridge)$
+        windowrulev2 = nofocus,class:^(xwaylandvideobridge)$
+        windowrulev2 = noinitialfocus,class:^(xwaylandvideobridge)$
         monitor = DP-1,1920x1080@144,0x0,1
         bind = SUPER, Q, killactive
         bind = SUPER, Space, togglefloating
@@ -430,7 +578,7 @@
         bind = SUPER, O, exec, wofi --show drun
         bind = SUPER, C, exec, clipman pick -t wofi
         bind = SUPER_SHIFT, W, exec, firefox
-        bind = SUPER, Print, exec, grim -g "$(slurp)"
+        bind = SUPER, Print, exec, grim -g "$(slurp)" | wl-copy
         bind = SUPER, 1, split-workspace, 1
         bind = SUPER, 2, split-workspace, 2
         bind = SUPER, 3, split-workspace, 3
