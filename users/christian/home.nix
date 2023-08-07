@@ -443,7 +443,7 @@
       };
     in
     with pkgs; [
-      discord
+      discord-canary
       thunderbird
       gnome.nautilus
       bitwarden
@@ -551,10 +551,7 @@
     in
     {
       enable = true;
-      package = pkgs.hyprland;
-      plugins = [
-        split-monitor-workspaces
-      ];
+      plugins = [ split-monitor-workspaces ];
       extraConfig = ''
         exec-once = waybar
         exec-once = hyprpaper
@@ -563,7 +560,6 @@
         exec-once = wl-paste -t text --watch clipman store --no-persist
         exec-once = xwaylandvideobridge
         env = XCURSOR_SIZE,24
-        env = WLR_NO_HARDWARE_CURSORS,1
         windowrulev2 = opacity 0.0 override 0.0 override,class:^(xwaylandvideobridge)$
         windowrulev2 = noanim,class:^(xwaylandvideobridge)$
         windowrulev2 = nofocus,class:^(xwaylandvideobridge)$

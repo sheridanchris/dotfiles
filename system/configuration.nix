@@ -7,7 +7,11 @@
 
   nix = {
     package = pkgs.nixFlakes;
-    settings.experimental-features = [ "nix-command" "flakes" ];
+    settings = {
+      experimental-features = [ "nix-command" "flakes" ];
+      substituters = [ "https://hyprland.cachix.org" ];
+      trusted-public-keys = [ "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc=" ];
+    };
     gc = {
       automatic = true;
       dates = "weekly";
@@ -15,9 +19,7 @@
     };
   };
 
-  boot.extraModulePackages = with config.boot.kernelPackages; [
-    v4l2loopback
-  ];
+  boot.extraModulePackages = with config.boot.kernelPackages; [ v4l2loopback ];
 
   # Home manager
   home-manager.useGlobalPkgs = true;
@@ -50,8 +52,9 @@
 
   programs.hyprland = {
     enable = true;
-    package = pkgs.hyprland;
+    package = inputs.hyprland.packages.${pkgs.system}.hyprland;
     xwayland.enable = true;
+    nvidiaPatches = true;
   };
 
   programs.dconf.enable = true;
@@ -98,8 +101,13 @@
 
   nixpkgs.config.allowUnfree = true;
 
-  # This environment variable fixes some x11 apps on wayland (wlroots)
-  environment.sessionVariables.NIXOS_OZONE_WL = "1";
+  # This environment variable fixes some x11 apps on wayland
+  environment.sessionVariables = {
+    NIXOS_OZONE_WL = "1";
+    NIXOS_XDG_OPEN_USE_PORTAL = "1";
+    WLR_NO_HARDWARE_CURSORS = "1";
+  };
+
   environment.systemPackages = with pkgs; [ direnv ];
 
   hardware.opengl = {
@@ -111,15 +119,17 @@
   hardware.nvidia = {
     modesetting.enable = true;
     nvidiaSettings = true;
+    forceFullCompositionPipeline = true;
     package = config.boot.kernelPackages.nvidiaPackages.stable;
   };
 
   xdg = {
+    autostart.enable = true;
     portal = {
       enable = true;
       extraPortals = with pkgs; [
-        xdg-desktop-portal-hyprland
         xdg-desktop-portal-gtk
+        # xdg-desktop-portal-hyprland
       ];
     };
   };
