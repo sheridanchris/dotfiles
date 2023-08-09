@@ -63,6 +63,7 @@
       vscode-icons-team.vscode-icons
       mkhl.direnv
       ms-azuretools.vscode-docker
+      haskell.haskell
     ] ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
       {
         name = "vscode-template-fsharp-highlight";
@@ -76,6 +77,12 @@
         version = "0.0.24";
         sha256 = "sha256-qinjKSc0890V/uNGhd23pcY05WxWRWEGO4yjMIpMj70=";
       }
+      {
+        name = "discord-vscode";
+        publisher = "icrawl";
+        version = "5.8.0";
+        sha256 = "sha256-IU/looiu6tluAp8u6MeSNCd7B8SSMZ6CEZ64mMsTNmU=";
+      }
     ];
     userSettings = {
       "workbench.iconTheme" = "vscode-icons";
@@ -87,6 +94,7 @@
       "FSharp.inlayHints.enabled" = false;
       "FSharp.inlayHints.typeAnnotations" = false;
       "FSharp.inlayHints.parameterNames" = false;
+      "haskell.manageHLS" = "PATH";
       "[fsharp]" = { "editor.defaultFormatter" = "ionide.ionide-fsharp"; };
     };
   };
@@ -315,6 +323,31 @@
             ];
           }
           {
+            name = "Haskell";
+            bookmarks = [
+              {
+                name = "Haskell";
+                url = "https://haskell.org";
+                tags = [ "haskell" ];
+              }
+              {
+                name = "Hoogle";
+                url = "https://hoogle.haskell.org/";
+                tags = [ "haskell" "programming" "docs" ];
+              }
+              {
+                name = "Learn You a Haskell for Great Good!";
+                url = "http://learnyouahaskell.com/chapters";
+                tags = [ "haskell" "programming" "reading" "learning" ];
+              }
+              {
+                name = "Haskell for Imperative Programmers";
+                url = "https://www.youtube.com/playlist?list=PLe7Ei6viL6jGp1Rfu0dil1JH1SHk9bgDV";
+                tags = [ "haskell" "programming" "learning" ];
+              }
+            ];
+          }
+          {
             name = "OCaml";
             bookmarks = [
               {
@@ -341,6 +374,21 @@
                 name = "Hypermedia Systems";
                 url = "https://hypermedia.systems/";
                 tags = [ "htmx" "hypermedia" "reading" "programming" "web-development" ];
+              }
+            ];
+          }
+          {
+            name = "Fancy Stuff";
+            bookmarks = [
+              {
+                name = "Category Theory for Programmers";
+                url = "https://bartoszmilewski.com/2014/10/28/category-theory-for-programmers-the-preface/";
+                tags = [ "category-theory" "reading" ];
+              }
+              {
+                name = "Every Clojure Talk Ever";
+                url = "https://www.youtube.com/watch?v=jlPaby7suOc";
+                tags = [ "clojure" "parody" ];
               }
             ];
           }
@@ -443,7 +491,7 @@
       };
     in
     with pkgs; [
-      discord-canary
+      discord
       thunderbird
       gnome.nautilus
       bitwarden
