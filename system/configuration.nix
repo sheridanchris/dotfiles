@@ -53,8 +53,6 @@
   programs.hyprland = {
     enable = true;
     package = inputs.hyprland.packages.${pkgs.system}.hyprland;
-    xwayland.enable = true;
-    nvidiaPatches = true;
   };
 
   programs.dconf.enable = true;
@@ -91,7 +89,7 @@
   users.users.christian = {
     isNormalUser = true;
     description = "Christian Sheridan";
-    extraGroups = [ "docker" "networkmanager" "wheel" ];
+    extraGroups = [ "docker" "networkmanager" "wheel" "libvirtd" ];
     packages = with pkgs; [ ];
   };
 
@@ -101,14 +99,14 @@
 
   nixpkgs.config.allowUnfree = true;
 
-  # This environment variable fixes some x11 apps on wayland
+  # Wayland fixes.
   environment.sessionVariables = {
     NIXOS_OZONE_WL = "1";
     NIXOS_XDG_OPEN_USE_PORTAL = "1";
     WLR_NO_HARDWARE_CURSORS = "1";
   };
 
-  environment.systemPackages = with pkgs; [ direnv ];
+  environment.systemPackages = with pkgs; [ direnv virt-manager ];
 
   hardware.opengl = {
     enable = true;
@@ -129,12 +127,14 @@
       enable = true;
       extraPortals = with pkgs; [
         xdg-desktop-portal-gtk
-        # xdg-desktop-portal-hyprland
       ];
     };
   };
 
-  virtualisation.docker.enable = true;
+  virtualisation = {
+    docker.enable = true;
+    libvirtd.enable = true;
+  };
 
   fonts = {
     enableDefaultPackages = true;
@@ -161,5 +161,11 @@
     };
   };
 
-  system.stateVersion = "23.05";
+  system = {
+    #autoUpgrade = {
+    #  enable = true;
+    #  channel = "https://nixos.org/channels/nixos-unstable";
+    #};
+    stateVersion = "23.05";
+  };
 }
