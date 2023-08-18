@@ -129,6 +129,18 @@
         xdg-desktop-portal-gtk
       ];
     };
+    mime.defaultApplications = {
+      "text/html" = "firefox.desktop";
+      "x-scheme-handler/http" = "firefox.desktop";
+      "x-scheme-handler/https" = "firefox.desktop";
+      "x-scheme-handler/about" = "firefox.desktop";
+      "x-scheme-handler/unknown" = "firefox.desktop";
+      "application/pdf" = "org.pwmt.zathura.desktop";
+      "image/png" = "feh.desktop";
+      "image/jpeg" = "feh.desktop";
+      "image/gif" = "feh.desktop";
+      "video/mp4" = "mpv.desktop";
+    };
   };
 
   virtualisation = {
@@ -162,10 +174,6 @@
   };
 
   system = {
-    #autoUpgrade = {
-    #  enable = true;
-    #  channel = "https://nixos.org/channels/nixos-unstable";
-    #};
     stateVersion = "23.05";
   };
 }

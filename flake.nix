@@ -7,9 +7,13 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     hyprland.url = "github:hyprwm/Hyprland";
+    hy3 = {
+      url = "github:outfoxxed/hy3";
+      inputs.hyprland.follows = "hyprland";
+    };
     nur.url = "github:nix-community/NUR";
   };
-  outputs = { self, nixpkgs, home-manager, hyprland, nur, ... }@inputs:
+  outputs = { self, nixpkgs, home-manager, hyprland, hy3, nur, ... }@inputs:
     let
       system = "x86_64-linux";
       pkgs = import nixpkgs {
