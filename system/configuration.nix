@@ -90,7 +90,6 @@
     isNormalUser = true;
     description = "Christian Sheridan";
     extraGroups = [ "docker" "networkmanager" "wheel" "libvirtd" ];
-    packages = with pkgs; [ ];
   };
 
   # Workaround for GNOME autologin: https://github.com/NixOS/nixpkgs/issues/103746#issuecomment-945091229
@@ -106,7 +105,10 @@
     WLR_NO_HARDWARE_CURSORS = "1";
   };
 
-  environment.systemPackages = with pkgs; [ direnv virt-manager ];
+  environment.systemPackages = with pkgs; [
+    direnv
+    virt-manager
+  ];
 
   hardware.opengl = {
     enable = true;
@@ -145,7 +147,23 @@
 
   virtualisation = {
     docker.enable = true;
-    libvirtd.enable = true;
+    libvirtd = {
+      enable = true;
+      qemu = {
+        package = pkgs.qemu_kvm;
+        runAsRoot = true;
+        swtpm.enable = true;
+        ovmf = {
+          enable = true;
+          packages = with pkgs; [
+            (OVMFFull.override {
+              secureBoot = true;
+              tpmSupport = true;
+            }).fd
+          ];
+        };
+      };
+    };
   };
 
   fonts = {
