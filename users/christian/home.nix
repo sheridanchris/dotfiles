@@ -186,7 +186,6 @@
     };
     waybar = {
       enable = true;
-      package = pkgs.waybar-hyprland;
       settings = [
         {
           layer = "top";
@@ -783,6 +782,11 @@
                   url = "https://www.youtube.com/watch?v=jlPaby7suOc";
                   tags = [ "clojure" "parody" ];
                 }
+                {
+                    name = "ARIA Authoring Practices Guide";
+                    url = "https://www.w3.org/WAI/ARIA/apg/";
+                    tags = [ "web-development" "accessibility" ];
+                }
               ];
             }
             {
@@ -936,9 +940,9 @@
         exec-once = hyprpaper
         exec-once = systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
         exec-once = dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
-        exec-once = wl-paste -t text --
-        watch clipman store --no-persist
+        exec-once = wl-paste -t text --watch clipman store --no-persist
         exec-once = xwaylandvideobridge
+        exec-once = thunderbird
         env = XCURSOR_SIZE,24
         windowrulev2 = opacity 0.0 override 0.0 override,class:^(xwaylandvideobridge)$
         windowrulev2 = noanim,class:^(xwaylandvideobridge)$
