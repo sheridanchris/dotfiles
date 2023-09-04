@@ -1,7 +1,5 @@
-{ config, pkgs, inputs, ... }: {
-  imports = [
-    inputs.hyprland.homeManagerModules.default
-  ];
+{ config, pkgs, lib, inputs, ... }: {
+  imports = [];
 
   home = {
     username = "christian";
@@ -68,7 +66,7 @@
     };
     obs-studio = {
       enable = true;
-      plugins = with pkgs.obs-studio-plugins; [ wlrobs ];
+      plugins = with pkgs.obs-studio-plugins; [ ];
     };
     vscode = {
       enable = true;
@@ -76,15 +74,14 @@
       enableUpdateCheck = false;
       enableExtensionUpdateCheck = false;
       extensions = with pkgs.vscode-extensions; [
-        ms-dotnettools.csharp
-        ionide.ionide-fsharp
+        #ms-dotnettools.csharp
         bbenoist.nix
         eamodio.gitlens
         vscode-icons-team.vscode-icons
         mkhl.direnv
-        #arrterian.nix-env-selector
         ms-azuretools.vscode-docker
         haskell.haskell
+        ionide.ionide-fsharp
       ] ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
         {
           name = "vscode-template-fsharp-highlight";
@@ -97,18 +94,6 @@
           publisher = "patcx";
           version = "0.0.24";
           sha256 = "sha256-qinjKSc0890V/uNGhd23pcY05WxWRWEGO4yjMIpMj70=";
-        }
-        {
-          name = "discord-vscode";
-          publisher = "icrawl";
-          version = "5.8.0";
-          sha256 = "sha256-IU/looiu6tluAp8u6MeSNCd7B8SSMZ6CEZ64mMsTNmU=";
-        }
-        {
-          name = "marksman";
-          publisher = "arr";
-          version = "0.3.3";
-          sha256 = "sha256-x+u2AD4uQAWvSAi3+ZzC8mLUfDntxOwBW67uiZfsgAQ=";
         }
       ];
       userSettings = {
@@ -125,121 +110,6 @@
         "[fsharp]" = { "editor.defaultFormatter" = "ionide.ionide-fsharp"; };
       };
     };
-    wofi = {
-      enable = true;
-      # This style.css was yoinked and modified from:
-      # https://github.com/lokesh-krishna/dotfiles/blob/main/tokyo-night/config/wofi/style.css
-      style = ''
-        window {
-          margin: 0px;
-          border: 2px solid #48494E;
-          border-radius: 5px;
-          background-color: #000000;
-          font-family: monospace;
-          font-size: 12px;
-        }
-      
-        #input {
-          margin: 5px;
-          border: 1px solid #000000;
-          color: #ffffff;
-          background-color: #000000;
-        }
-
-        #input image {
-            color: #ffffff;
-        }
-
-        #inner-box {
-          margin: 5px;
-          border: none;
-          background-color: #000000;
-        }
-
-        #outer-box {
-          margin: 5px;
-          border: none;
-          background-color: #000000;
-        }
-
-        #scroll {
-          margin: 0px;
-          border: none;
-        }
-
-        #text {
-          margin: 5px;
-          border: none;
-          color: #ffffff;
-        } 
-
-        #entry:selected {
-            background-color: #334FCE;
-            font-weight: normal;
-        }
-
-        #text:selected {
-            background-color: #334FCE;
-            font-weight: normal;
-        }
-      '';
-    };
-    waybar = {
-      enable = true;
-      settings = [
-        {
-          layer = "top";
-          position = "top";
-          height = 30;
-          output = [ "DP-1" ];
-          modules-left = [ "hyprland/workspaces" "hyprland/window" ];
-          modules-center = [ ];
-          modules-right = [ "clock" "tray" ];
-
-          "clock" = {
-            "format" = "{:%a %B %d %G %I:%M %p}";
-          };
-        }
-      ];
-      style = ''
-        * {
-          font-family: Source Code Pro;
-          font-size: 13px;
-        }
-        
-        window#waybar {
-          background: #16191C;
-          color: #AAB2BF;
-        }
-
-        #workspaces button {
-          padding: 0 5px;
-          color: #ffffff;
-        }
-
-        #workspaces button:hover {
-          background-color: #2986cc;
-        }
-
-        #workspaces button.active {
-          background-color: #2986cc;
-        }
-
-        #workspaces button.urgent {
-          background-color: #eb4d4b;
-        }
-
-        #window,
-        #workspaces,
-        #clock,
-        #tray {
-          padding: 0 10px;
-          color: #ffffff;
-        }
-      '';
-    };
-
-    # TODO: Figure out which plugins need configuring
     # TODO: Nix LSP ??
     # TODO: F# ??
     # TODO: Haskell ??
@@ -682,6 +552,11 @@
                   url = "https://fsharpforfunandprofit.com/";
                   tags = [ "learning" "f#" "programming" ];
                 }
+                {
+                  name = "Paul Blasucci's Weblog";
+                  url = "https://paul.blasuc.ci/";
+                  tags = [ "blogs" "programming" ];
+                }
               ];
             }
             {
@@ -783,29 +658,9 @@
                   tags = [ "clojure" "parody" ];
                 }
                 {
-                    name = "ARIA Authoring Practices Guide";
-                    url = "https://www.w3.org/WAI/ARIA/apg/";
-                    tags = [ "web-development" "accessibility" ];
-                }
-              ];
-            }
-            {
-              name = "Hyprland";
-              bookmarks = [
-                {
-                  name = "Hyprland";
-                  url = "https://hyprland.org/";
-                  tags = [ "hyprland" ];
-                }
-                {
-                  name = "Hyprland Repo";
-                  url = "https://github.com/hyprwm/Hyprland";
-                  tags = [ "hyprland" "github-repo" ];
-                }
-                {
-                  name = "Awesome Hyprland";
-                  url = "https://github.com/hyprland-community/awesome-hyprland";
-                  tags = [ "hyprland" "awesome" "linux" ];
+                  name = "ARIA Authoring Practices Guide";
+                  url = "https://www.w3.org/WAI/ARIA/apg/";
+                  tags = [ "web-development" "accessibility" ];
                 }
               ];
             }
@@ -848,158 +703,70 @@
     };
   };
 
-  home.packages =
-    let
-      xwaylandvideobridge = pkgs.stdenv.mkDerivation {
-        pname = "xwaylandvideobridge";
-        version = "2023-08-02-git";
+  home.packages = with pkgs; [
+    discord
+    thunderbird
+    gnome.nautilus
+    bitwarden
+    (kodi.withPackages (kodiPkgs: with kodiPkgs; [ netflix ]))
+    easyeffects
+    dunst
+    mpv
+    yt-dlp
+    obsidian
+    wl-clipboard
+    clipman
+    btop
+    lazydocker
+    rofi
+    flameshot
+    prismlauncher
+    ngrok
+  ];
 
-        # https://github.com/KDE/xwaylandvideobridge
-        src = pkgs.fetchFromGitHub {
-          owner = "KDE";
-          repo = "xwaylandvideobridge";
-          rev = "5103ac";
-          sha256 = "sha256-nvhpxNxOye5iIBnW5H4bYs/FZFweWpOPLByoA5esFEQ=";
-        };
-
-        nativeBuildInputs = with pkgs; [
-          cmake
-          extra-cmake-modules
-          libsForQt5.kdoctools
-          libsForQt5.qt5.wrapQtAppsHook
-        ];
-
-        buildInputs = with pkgs; [
-          libsForQt5.qt5.qtx11extras
-          libsForQt5.kio
-          (libsForQt5.kpipewire.overrideAttrs (oldAttrs: {
-            version = "5.27.7";
-            src = pkgs.fetchFromGitHub {
-              owner = "KDE";
-              repo = "kpipewire";
-              rev = "92778d5";
-              sha256 = "sha256-Ec/YWgrHt7lVKXS2Nb5yjesVpJ0FSwuBqAnbIS+bviU=";
-            };
-          }))
-        ];
-
-        patches = [
-          (
-            pkgs.fetchpatch {
-              url = "https://aur.archlinux.org/cgit/aur.git/plain/cursor-mode.patch?h=xwaylandvideobridge-cursor-mode-2-git";
-              sha256 = "sha256-649kCs3Fsz8VCgGpZ952Zgl8txAcTgakLoMusaJQYa4=";
-            }
-          )
-        ];
-      };
-    in
-    with pkgs; [
-      discord
-      thunderbird
-      gnome.nautilus
-      bitwarden
-      (kodi-wayland.withPackages (kodiPkgs: with kodiPkgs; [ netflix ]))
-      easyeffects
-      hyprpaper
-      grim
-      slurp
-      dunst
-      mpv
-      yt-dlp
-      obsidian
-      wl-clipboard
-      clipman
-      btop
-      lazydocker
-      xwaylandvideobridge
-    ];
-
-  wayland.windowManager.hyprland =
+  xsession.windowManager.i3 =
     {
       enable = true;
-      enableNvidiaPatches = true;
-      xwayland.enable = true;
-      plugins = [ inputs.hy3.packages.x86_64-linux.hy3 ];
-      extraConfig = ''
-        general {
-            layout = hy3
-            gaps_in = 0
-            gaps_out = 0
-        }
+      config =
+        let
+          modifier = "Mod4";
+        in
+        {
+          modifier = modifier;
+          startup = [
+            { command = "xrandr --output DP-0 --primary --mode 1920x1080 --rate 144.00"; }
+            { command = "thunderbird"; }
+            { command = "feh --bg-fill ~/.backgrounds/nixos.png"; }
+          ];
+          window = {
+            titlebar = false;
+          };
+          gaps = {
+            inner = 10;
+            outer = 0;
+            smartGaps = true;
+          };
+          keybindings = lib.mkOptionDefault
+            {
+              "${modifier}+q" = "kill";
 
-        decoration {
-            blur {
-                enabled = true
-                size = 3
-                passes = 1
-                new_optimizations = true
-            }
-        }
+              "${modifier}+Return" = "exec alacritty";
+              "${modifier}+Shift+Return" = "exec nautilus";
+              "${modifier}+o" = "exec rofi -show drun";
+              "${modifier}+Shift+w" = "exec firefox";
+              "${modifier}+p" = "exec alacritty --command btop";
+              "${modifier}+Print" = "exec flameshot gui";
 
-        exec-once = waybar
-        exec-once = hyprpaper
-        exec-once = systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
-        exec-once = dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
-        exec-once = wl-paste -t text --watch clipman store --no-persist
-        exec-once = xwaylandvideobridge
-        exec-once = thunderbird
-        env = XCURSOR_SIZE,24
-        windowrulev2 = opacity 0.0 override 0.0 override,class:^(xwaylandvideobridge)$
-        windowrulev2 = noanim,class:^(xwaylandvideobridge)$
-        windowrulev2 = nofocus,class:^(xwaylandvideobridge)$
-        windowrulev2 = noinitialfocus,class:^(xwaylandvideobridge)$
-        monitor = DP-1,1920x1080@144,0x0,1
-        bind = SUPER, Q, killactive
-        bind = SUPER, Space, togglefloating
-        bind = SUPER_CONTROL_SHIFT, Q, exit
-        bind = SUPER, Return, exec, alacritty
-        bind = SUPER_SHIFT, Return, exec, nautilus
-        bind = SUPER, P, exec, alacritty --command btop
-        bind = SUPER, O, exec, wofi --show drun
-        bind = SUPER, C, exec, clipman pick -t wofi
-        bind = SUPER_SHIFT, W, exec, firefox
-        bind = SUPER, Print, exec, grim -g "$(slurp)"
+              "${modifier}+h" = "focus left";
+              "${modifier}+j" = "focus down";
+              "${modifier}+k" = "focus up";
+              "${modifier}+l" = "focus right";
 
-        # Move focus with super + arrow keys, hjkl
-        bind = SUPER, left, hy3:movefocus, l
-        bind = SUPER, h, hy3:movefocus, l
-        bind = SUPER, right, hy3:movefocus, r
-        bind = SUPER, l, hy3:movefocus, r
-        bind = SUPER, up, hy3:movefocus, u
-        bind = SUPER, k, hy3:movefocus, u
-        bind = SUPER, down, hy3:movefocus, d
-        bind = SUPER, j, hy3:movefocus, d
-
-        # Move window positions with super + arrow keys, hjkl
-        bind = SUPER_SHIFT, left, hy3:movewindow, l
-        bind = SUPER_SHIFT, h, hy3:movewindow, l
-        bind = SUPER_SHIFT, right, hy3:movewindow, r
-        bind = SUPER_SHIFT, l, hy3:movewindow, r
-        bind = SUPER_SHIFT, up, hy3:movewindow, u
-        bind = SUPER_SHIFT, k, hy3:movewindow, u
-        bind = SUPER_SHIFT, down, hy3:movewindow, d
-        bind = SUPER_SHIFT, j, hy3:movewindow, d
-
-        bind = SUPER, 1, workspace, 1
-        bind = SUPER, 2, workspace, 2
-        bind = SUPER, 3, workspace, 3
-        bind = SUPER, 4, workspace, 4
-        bind = SUPER, 5, workspace, 5
-        bind = SUPER, 6, workspace, 6
-        bind = SUPER, 7, workspace, 7
-        bind = SUPER, 8, workspace, 8
-        bind = SUPER, 9, workspace, 9
-        bind = SUPER, 0, workspace, 10
-        bind = SUPER_SHIFT, 1, movetoworkspace, 1
-        bind = SUPER_SHIFT, 2, movetoworkspace, 2
-        bind = SUPER_SHIFT, 3, movetoworkspace, 3
-        bind = SUPER_SHIFT, 4, movetoworkspace, 4
-        bind = SUPER_SHIFT, 5, movetoworkspace, 5
-        bind = SUPER_SHIFT, 6, movetoworkspace, 6
-        bind = SUPER_SHIFT, 7, movetoworkspace, 7
-        bind = SUPER_SHIFT, 8, movetoworkspace, 8
-        bind = SUPER_SHIFT, 9, movetoworkspace, 9
-        bind = SUPER_SHIFT, 0, movetoworkspace, 10
-      '';
+              "${modifier}+Shift+h" = "move left";
+              "${modifier}+Shift+j" = "move down";
+              "${modifier}+Shift+k" = "move up";
+              "${modifier}+Shift+l" = "move right";
+            };
+        };
     };
 }

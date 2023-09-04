@@ -6,14 +6,10 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    hyprland.url = "github:hyprwm/Hyprland";
-    hy3 = {
-      url = "github:outfoxxed/hy3";
-      inputs.hyprland.follows = "hyprland";
-    };
     nur.url = "github:nix-community/NUR";
+    prismlauncher.url = "github:PrismLauncher/PrismLauncher";
   };
-  outputs = { self, nixpkgs, home-manager, hyprland, hy3, nur, ... }@inputs:
+  outputs = { self, nixpkgs, home-manager, nur, prismlauncher, ... }@inputs:
     let
       system = "x86_64-linux";
       pkgs = import nixpkgs {
@@ -21,9 +17,7 @@
         config = { allowUnfree = true; };
       };
       lib = nixpkgs.lib;
-      overlays = [
-        hyprland.overlays.default
-      ];
+      overlays = [prismlauncher.overlays.default];
       nurpkgs = import nixpkgs { inherit system; };
     in
     {
@@ -50,6 +44,11 @@
             (import ./system/configuration.nix)
           ];
         };
+      };
+      devShell.x86_64-linux = pkgs.mkShell {
+        buildInputs = with pkgs; [
+          rnix-lsp
+        ];
       };
     };
 }

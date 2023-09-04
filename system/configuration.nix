@@ -3,14 +3,13 @@
   imports =
     [
       ./hardware-configuration.nix
+      ../runtimes
     ];
 
   nix = {
     package = pkgs.nixFlakes;
     settings = {
       experimental-features = [ "nix-command" "flakes" ];
-      substituters = [ "https://hyprland.cachix.org" ];
-      trusted-public-keys = [ "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc=" ];
     };
     gc = {
       automatic = true;
@@ -50,11 +49,6 @@
     LC_TIME = "en_US.UTF-8";
   };
 
-  programs.hyprland = {
-    enable = true;
-    package = inputs.hyprland.packages.${pkgs.system}.hyprland;
-  };
-
   programs.dconf.enable = true;
   security.polkit.enable = true;
 
@@ -65,11 +59,19 @@
     displayManager = {
       gdm = {
         enable = true;
-        wayland = true;
       };
       autoLogin = {
         enable = true;
         user = "christian";
+      };
+    };
+    windowManager = {
+      i3 = {
+        enable = true;
+        extraPackages = with pkgs; [
+          i3status
+          i3lock
+        ];
       };
     };
   };
@@ -98,17 +100,17 @@
 
   nixpkgs.config.allowUnfree = true;
 
-  # Wayland fixes.
-  environment.sessionVariables = {
-    NIXOS_OZONE_WL = "1";
-    NIXOS_XDG_OPEN_USE_PORTAL = "1";
-    WLR_NO_HARDWARE_CURSORS = "1";
-  };
-
   environment.systemPackages = with pkgs; [
     direnv
     virt-manager
   ];
+
+  # Imagine only using Java for Minecraft!
+  programs.java = {
+    enable = true;
+    additionalRuntimes = { inherit (pkgs) jdk17 jdk11 jdk8; };
+    package = pkgs.jdk17;
+  };
 
   hardware.opengl = {
     enable = true;
