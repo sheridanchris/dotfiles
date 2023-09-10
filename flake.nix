@@ -7,9 +7,8 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nur.url = "github:nix-community/NUR";
-    prismlauncher.url = "github:PrismLauncher/PrismLauncher";
   };
-  outputs = { self, nixpkgs, home-manager, nur, prismlauncher, ... }@inputs:
+  outputs = { self, nixpkgs, home-manager, nur, ... }@inputs:
     let
       system = "x86_64-linux";
       pkgs = import nixpkgs {
@@ -17,7 +16,7 @@
         config = { allowUnfree = true; };
       };
       lib = nixpkgs.lib;
-      overlays = [prismlauncher.overlays.default];
+      overlays = [ ];
       nurpkgs = import nixpkgs { inherit system; };
     in
     {

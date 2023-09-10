@@ -178,6 +178,7 @@
       jetbrains-mono
       twitter-color-emoji
       font-awesome
+      commit-mono
       (nerdfonts.override {
         fonts = [ "JetBrainsMono" ];
       })
@@ -187,7 +188,7 @@
       defaultFonts = {
         serif = [ "DejaVu Math TeX Gyre" "DejaVu Serif" "Noto Serif" ];
         sansSerif = [ "DejaVu Sans" "Noto Sans" ];
-        monospace = [ "JetBrainsMono Nerd Font" "DejaVu Sans Mono" ];
+        monospace = [ "JetBrainsMono Nerd Font" "CommitMono" "DejaVu Sans Mono" ];
         emoji = [ "Twitter Color Emoji" "Noto Color Emoji" "Noto Emoji" ];
       };
     };

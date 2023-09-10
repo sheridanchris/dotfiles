@@ -14,12 +14,11 @@
       {
         devShells.default = mkShell rec {
           packages = [
-            haskellPackages.hoogle
-            haskellPackages.cabal-install
-            haskellPackages.haskell-language-server
-            haskellPackages.ormolu
-            haskellPackages.retrie
-            haskellPackages.hlint
+            clippy
+            rustc
+            cargo
+            rustfmt
+            rust-analyzer
           ];
         };
       });
