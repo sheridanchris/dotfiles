@@ -44,7 +44,7 @@
       enable = true;
       enableZshIntegration = true;
     };
-    exa = {
+    eza = {
       enable = true;
       git = true;
       icons = true;
@@ -728,32 +728,32 @@
         };
       };
     };
-    i3status = {
-      enable = true;
-      modules = {
-        "wireless wlan0" = {
-          position = 1;
-          settings = {
-            format_up = "W: (%quality at %essid, %bitrate) %ip";
-            format_down = "W: down";
-          };
-        };
-        "tztime local" = {
-          position = 2;
-          settings = {
-            format = "%Y-%m-%d %H:%M:%S";
-          };
-        };
-        "memory" = {
-          position = 3;
-          settings = {
-            format = "%used";
-            threshold_degraded = "10%";
-            format_degraded = "MEMORY: %free";
-          };
-        };
-      };
-    };
+    # i3status = {
+    #   enable = true;
+    #   modules = {
+    #     "wireless wlan0" = {
+    #       position = 1;
+    #       settings = {
+    #         format_up = "W: (%quality at %essid, %bitrate) %ip";
+    #         format_down = "W: down";
+    #       };
+    #     };
+    #     "tztime local" = {
+    #       position = 2;
+    #       settings = {
+    #         format = "%Y-%m-%d %H:%M:%S";
+    #       };
+    #     };
+    #     "memory" = {
+    #       position = 3;
+    #       settings = {
+    #         format = "%used";
+    #         threshold_degraded = "10%";
+    #         format_degraded = "MEMORY: %free";
+    #       };
+    #     };
+    #   };
+    # };
   };
 
   home.packages = with pkgs; [
