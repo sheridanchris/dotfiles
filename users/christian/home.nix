@@ -82,7 +82,9 @@
         mkhl.direnv
         ms-azuretools.vscode-docker
         haskell.haskell
+        justusadam.language-haskell
         catppuccin.catppuccin-vsc
+        editorconfig.editorconfig
       ] ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
         {
           name = "vscode-template-fsharp-highlight";
@@ -477,9 +479,9 @@
               tags = [ "social" "entertainment" ];
             }
             {
-              name = "Feedly";
-              url = "https://feedly.com/";
-              tags = [ "reading" ];
+              name = "Notion";
+              url = "https://www.notion.so";
+              tags = [ "journal" "management-tool" ];
             }
             {
               name = "Nix";
@@ -637,6 +639,16 @@
               ];
             }
             {
+              name = "Elm";
+              bookmarks = [
+                {
+                  name = "Happiness in the Front-End Using Elm";
+                  url = "https://www.youtube.com/watch?v=VJCP4_zgbPQ";
+                  tags = [ "elm" "programming" "learning" ];
+                }
+              ];
+            }
+            {
               name = "Htmx";
               bookmarks = [
                 {
@@ -687,6 +699,11 @@
                 {
                   name = "Tsoding";
                   url = "https://www.youtube.com/@Tsoding";
+                  tags = [ "videos" "programming" ];
+                }
+                {
+                  name = "Jesse Warden";
+                  url = "https://www.youtube.com/@JesseWarden";
                   tags = [ "videos" "programming" ];
                 }
               ];
@@ -775,6 +792,7 @@
     flameshot
     prismlauncher
     ngrok
+    libreoffice
   ];
 
   xsession.windowManager.i3 =
@@ -789,7 +807,7 @@
           startup = [
             { command = "xrandr --output DP-0 --primary --mode 1920x1080 --rate 144.00"; }
             { command = "thunderbird"; }
-            { command = "feh --bg-fill ~/.backgrounds/nixos.png"; }
+            { command = "feh --bg-fill ~/.backgrounds/wallpaper.png"; }
           ];
           window = {
             titlebar = false;
