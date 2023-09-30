@@ -85,6 +85,9 @@
         justusadam.language-haskell
         catppuccin.catppuccin-vsc
         editorconfig.editorconfig
+        ocamllabs.ocaml-platform
+        usernamehw.errorlens
+        adpyke.codesnap
       ] ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
         {
           name = "vscode-template-fsharp-highlight";
@@ -636,6 +639,26 @@
                   url = "https://cs3110.github.io/textbook/cover.html";
                   tags = [ "ocaml" "reading" "learning" ];
                 }
+                {
+                  name = "OCaml Programming: Correct + Efficient + Beautiful (YouTube Playlist)";
+                  url = "https://www.youtube.com/playlist?list=PLre5AT9JnKShBOPeuiD9b-I4XROIJhkIU";
+                  tags = [ "ocaml" "learning" ];
+                }
+                {
+                  name = "Real World OCaml";
+                  url = "http://dev.realworldocaml.org/index.html";
+                  tags = [ "ocaml" "learning" ];
+                }
+                {
+                  name = "awesome-ocaml";
+                  url = "https://github.com/ocaml-community/awesome-ocaml";
+                  tags = [ "ocaml" "learning" ];
+                }
+                {
+                  name = "Jane Street Open-Source";
+                  url = "https://opensource.janestreet.com/";
+                  tags = [ "ocaml" ];
+                }
               ];
             }
             {
@@ -666,6 +689,11 @@
             {
               name = "Fancy Stuff";
               bookmarks = [
+                {
+                  name = "Excercism";
+                  url = "https://exercism.org/";
+                  tags = [ "programming" "learning" ];
+                }
                 {
                   name = "Category Theory for Programmers";
                   url = "https://bartoszmilewski.com/2014/10/28/category-theory-for-programmers-the-preface/";
@@ -784,8 +812,6 @@
     mpv
     yt-dlp
     obsidian
-    wl-clipboard
-    clipman
     btop
     lazydocker
     rofi
@@ -793,6 +819,9 @@
     prismlauncher
     ngrok
     libreoffice
+    element-desktop
+    entr
+    gimp
   ];
 
   xsession.windowManager.i3 =

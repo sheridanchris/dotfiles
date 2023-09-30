@@ -13,12 +13,15 @@
       with pkgs;
       {
         devShells.default = mkShell rec {
-          packages = [
+          packages = with ocamlPackages; [
             ocaml
             dune_3
             ocamlformat
-            ocamlPackages.merlin
-            ocamlPackages.ocaml-lsp
+            merlin
+            utop
+            odoc
+            ocaml-lsp
+            ocamlformat-rpc-lib
           ];
         };
       });
