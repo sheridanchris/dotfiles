@@ -13,8 +13,10 @@
       with pkgs;
       {
         devShells.default = mkShell rec {
-          packages = [ dotnet-sdk_7 ];
-          DOTNET_ROOT = "${dotnet-sdk_7}";
+          packages = [
+            elixir_1_15
+            elixir-ls
+          ];
         };
       });
 }

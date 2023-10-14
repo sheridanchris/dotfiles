@@ -88,6 +88,8 @@
         ocamllabs.ocaml-platform
         usernamehw.errorlens
         adpyke.codesnap
+        elixir-lsp.vscode-elixir-ls
+        gruntfuggly.todo-tree
       ] ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
         {
           name = "vscode-template-fsharp-highlight";
@@ -463,296 +465,329 @@
               };
             };
           };
-          # TODO: Tech Talks
-          # https://www.youtube.com/watch?v=QyJZzq0v7Z4
           bookmarks = [
             {
-              name = "DuckDuckGo";
-              url = "https://duckduckgo.com/";
-              tags = [ "search" ];
-            }
-            {
-              name = "GitHub";
-              url = "https://github.com";
-              tags = [ "social" "programming" ];
-            }
-            {
-              name = "YouTube";
-              url = "https://youtube.com";
-              tags = [ "social" "entertainment" ];
-            }
-            {
-              name = "Notion";
-              url = "https://www.notion.so";
-              tags = [ "journal" "management-tool" ];
-            }
-            {
-              name = "Nix";
+              toolbar = true;
               bookmarks = [
                 {
-                  name = "Nix Manual";
-                  url = "https://nixos.org/manual/nix/stable/";
-                  tags = [ "nix" "manual" ];
+                  name = "DuckDuckGo";
+                  url = "https://duckduckgo.com/";
+                  tags = [ "search" ];
                 }
                 {
-                  name = "Nixpkgs Manual";
-                  url = "https://nixos.org/manual/nixpkgs/stable/";
-                  tags = [ "nix" "manual" ];
+                  name = "GitHub";
+                  url = "https://github.com";
+                  tags = [ "social" "programming" ];
                 }
                 {
-                  name = "NixOS Manual";
-                  url = "https://nixos.org/manual/nixos/stable/";
-                  tags = [ "nix" "nix-os" "manual" ];
+                  name = "YouTube";
+                  url = "https://youtube.com";
+                  tags = [ "social" "entertainment" ];
                 }
                 {
-                  name = "NixOS Wiki";
-                  url = "https://nixos.wiki/";
-                  tags = [ "nix" "nix-os" "wiki" ];
+                  name = "Notion";
+                  url = "https://www.notion.so";
+                  tags = [ "journal" "management-tool" ];
                 }
                 {
-                  name = "Noogle";
-                  url = "https://noogle.dev/";
-                  tags = [ "nix" "search" ];
+                  name = "Trello";
+                  url = "https://trello.com/";
+                  tags = [ "project-management" ];
                 }
                 {
-                  name = "Home Manager Options";
-                  url = "https://nix-community.github.io/home-manager/options.html";
-                  tags = [ "nix" "home-manager" ];
+                  name = "Nix";
+                  bookmarks = [
+                    {
+                      name = "Nix Manual";
+                      url = "https://nixos.org/manual/nix/stable/";
+                      tags = [ "nix" "manual" ];
+                    }
+                    {
+                      name = "Nixpkgs Manual";
+                      url = "https://nixos.org/manual/nixpkgs/stable/";
+                      tags = [ "nix" "manual" ];
+                    }
+                    {
+                      name = "NixOS Manual";
+                      url = "https://nixos.org/manual/nixos/stable/";
+                      tags = [ "nix" "nix-os" "manual" ];
+                    }
+                    {
+                      name = "NixOS Wiki";
+                      url = "https://nixos.wiki/";
+                      tags = [ "nix" "nix-os" "wiki" ];
+                    }
+                    {
+                      name = "Noogle";
+                      url = "https://noogle.dev/";
+                      tags = [ "nix" "search" ];
+                    }
+                    {
+                      name = "Home Manager Options";
+                      url = "https://nix-community.github.io/home-manager/options.html";
+                      tags = [ "nix" "home-manager" ];
+                    }
+                    {
+                      name = "Nix User Repositories";
+                      url = "https://nur.nix-community.org/";
+                      tags = [ "nix" ];
+                    }
+                    {
+                      name = "Zero to Nix";
+                      url = "https://zero-to-nix.com/";
+                      tags = [ "nix" "learning" ];
+                    }
+                    {
+                      name = "Nix.dev";
+                      url = "https://nix.dev/";
+                      tags = [ "nix" "learning" ];
+                    }
+                    {
+                      name = "Flake Hub";
+                      url = "https://flakehub.com/";
+                      tags = [ "nix" ];
+                    }
+                  ];
                 }
                 {
-                  name = "Nix User Repositories";
-                  url = "https://nur.nix-community.org/";
-                  tags = [ "nix" ];
+                  name = "Blogs";
+                  bookmarks = [
+                    {
+                      name = "Ploeh";
+                      url = "https://blog.ploeh.dk/";
+                      tags = [ "blogs" "programming" ];
+                    }
+                    {
+                      name = "Tales from Dev";
+                      url = "https://talesfrom.dev/";
+                      tags = [ "blogs" "programming" ];
+                    }
+                    {
+                      name = "F# Weekly";
+                      url = "https://sergeytihon.com/fsharp-weekly/";
+                      tags = [ "blogs" "f#" "programming" ];
+                    }
+                    {
+                      name = "F# for fun and profit";
+                      url = "https://fsharpforfunandprofit.com/";
+                      tags = [ "learning" "f#" "programming" ];
+                    }
+                    {
+                      name = "Paul Blasucci's Weblog";
+                      url = "https://paul.blasuc.ci/";
+                      tags = [ "blogs" "programming" ];
+                    }
+                  ];
                 }
                 {
-                  name = "Zero to Nix";
-                  url = "https://zero-to-nix.com/";
-                  tags = [ "nix" "learning" ];
+                  name = "F#";
+                  bookmarks = [
+                    {
+                      name = "F# Software Foundation";
+                      url = "https://fsharp.org/";
+                      tags = [ "f#" ];
+                    }
+                    {
+                      name = "F# Docs";
+                      url = "https://learn.microsoft.com/en-us/dotnet/fsharp/";
+                      tags = [ "docs" "f#" "programming" ];
+                    }
+                    {
+                      name = "F# Core Library Documentation";
+                      url = "https://fsharp.github.io/fsharp-core-docs/";
+                      tags = [ "docs" "f#" "programming" ];
+                    }
+                    {
+                      name = "Fable";
+                      url = "https://fable.io/";
+                      tags = [ "f#" "programming" "web-development" ];
+                    }
+                  ];
                 }
-                {
-                  name = "Nix.dev";
-                  url = "https://nix.dev/";
-                  tags = [ "nix" "learning" ];
-                }
-              ];
-            }
-            {
-              name = "Blogs";
-              bookmarks = [
-                {
-                  name = "Ploeh";
-                  url = "https://blog.ploeh.dk/";
-                  tags = [ "blogs" "programming" ];
-                }
-                {
-                  name = "Tales from Dev";
-                  url = "https://talesfrom.dev/";
-                  tags = [ "blogs" "programming" ];
-                }
-                {
-                  name = "F# Weekly";
-                  url = "https://sergeytihon.com/fsharp-weekly/";
-                  tags = [ "blogs" "f#" "programming" ];
-                }
-                {
-                  name = "F# for fun and profit";
-                  url = "https://fsharpforfunandprofit.com/";
-                  tags = [ "learning" "f#" "programming" ];
-                }
-                {
-                  name = "Paul Blasucci's Weblog";
-                  url = "https://paul.blasuc.ci/";
-                  tags = [ "blogs" "programming" ];
-                }
-              ];
-            }
-            {
-              name = "F#";
-              bookmarks = [
-                {
-                  name = "F# Software Foundation";
-                  url = "https://fsharp.org/";
-                  tags = [ "f#" ];
-                }
-                {
-                  name = "F# Docs";
-                  url = "https://learn.microsoft.com/en-us/dotnet/fsharp/";
-                  tags = [ "docs" "f#" "programming" ];
-                }
-                {
-                  name = "F# Core Library Documentation";
-                  url = "https://fsharp.github.io/fsharp-core-docs/";
-                  tags = [ "docs" "f#" "programming" ];
-                }
-                {
-                  name = "Fable";
-                  url = "https://fable.io/";
-                  tags = [ "f#" "programming" "web-development" ];
-                }
-              ];
-            }
-            {
-              name = "Haskell";
-              bookmarks = [
                 {
                   name = "Haskell";
-                  url = "https://haskell.org";
-                  tags = [ "haskell" ];
+                  bookmarks = [
+                    {
+                      name = "Haskell";
+                      url = "https://haskell.org";
+                      tags = [ "haskell" ];
+                    }
+                    {
+                      name = "Hackage";
+                      url = "https://hackage.haskell.org/";
+                      tags = [ "haskell" ];
+                    }
+                    {
+                      name = "Hoogle";
+                      url = "https://hoogle.haskell.org/";
+                      tags = [ "haskell" "programming" "docs" ];
+                    }
+                    {
+                      name = "Monday Morning Haskell";
+                      url = "https://mmhaskell.com/";
+                      tags = [ "haskell" "programming" ];
+                    }
+                    {
+                      name = "Learn You a Haskell for Great Good!";
+                      url = "http://learnyouahaskell.com/chapters";
+                      tags = [ "haskell" "programming" "reading" "learning" ];
+                    }
+                    {
+                      name = "Haskell for Imperative Programmers";
+                      url = "https://www.youtube.com/playlist?list=PLe7Ei6viL6jGp1Rfu0dil1JH1SHk9bgDV";
+                      tags = [ "haskell" "programming" "learning" ];
+                    }
+                  ];
                 }
-                {
-                  name = "Hackage";
-                  url = "https://hackage.haskell.org/";
-                  tags = [ "haskell" ];
-                }
-                {
-                  name = "Hoogle";
-                  url = "https://hoogle.haskell.org/";
-                  tags = [ "haskell" "programming" "docs" ];
-                }
-                {
-                  name = "Monday Morning Haskell";
-                  url = "https://mmhaskell.com/";
-                  tags = [ "haskell" "programming" ];
-                }
-                {
-                  name = "Learn You a Haskell for Great Good!";
-                  url = "http://learnyouahaskell.com/chapters";
-                  tags = [ "haskell" "programming" "reading" "learning" ];
-                }
-                {
-                  name = "Haskell for Imperative Programmers";
-                  url = "https://www.youtube.com/playlist?list=PLe7Ei6viL6jGp1Rfu0dil1JH1SHk9bgDV";
-                  tags = [ "haskell" "programming" "learning" ];
-                }
-              ];
-            }
-            {
-              name = "OCaml";
-              bookmarks = [
                 {
                   name = "OCaml";
-                  url = "https://ocaml.org/";
-                  tags = [ "ocaml" ];
+                  bookmarks = [
+                    {
+                      name = "OCaml";
+                      url = "https://ocaml.org/";
+                      tags = [ "ocaml" ];
+                    }
+                    {
+                      name = "OCaml 5.0 Manual";
+                      url = "https://v2.ocaml.org/releases/5.0/manual/index.html";
+                      tags = [ "ocaml" "reading" "learning" ];
+                    }
+                    {
+                      name = "OCaml Programming: Correct + Efficient + Beautiful";
+                      url = "https://cs3110.github.io/textbook/cover.html";
+                      tags = [ "ocaml" "reading" "learning" ];
+                    }
+                    {
+                      name = "OCaml Programming: Correct + Efficient + Beautiful (YouTube Playlist)";
+                      url = "https://www.youtube.com/playlist?list=PLre5AT9JnKShBOPeuiD9b-I4XROIJhkIU";
+                      tags = [ "ocaml" "learning" ];
+                    }
+                    {
+                      name = "Real World OCaml";
+                      url = "http://dev.realworldocaml.org/index.html";
+                      tags = [ "ocaml" "learning" ];
+                    }
+                    {
+                      name = "awesome-ocaml";
+                      url = "https://github.com/ocaml-community/awesome-ocaml";
+                      tags = [ "ocaml" "learning" ];
+                    }
+                    {
+                      name = "Jane Street Open-Source";
+                      url = "https://opensource.janestreet.com/";
+                      tags = [ "ocaml" ];
+                    }
+                  ];
                 }
                 {
-                  name = "OCaml Programming: Correct + Efficient + Beautiful";
-                  url = "https://cs3110.github.io/textbook/cover.html";
-                  tags = [ "ocaml" "reading" "learning" ];
+                  name = "Elm";
+                  bookmarks = [
+                    {
+                      name = "Happiness in the Front-End Using Elm";
+                      url = "https://www.youtube.com/watch?v=VJCP4_zgbPQ";
+                      tags = [ "elm" "programming" "learning" ];
+                    }
+                  ];
                 }
                 {
-                  name = "OCaml Programming: Correct + Efficient + Beautiful (YouTube Playlist)";
-                  url = "https://www.youtube.com/playlist?list=PLre5AT9JnKShBOPeuiD9b-I4XROIJhkIU";
-                  tags = [ "ocaml" "learning" ];
+                  name = "Elixir";
+                  bookmarks = [
+                    {
+                      name = "Elixir";
+                      url = "https://elixir-lang.org/";
+                      tags = [ "elixir" "programming" ];
+                    }
+                    {
+                      name = "Phoenix";
+                      url = "https://www.phoenixframework.org/";
+                      tags = [ "elixir" "programming" ];
+                    }
+                  ];
                 }
-                {
-                  name = "Real World OCaml";
-                  url = "http://dev.realworldocaml.org/index.html";
-                  tags = [ "ocaml" "learning" ];
-                }
-                {
-                  name = "awesome-ocaml";
-                  url = "https://github.com/ocaml-community/awesome-ocaml";
-                  tags = [ "ocaml" "learning" ];
-                }
-                {
-                  name = "Jane Street Open-Source";
-                  url = "https://opensource.janestreet.com/";
-                  tags = [ "ocaml" ];
-                }
-              ];
-            }
-            {
-              name = "Elm";
-              bookmarks = [
-                {
-                  name = "Happiness in the Front-End Using Elm";
-                  url = "https://www.youtube.com/watch?v=VJCP4_zgbPQ";
-                  tags = [ "elm" "programming" "learning" ];
-                }
-              ];
-            }
-            {
-              name = "Htmx";
-              bookmarks = [
                 {
                   name = "Htmx";
-                  url = "https://htmx.org";
-                  tags = [ "htmx" "hypermedia" "programming" "web-development" ];
+                  bookmarks = [
+                    {
+                      name = "Htmx";
+                      url = "https://htmx.org";
+                      tags = [ "htmx" "hypermedia" "programming" "web-development" ];
+                    }
+                    {
+                      name = "Hypermedia Systems";
+                      url = "https://hypermedia.systems/";
+                      tags = [ "htmx" "hypermedia" "reading" "programming" "web-development" ];
+                    }
+                  ];
                 }
                 {
-                  name = "Hypermedia Systems";
-                  url = "https://hypermedia.systems/";
-                  tags = [ "htmx" "hypermedia" "reading" "programming" "web-development" ];
-                }
-              ];
-            }
-            {
-              name = "Fancy Stuff";
-              bookmarks = [
-                {
-                  name = "Excercism";
-                  url = "https://exercism.org/";
-                  tags = [ "programming" "learning" ];
-                }
-                {
-                  name = "Category Theory for Programmers";
-                  url = "https://bartoszmilewski.com/2014/10/28/category-theory-for-programmers-the-preface/";
-                  tags = [ "category-theory" "reading" "functional-programming" ];
-                }
-                {
-                  name = "Every Clojure Talk Ever";
-                  url = "https://www.youtube.com/watch?v=jlPaby7suOc";
-                  tags = [ "clojure" "parody" ];
-                }
-                {
-                  name = "ARIA Authoring Practices Guide";
-                  url = "https://www.w3.org/WAI/ARIA/apg/";
-                  tags = [ "web-development" "accessibility" ];
-                }
-              ];
-            }
-            {
-              name = "YouTube Channels";
-              bookmarks = [
-                {
-                  name = "Impure Pics";
-                  url = "https://www.youtube.com/@impurepics";
-                  tags = [ "videos" "programming" ];
+                  name = "Fancy Stuff";
+                  bookmarks = [
+                    {
+                      name = "Excercism";
+                      url = "https://exercism.org/";
+                      tags = [ "programming" "learning" ];
+                    }
+                    {
+                      name = "Category Theory for Programmers";
+                      url = "https://bartoszmilewski.com/2014/10/28/category-theory-for-programmers-the-preface/";
+                      tags = [ "category-theory" "reading" "functional-programming" ];
+                    }
+                    {
+                      name = "Every Clojure Talk Ever";
+                      url = "https://www.youtube.com/watch?v=jlPaby7suOc";
+                      tags = [ "clojure" "parody" ];
+                    }
+                    {
+                      name = "ARIA Authoring Practices Guide";
+                      url = "https://www.w3.org/WAI/ARIA/apg/";
+                      tags = [ "web-development" "accessibility" ];
+                    }
+                  ];
                 }
                 {
-                  name = "Tweag";
-                  url = "https://www.youtube.com/@tweag";
-                  tags = [ "videos" "programming" ];
+                  name = "YouTube Channels";
+                  bookmarks = [
+                    {
+                      name = "Impure Pics";
+                      url = "https://www.youtube.com/@impurepics";
+                      tags = [ "videos" "programming" ];
+                    }
+                    {
+                      name = "Tweag";
+                      url = "https://www.youtube.com/@tweag";
+                      tags = [ "videos" "programming" ];
+                    }
+                    {
+                      name = "Tsoding";
+                      url = "https://www.youtube.com/@Tsoding";
+                      tags = [ "videos" "programming" ];
+                    }
+                    {
+                      name = "Jesse Warden";
+                      url = "https://www.youtube.com/@JesseWarden";
+                      tags = [ "videos" "programming" ];
+                    }
+                  ];
                 }
                 {
-                  name = "Tsoding";
-                  url = "https://www.youtube.com/@Tsoding";
-                  tags = [ "videos" "programming" ];
-                }
-                {
-                  name = "Jesse Warden";
-                  url = "https://www.youtube.com/@JesseWarden";
-                  tags = [ "videos" "programming" ];
-                }
-              ];
-            }
-            {
-              name = "Vim";
-              bookmarks = [
-                {
-                  name = "0 to LSP : Neovim RC From Scratch";
-                  url = "https://www.youtube.com/watch?v=w7i4amO_zaE";
-                  tags = [ "vim" "learning" ];
-                }
-                {
-                  name = "Neovim Configuration (typecraft)";
-                  url = "https://www.youtube.com/playlist?list=PLsz00TDipIffxsNXSkskknolKShdbcALR";
-                  tags = [ "vim" "learning" ];
-                }
-                {
-                  name = "Vim Cheatsheet";
-                  url = "https://devhints.io/vim";
-                  tags = [ "vim" ];
+                  name = "Vim";
+                  bookmarks = [
+                    {
+                      name = "0 to LSP : Neovim RC From Scratch";
+                      url = "https://www.youtube.com/watch?v=w7i4amO_zaE";
+                      tags = [ "vim" "learning" ];
+                    }
+                    {
+                      name = "Neovim Configuration (typecraft)";
+                      url = "https://www.youtube.com/playlist?list=PLsz00TDipIffxsNXSkskknolKShdbcALR";
+                      tags = [ "vim" "learning" ];
+                    }
+                    {
+                      name = "Vim Cheatsheet";
+                      url = "https://devhints.io/vim";
+                      tags = [ "vim" ];
+                    }
+                  ];
                 }
               ];
             }
