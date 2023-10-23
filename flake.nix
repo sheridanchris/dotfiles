@@ -7,8 +7,12 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nur.url = "github:nix-community/NUR";
+    helix = {
+      url = "github:helix-editor/helix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
-  outputs = { self, nixpkgs, home-manager, nur, ... }@inputs:
+  outputs = { self, nixpkgs, home-manager, nur, helix, ... }@inputs:
     let
       system = "x86_64-linux";
       pkgs = import nixpkgs {
@@ -46,7 +50,7 @@
       };
       devShell.x86_64-linux = pkgs.mkShell {
         buildInputs = with pkgs; [
-          rnix-lsp
+          nil
         ];
       };
     };

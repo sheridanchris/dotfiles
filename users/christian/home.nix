@@ -63,7 +63,7 @@
         font = {
           size = 15;
           normal = {
-            family = "JetBrains Mono";
+            family = "CommitMono";
           };
         };
       };
@@ -72,67 +72,29 @@
       enable = true;
       plugins = with pkgs.obs-studio-plugins; [ ];
     };
-    neovim = {
+    helix = {
       enable = true;
+      package = inputs.helix.packages.${pkgs.system}.default;
       defaultEditor = true;
-      viAlias = true;
-      vimAlias = true;
-      plugins = with pkgs.vimPlugins; [
-        zen-mode-nvim
-        undotree
-        plenary-nvim
-        nui-nvim
-        lualine-nvim
-        barbar-nvim
-        vim-floaterm
-        todo-comments-nvim
-
-        # File Tree
-        neo-tree-nvim
-        nvim-web-devicons
-
-        # Color Scheme
-        gruvbox-nvim
-        catppuccin-nvim
-        kanagawa-nvim
-
-        # Nix Integration
-        direnv-vim
-
-        # Git
-        vim-fugitive
-        gitsigns-nvim
-
-        # Treesitter
-        nvim-treesitter.withAllGrammars
-        nvim-treesitter-context
-        nvim-treesitter-textobjects
-
-        # Telescope
-        telescope-nvim
-        telescope-fzf-native-nvim
-
-        # Language Support
-        nvim-lspconfig
-        nvim-dap
-        Ionide-vim
-        haskell-tools-nvim
-        vim-nix
-
-        # Autocompletion
-        luasnip
-        nvim-cmp
-        cmp-nvim-lsp
-        cmp_luasnip
-      ];
-      extraPackages = with pkgs; [
-        ripgrep
-        fsautocomplete
-        haskellPackages.haskell-debug-adapter
-        rnix-lsp
-        lua-language-server
-      ];
-      extraLuaConfig = lib.fileContents ../../config/neovim/init.lua;
+      settings = {
+        theme = "catppuccin_mocha";
+        editor = {
+          mouse = false;
+          cursorline = true;
+          true-color = true;
+          color-modes = true;
+          line-number = "relative";
+          bufferline = "multiple";
+          cursor-shape = {
+            insert = "bar";
+            normal = "block";
+            select = "underline";
+          };
+          indent-guides = {
+            render = true;
+          };
+        };
+      };
     };
     firefox = {
       enable = true;
@@ -565,7 +527,6 @@
     dunst
     mpv
     yt-dlp
-    obsidian
     btop
     lazydocker
     rofi
@@ -576,6 +537,7 @@
     element-desktop
     entr
     slack
+    slides
   ];
 
   xsession.windowManager.i3 =
