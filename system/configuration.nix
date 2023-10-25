@@ -10,6 +10,8 @@
     package = pkgs.nixFlakes;
     settings = {
       experimental-features = [ "nix-command" "flakes" ];
+      substituters = [ "https://hyprland.cachix.org" ];
+      trusted-public-keys = [ "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc=" ];
     };
     gc = {
       automatic = true;
@@ -18,7 +20,13 @@
     };
   };
 
-  boot.extraModulePackages = with config.boot.kernelPackages; [ v4l2loopback ];
+  #boot = {
+  #  # Enable OBS Virtual Camera
+  #  extraModulePackages = with config.boot.kernelPackages; [ v4l2loopback ];
+  #  extraModprobeConfig = ''
+  #    options v4l2loopback devices=1 video_nr=1 card_label="OBS Cam" exclusive_caps=1
+  #  '';
+  #};
 
   # Home manager
   home-manager.useGlobalPkgs = true;
@@ -65,15 +73,7 @@
         user = "christian";
       };
     };
-    windowManager = {
-      i3 = {
-        enable = true;
-        extraPackages = with pkgs; [
-          i3status
-          i3lock
-        ];
-      };
-    };
+    windowManager.bspwm.enable = true;
   };
 
   services.printing.enable = true;
@@ -103,6 +103,7 @@
   environment.systemPackages = with pkgs; [
     direnv
     virt-manager
+    pavucontrol
   ];
 
   # Imagine only using Java for Minecraft!
@@ -129,21 +130,18 @@
     autostart.enable = true;
     portal = {
       enable = true;
-      extraPortals = with pkgs; [
-        xdg-desktop-portal-gtk
-      ];
+      extraPortals = with pkgs; [ xdg-desktop-portal-gtk ];
     };
-    mime.defaultApplications = {
-      "text/html" = "firefox.desktop";
-      "x-scheme-handler/http" = "firefox.desktop";
-      "x-scheme-handler/https" = "firefox.desktop";
-      "x-scheme-handler/about" = "firefox.desktop";
-      "x-scheme-handler/unknown" = "firefox.desktop";
+    mime.defaultApplications = let browser = "firefox"; in {
+      "text/html" = browser;
+      "x-scheme-handler/http" = browser;
+      "x-scheme-handler/https" = browser;
+      "x-scheme-handler/about" = browser;
+      "x-scheme-handler/unknown" = browser;
       "application/pdf" = "org.pwmt.zathura.desktop";
-      "image/png" = "feh.desktop";
-      "image/jpeg" = "feh.desktop";
-      "image/gif" = "feh.desktop";
-      "video/mp4" = "mpv.desktop";
+      "image/*" = "feh.desktop";
+      "video/*" = "mpv.desktop";
+      "audio/*" = "mpv.desktop";
     };
   };
 
