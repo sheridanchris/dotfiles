@@ -132,16 +132,18 @@
       enable = true;
       extraPortals = with pkgs; [ xdg-desktop-portal-gtk ];
     };
-    mime.defaultApplications = let browser = "firefox"; in {
-      "text/html" = browser;
-      "x-scheme-handler/http" = browser;
-      "x-scheme-handler/https" = browser;
-      "x-scheme-handler/about" = browser;
-      "x-scheme-handler/unknown" = browser;
-      "application/pdf" = "org.pwmt.zathura.desktop";
-      "image/*" = "feh.desktop";
-      "video/*" = "mpv.desktop";
-      "audio/*" = "mpv.desktop";
+    mime.defaultApplications =
+      let browser = "firefox.desktop";
+      in {
+        "text/html" = browser;
+        "x-scheme-handler/http" = browser;
+        "x-scheme-handler/https" = browser;
+        "x-scheme-handler/about" = browser;
+        "x-scheme-handler/unknown" = browser;
+        "application/pdf" = "org.pwmt.zathura.desktop";
+        "image/*" = "feh.desktop";
+        "video/*" = "mpv.desktop";
+        "audio/*" = "mpv.desktop";
     };
   };
 

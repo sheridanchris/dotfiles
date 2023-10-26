@@ -8,18 +8,15 @@ let
   };
 in
 {
-  # TODO: Catppuccin Icons
-
   home = {
     username = "christian";
     homeDirectory = "/home/christian";
     stateVersion = "23.05";
 
-    # TODO: this does not work.
     pointerCursor = {
-      package = pkgs.catppuccin-cursors.mochaSky;
-      name = "Catppuccin-${catppuccin.flavorTitleCase}-Sky";
-      size = 24;
+      package = pkgs.catppuccin-cursors.${catppuccin.flavor + catppuccin.accentTitleCase};
+      name = "Catppuccin-${catppuccin.flavorTitleCase}-${catppuccin.accentTitleCase}-Cursors";
+      size = 32;
     };
   };
 
@@ -41,7 +38,7 @@ in
         accent = catppuccin.accent;
         flavor = catppuccin.flavor;
       };
-      name = "Papirus-cat-${catppuccin.flavor}-${catppuccin.accent}";
+      name = "Papirus-Dark";
     };
   };
 
@@ -59,6 +56,17 @@ in
     "org/virt-manager/virt-manager/connections" = {
       autoconnect = [ "qemu:///system" ];
       uris = [ "qemu:///system" ];
+    };
+  };
+
+  xdg = {
+    configFile = {
+      "btop/themes/catppuccin_${catppuccin.flavor}.theme".source = (pkgs.fetchFromGitHub {
+        owner = "catppuccin";
+        repo = "btop";
+        rev = "c6469190f2ecf25f017d6120bf4e050e6b1d17af";
+        sha256 = "sha256-jodJl4f2T9ViNqsY9fk8IV62CrpC5hy7WK3aRpu70Cs=";
+      } + /themes/catppuccin_${catppuccin.flavor}.theme);
     };
   };
 
@@ -159,6 +167,12 @@ in
     obs-studio = {
       enable = true;
       plugins = with pkgs.obs-studio-plugins; [ ];
+    };
+    btop = {
+      enable = true;
+      settings = {
+        color_theme = "catppuccin_${catppuccin.flavor}.theme";
+      };
     };
     helix = {
       enable = true;
@@ -590,7 +604,6 @@ in
     flameshot
     mpv
     yt-dlp
-    btop
     lazydocker
     prismlauncher
     ngrok
@@ -618,8 +631,14 @@ in
     };
     settings = {
       border_width = 2;
-      gapless_monocle = true;
+      window_gap = 12;
+      
       split_ratio = 0.52;
+      borderless_moncole = true;
+      gapless_monocle = true;
+      
+      active_border_color = "#f2cdcd"; # Catppuccin flamingo
+      normal_border_color = "#1e1e2e"; # Catppuccin base
     };
     startupPrograms = [
       "xrandr --output DP-0 --primary --mode 1920x1080 --rate 144.00"
@@ -645,8 +664,12 @@ in
     sxhkd = {
       enable = true;
       keybindings = {
+        # Application Keybindings
         "super + Return" = "alacritty";
+        "super + p" = "alacritty --command btop";
         "super + o" = "rofi -show drun";
+        "super + shift + w" = "firefox";
+        "super + shift + c" = "discord";
 
         # Bspwm Keybindings
         "super + q" = "xdo close && bspunhide";
@@ -655,12 +678,13 @@ in
         "super + shift + {h,j,k,l}" = "bspc node -s {west,south,north,east}";
         "super + {0-9}" = "bspc desktop -f {0-9}";
         "super + shift + {0-9}" = "bspc node -d {0-9} && bspunhide";
-        "super + f" = "bspfullscreen";
         "super + space" = "bspc node focused.tiled -t floating || bspc node focused.floating -t tiled";
+        "ctrl + alt + {h,j,k,l}" = "bspc node -z {left -20 0, bottom 0 20, top 0 -20, right 20 0}";
+        "ctrl + super + {h,j,k,l}" = "bspc node -z {right -20 0, top 0 20, bottom 0 -20, left 20 0}";
+        
       };
     };
 
-    # TODO: Catppuccin
     polybar =
       let
         colorsConfig =
@@ -705,7 +729,6 @@ in
             type = "internal/bspwm";
             enable-click = false;
             enable-scroll = false;
-            #format-background = "\${colors.green}";
             ws-icon-default = "";
 
             label-focused = "%icon%";
