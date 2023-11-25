@@ -12,7 +12,7 @@
       in
       with pkgs;
       {
-        devShells.default = mkShell rec {
+        devShells.default = mkShell {
           packages = [
             clippy
             rustc

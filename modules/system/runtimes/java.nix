@@ -1,5 +1,5 @@
 # Yoinked from https://github.com/CatDevz/dotfiles/modules/system/runtimes/java.nix
-{ config, pkgs, lib, ... }:
+{ config, lib, ... }:
 
 with lib;
 let

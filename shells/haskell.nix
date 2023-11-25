@@ -12,14 +12,14 @@
       in
       with pkgs;
       {
-        devShells.default = mkShell rec {
-          packages = [
-            haskellPackages.hoogle
-            haskellPackages.cabal-install
-            haskellPackages.haskell-language-server
-            haskellPackages.ormolu
-            haskellPackages.retrie
-            haskellPackages.hlint
+        devShells.default = mkShell {
+          packages = with haskellPackages; [
+            hoogle
+            cabal-install
+            haskell-language-server
+            ormolu
+            retrie
+            hlint
           ];
         };
       });

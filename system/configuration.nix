@@ -3,15 +3,14 @@
   imports =
     [
       ./hardware-configuration.nix
-      ../runtimes
+      # ../runtimes
+      ../modules/system
     ];
 
   nix = {
     package = pkgs.nixFlakes;
     settings = {
       experimental-features = [ "nix-command" "flakes" ];
-      substituters = [ "https://hyprland.cachix.org" ];
-      trusted-public-keys = [ "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc=" ];
     };
     gc = {
       automatic = true;
@@ -20,19 +19,15 @@
     };
   };
 
-  #boot = {
-  #  # Enable OBS Virtual Camera
-  #  extraModulePackages = with config.boot.kernelPackages; [ v4l2loopback ];
-  #  extraModprobeConfig = ''
-  #    options v4l2loopback devices=1 video_nr=1 card_label="OBS Cam" exclusive_caps=1
-  #  '';
-  #};
-
   # Home manager
-  home-manager.useGlobalPkgs = true;
-  home-manager.useUserPackages = true;
-  home-manager.extraSpecialArgs = { inherit inputs; };
-  home-manager.users.christian = import ../users/christian/home.nix;
+  home-manager = {
+    useGlobalPkgs = true;
+    useUserPackages = true;
+    extraSpecialArgs = { inherit inputs; };
+    users = {
+      christian = import ./users/christian/home.nix;
+    };
+  };
 
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -101,7 +96,6 @@
   nixpkgs.config.allowUnfree = true;
 
   environment.systemPackages = with pkgs; [
-    direnv
     virt-manager
     pavucontrol
   ];
@@ -144,54 +138,7 @@
         "image/*" = "feh.desktop";
         "video/*" = "mpv.desktop";
         "audio/*" = "mpv.desktop";
-    };
-  };
-
-  virtualisation = {
-    docker.enable = true;
-    libvirtd = {
-      enable = true;
-      qemu = {
-        package = pkgs.qemu_kvm;
-        runAsRoot = true;
-        swtpm.enable = true;
-        ovmf = {
-          enable = true;
-          packages = with pkgs; [
-            (OVMFFull.override {
-              secureBoot = true;
-              tpmSupport = true;
-            }).fd
-          ];
-        };
       };
-    };
-  };
-
-  fonts = {
-    enableDefaultPackages = true;
-    packages = with pkgs; [
-      liberation_ttf
-      dejavu_fonts
-      noto-fonts
-      noto-fonts-lgc-plus
-      jetbrains-mono
-      twitter-color-emoji
-      font-awesome
-      commit-mono
-      (nerdfonts.override {
-        fonts = [ "JetBrainsMono" ];
-      })
-    ];
-
-    fontconfig = {
-      defaultFonts = {
-        serif = [ "DejaVu Math TeX Gyre" "DejaVu Serif" "Noto Serif" ];
-        sansSerif = [ "DejaVu Sans" "Noto Sans" ];
-        monospace = [ "JetBrainsMono Nerd Font" "CommitMono" "DejaVu Sans Mono" ];
-        emoji = [ "Twitter Color Emoji" "Noto Color Emoji" "Noto Emoji" ];
-      };
-    };
   };
 
   system = {
