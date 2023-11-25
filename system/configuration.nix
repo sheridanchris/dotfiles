@@ -1,23 +1,13 @@
+# TODO: Modularize!
 { config, pkgs, inputs, ... }:
 {
   imports =
     [
       ./hardware-configuration.nix
-      # ../runtimes
-      ../modules/system
+      ../modules/system/base
+      ../modules/system/runtimes
+      ../modules/system/virtualisation
     ];
-
-  nix = {
-    package = pkgs.nixFlakes;
-    settings = {
-      experimental-features = [ "nix-command" "flakes" ];
-    };
-    gc = {
-      automatic = true;
-      dates = "weekly";
-      options = "--delete-older-than 7d";
-    };
-  };
 
   # Home manager
   home-manager = {

@@ -1,7 +1,6 @@
 { config, pkgs, lib, ... }: {
   imports = [
-    ./runtimes
+    ./nix.nix
     ./fonts.nix
-    ./virtualisation.nix
   ];
 }

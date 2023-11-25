@@ -22,20 +22,7 @@
     ];
   };
   services = {
-    # TODO: Catppuccin (copy mocha.conf to $XDG_CONFIG_HOME/dunst/dunstrc)
-    dunst =
-      let
-        theme = pkgs.fetchFromGitHub
-          {
-            owner = "catppuccin";
-            repo = "dunst";
-            rev = "a72991e56338289a9fce941b5df9f0509d2cba09";
-            sha256 = "sha256-1LeSKuZcuWr9z6mKnyt1ojFOnIiTupwspGrOw/ts8Yk=";
-          } + /src/mocha.conf;
-      in
-      {
-        enable = true;
-      };
+    dunst.enable = true; # TODO: Catppuccin
     sxhkd = {
       enable = true;
       keybindings = {

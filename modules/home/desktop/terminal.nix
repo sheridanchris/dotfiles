@@ -19,7 +19,7 @@ in
         font = {
           size = 15;
           normal = {
-            family = "CommitMono";
+            family = "Monaspace Radon";
           };
         };
         window = {

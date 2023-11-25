@@ -1,6 +1,8 @@
 { config, pkgs, lib, inputs, ... }:
 {
   imports = [
+    inputs.nixvim.homeManagerModules.nixvim
+    # inputs.stylix.homeManagerModules.stylix
     ../../../modules/home/base
     ../../../modules/home/desktop
     ../../../modules/home/develop

@@ -24,7 +24,7 @@
     ripgrep
     feh
     zathura
-    lazygit # TODO: Catppuccin
+    lazygit
     obs-studio
   ];
 

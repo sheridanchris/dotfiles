@@ -1,7 +1,6 @@
 { config, pkgs, lib, inputs, ... }: {
   imports = [
-    ./helix.nix
-    ./neovim
-    ./vscode.nix
+    ./docker.nix
+    ./libvirtd.nix
   ];
 }
