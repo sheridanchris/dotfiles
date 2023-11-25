@@ -1,4 +1,4 @@
-{ pkgs }: {
+{ config, pkgs, lib, inputs, ... }: {
   programs.firefox = {
     enable = true;
     package = pkgs.wrapFirefox pkgs.firefox-unwrapped {

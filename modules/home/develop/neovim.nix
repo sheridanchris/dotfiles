@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+{ config, pkgs, lib, inputs, ... }: {
   # TODO: this.
   programs.vim = {
     enable = true;

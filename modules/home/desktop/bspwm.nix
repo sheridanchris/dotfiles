@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+{ config, pkgs, lib, inputs, ... }: {
   xsession.windowManager.bspwm = {
     enable = true;
     monitors = {
@@ -17,7 +17,7 @@
     };
     startupPrograms = [
       "xrandr --output DP-0 --primary --mode 1920x1080 --rate 144.00"
-      "feh --bg-fill ~/dotfiles/wallpapers/wallpaper.png"
+      "feh --bg-fill ~/dotfiles/wallpapers/cat_pacman.png"
       "polybar"
     ];
   };
@@ -41,6 +41,7 @@
       keybindings = {
         # Application Keybindings
         "super + Return" = "alacritty";
+        "super + shift + Return" = "thunar";
         "super + p" = "alacritty --command btop";
         "super + o" = "rofi -show drun";
         "super + shift + w" = "firefox";
@@ -56,7 +57,6 @@
         "super + space" = "bspc node focused.tiled -t floating || bspc node focused.floating -t tiled";
         "ctrl + alt + {h,j,k,l}" = "bspc node -z {left -20 0, bottom 0 20, top 0 -20, right 20 0}";
         "ctrl + super + {h,j,k,l}" = "bspc node -z {right -20 0, top 0 20, bottom 0 -20, left 20 0}";
-
       };
     };
 

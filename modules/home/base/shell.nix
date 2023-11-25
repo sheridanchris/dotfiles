@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+{ config, pkgs, lib, inputs, ... }: {
   programs.zsh = {
     enable = true;
     enableAutosuggestions = true;
@@ -20,6 +20,7 @@
           sha256 = "sha256-nsRuxQFKbQkyEI4TXgvAjcroVdG+heKX5Pauq/4Ota0=";
         } + /palettes/mocha.toml));
   };
+
   programs.eza = {
     enable = true;
     git = true;

@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+{ config, pkgs, lib, inputs, ... }: {
   home.packages = with pkgs; [
     discord
     thunderbird
@@ -22,12 +22,15 @@
     slides
     cmus
     ripgrep
+    feh
+    zathura
+    lazygit # TODO: Catppuccin
+    obs-studio
   ];
 
   # TODO: Idk where to put this.
   programs.direnv = {
     enable = true;
     nix-direnv.enable = true;
-    enableZshIntegration = true; # TODO: Maybe keep this?
   };
 }

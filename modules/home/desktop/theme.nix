@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+{ config, pkgs, lib, inputs, ... }: {
   home.pointerCursor = {
     package = pkgs.catppuccin-cursors.mochaPink;
     name = "Catppuccin-Mocha-Pink-Cursors";
