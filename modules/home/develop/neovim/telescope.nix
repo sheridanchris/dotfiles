@@ -1,5 +1,11 @@
 { config, pkgs, lib, inputs, ... }: {
   programs.nixvim = {
+    keymaps = [
+      {
+        key = "<leader>ft";
+        action = "<cmd>TodoTelescope<cr>";
+      }
+    ];
     plugins.telescope = {
       enable = true;
       extensions = {

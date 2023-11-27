@@ -2,7 +2,6 @@
   description = "Christian Sheridan's NixOS System and User Configuration";
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-    nur.url = "github:nix-community/NUR";
     # stylix.url = "github:danth/stylix";
     home-manager = {
       url = "github:nix-community/home-manager";
@@ -17,7 +16,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
-  outputs = { self, nixpkgs, home-manager, nur, helix, nixvim, ... }@inputs:
+  outputs = { self, nixpkgs, home-manager, helix, nixvim, ... }@inputs:
     let
       system = "x86_64-linux";
       pkgs = import nixpkgs {
@@ -26,7 +25,6 @@
       };
       lib = nixpkgs.lib;
       overlays = [ ];
-      nurpkgs = import nixpkgs { inherit system; };
     in
     {
       formatter.x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.nixpkgs-fmt;
@@ -38,14 +36,6 @@
           modules = [
             {
               nixpkgs.overlays = overlays;
-            }
-            {
-              nixpkgs.config.packageOverrides = pkgs: {
-                nur = import nur {
-                  inherit pkgs nurpkgs;
-                  repoOverrides = { };
-                };
-              };
             }
 
             home-manager.nixosModules.home-manager
