@@ -1,4 +1,4 @@
-{}: {
+{ config, pkgs, lib, inputs, ... }: {
   programs.nixvim.colorschemes.catppuccin = {
     enable = true;
     flavour = "mocha";

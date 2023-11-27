@@ -1,14 +1,11 @@
 { config, pkgs, lib, inputs, ... }: {
   imports = [
     ./options.nix
-    ./completions.nix
     ./lsp.nix
+    ./completions.nix
     ./telescope.nix
     ./colorscheme.nix
   ];
 
-  programs.nixvim = {
-    enable = true;
-    
-  };
+  programs.nixvim.enable = true;
 }
