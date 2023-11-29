@@ -15,8 +15,9 @@
       url = "github:nix-community/nixvim";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    spicetify-nix.url = "github:the-argus/spicetify-nix";
   };
-  outputs = { self, nixpkgs, home-manager, helix, nixvim, ... }@inputs:
+  outputs = { self, nixpkgs, home-manager, helix, nixvim, spicetify-nix, ... }@inputs:
     let
       system = "x86_64-linux";
       pkgs = import nixpkgs {

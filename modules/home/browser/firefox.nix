@@ -1,6 +1,6 @@
-{pkgs, ...}: {
-    # TODO: Use librewolf?
-    programs.firefox = {
+{ pkgs, ... }: {
+  # TODO: Use librewolf?
+  programs.firefox = {
     enable = true;
     package = pkgs.wrapFirefox pkgs.firefox-unwrapped {
       extraPolicies = {

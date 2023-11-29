@@ -2,6 +2,7 @@
 {
   imports = [
     inputs.nixvim.homeManagerModules.nixvim
+    inputs.spicetify-nix.homeManagerModule
     # inputs.stylix.homeManagerModules.stylix
     ../../../modules/home/base
     ../../../modules/home/desktop

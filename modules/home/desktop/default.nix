@@ -4,5 +4,6 @@
     ./rofi.nix
     ./btop.nix
     ./bspwm.nix
+    ./spotify.nix
   ];
 }
