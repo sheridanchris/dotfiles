@@ -117,7 +117,7 @@
       extraPortals = with pkgs; [ xdg-desktop-portal-gtk ];
     };
     mime.defaultApplications =
-      let browser = "firefox.desktop";
+      let browser = "librewolf.desktop";
       in {
         "text/html" = browser;
         "x-scheme-handler/http" = browser;
