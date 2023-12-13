@@ -33,6 +33,7 @@
         "super + o" = "rofi -show drun";
         "super + shift + w" = "firefox";
         "super + shift + c" = "discord";
+        "super + Print" = "flameshot gui";
 
         # Bspwm Keybindings
         "super + q" = "xdo close && bspunhide";

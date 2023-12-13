@@ -10,21 +10,19 @@ let
       };
 in
 {
-  # TODO: I don't know where to put this :(
-  programs.alacritty =
-    {
-      enable = true;
-      settings = {
-        import = [ "${theme}/catppuccin-mocha.yml" ];
-        font = {
-          size = 15;
-          normal = {
-            family = "Monaspace Radon";
-          };
-        };
-        window = {
-          opactiy = 0.8;
+  programs.alacritty = {
+    enable = true;
+    settings = {
+      import = [ "${theme}/catppuccin-mocha.yml" ];
+      font = {
+        size = 15;
+        normal = {
+          family = "CommitMono";
         };
       };
+      window = {
+        opactiy = 0.8;
+      };
     };
+  };
 }

@@ -1,23 +1,26 @@
 {
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:nixos/nixpkgs/master";
     flake-utils.url = "github:numtide/flake-utils";
   };
   outputs = { self, nixpkgs, flake-utils, ... }:
     flake-utils.lib.eachDefaultSystem (system:
       let
-        pkgs = import nixpkgs {
-          inherit system;
-        };
+        pkgs =
+          import nixpkgs {
+            inherit system;
+          };
       in
       with pkgs;
       {
         devShells.default = mkShell {
           packages = [
-            fsautocomplete
-            dotnet-sdk_8
+            go
+            gotools
+            gopls
+            golangci-lint
+            golangci-lint-langserver
           ];
-          DOTNET_ROOT = "${dotnet-sdk_8}";
         };
       });
 }
