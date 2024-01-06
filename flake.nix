@@ -16,6 +16,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     spicetify-nix.url = "github:the-argus/spicetify-nix";
+    pre-commit-hooks.url = "github:cachix/pre-commit-hooks.nix";
   };
   outputs = {
     self,
@@ -24,6 +25,7 @@
     helix,
     nixvim,
     spicetify-nix,
+    pre-commit-hooks,
     ...
   } @ inputs: let
     system = "x86_64-linux";
@@ -35,6 +37,16 @@
     overlays = [];
   in {
     formatter.${system} = pkgs.alejandra;
+
+    checks = {
+      pre-commit-check = pre-commit-hooks.lib.${system}.run {
+        src = ./.;
+        hooks = {
+          nil.enable = true;
+          alejandra.enable = true;
+        };
+      };
+    };
 
     nixosConfigurations = {
       nixos = lib.nixosSystem {
@@ -51,6 +63,7 @@
       };
     };
     devShell.${system} = pkgs.mkShell {
+      inherit (self.checks.${system}.pre-commit-check) shellHook;
       packages = with pkgs; [
         nil
       ];

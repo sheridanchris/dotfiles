@@ -93,6 +93,8 @@
     pavucontrol
 
     # Not sure where to put this.
+    # This could be installed globally or in individual flakes...
+    # (need to test flakes + helix config integration)
     alejandra
   ];
 
