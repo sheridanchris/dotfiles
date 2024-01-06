@@ -17,6 +17,7 @@
     };
     spicetify-nix.url = "github:the-argus/spicetify-nix";
     pre-commit-hooks.url = "github:cachix/pre-commit-hooks.nix";
+    flake-utils.url = "github:numtide/flake-utils";
   };
   outputs = {
     self,
@@ -26,6 +27,7 @@
     nixvim,
     spicetify-nix,
     pre-commit-hooks,
+    flake-utils,
     ...
   } @ inputs: let
     system = "x86_64-linux";
@@ -33,23 +35,13 @@
       inherit system;
       config = {allowUnfree = true;};
     };
-    lib = nixpkgs.lib;
+    # lib = nixpkgs.lib;
     overlays = [];
   in {
     formatter.${system} = pkgs.alejandra;
 
-    checks = {
-      pre-commit-check = pre-commit-hooks.lib.${system}.run {
-        src = ./.;
-        hooks = {
-          nil.enable = true;
-          alejandra.enable = true;
-        };
-      };
-    };
-
     nixosConfigurations = {
-      nixos = lib.nixosSystem {
+      nixos = nixpkgs.lib.nixosSystem {
         inherit system;
         specialArgs = {inherit inputs;};
         modules = [
@@ -60,6 +52,15 @@
           home-manager.nixosModules.home-manager
           (import ./system/configuration.nix)
         ];
+      };
+    };
+    checks = {
+      pre-commit-check = pre-commit-hooks.lib.${system}.run {
+        src = ./.;
+        hooks = {
+          nil.enable = true;
+          alejandra.enable = true;
+        };
       };
     };
     devShell.${system} = pkgs.mkShell {
