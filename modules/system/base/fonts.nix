@@ -1,4 +1,10 @@
-{ config, pkgs, lib, inputs, ... }: {
+{
+  config,
+  pkgs,
+  lib,
+  inputs,
+  ...
+}: {
   fonts = {
     enableDefaultPackages = true;
     packages = with pkgs; [
@@ -12,16 +18,16 @@
       commit-mono
       monaspace
       (nerdfonts.override {
-        fonts = [ "JetBrainsMono" ];
+        fonts = ["JetBrainsMono"];
       })
     ];
 
     fontconfig = {
       defaultFonts = {
-        serif = [ "DejaVu Math TeX Gyre" "DejaVu Serif" "Noto Serif" ];
-        sansSerif = [ "DejaVu Sans" "Noto Sans" ];
-        monospace = [ "JetBrainsMono Nerd Font" "CommitMono" "DejaVu Sans Mono" ];
-        emoji = [ "Twitter Color Emoji" "Noto Color Emoji" "Noto Emoji" ];
+        serif = ["DejaVu Math TeX Gyre" "DejaVu Serif" "Noto Serif"];
+        sansSerif = ["DejaVu Sans" "Noto Sans"];
+        monospace = ["JetBrainsMono Nerd Font" "CommitMono" "DejaVu Sans Mono"];
+        emoji = ["Twitter Color Emoji" "Noto Color Emoji" "Noto Emoji"];
       };
     };
   };

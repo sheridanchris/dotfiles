@@ -1,4 +1,10 @@
-{ config, pkgs, lib, inputs, ... }: {
+{
+  config,
+  pkgs,
+  lib,
+  inputs,
+  ...
+}: {
   virtualisation.docker.enable = true;
-  users.users.christian.extraGroups = [ "docker" ];
+  users.users.christian.extraGroups = ["docker"];
 }

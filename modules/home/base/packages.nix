@@ -1,11 +1,17 @@
-{ config, pkgs, lib, inputs, ... }: {
+{
+  config,
+  pkgs,
+  lib,
+  inputs,
+  ...
+}: {
   home.packages = with pkgs; [
     discord
     thunderbird
     xfce.thunar
     ark
     bitwarden
-    (kodi.withPackages (kodiPkgs: with kodiPkgs; [ netflix ]))
+    (kodi.withPackages (kodiPkgs: with kodiPkgs; [netflix]))
     easyeffects
     feh
     xdo

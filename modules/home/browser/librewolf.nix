@@ -1,9 +1,13 @@
-{ pkgs, ... }: {
+{pkgs, ...}: {
   programs.librewolf = {
     enable = true;
+    # Enable WebGL, cookies and history
     settings = {
-      "middlemouse.paste" = false;
       "webgl.disabled" = false;
+      "privacy.resistFingerprinting" = false;
+      "privacy.clearOnShutdown.history" = false;
+      "privacy.clearOnShutdown.cookies" = false;
+      "network.cookie.lifetimePolicy" = 0;
     };
   };
 }

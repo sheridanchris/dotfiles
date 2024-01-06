@@ -1,4 +1,10 @@
-{ config, pkgs, lib, inputs, ... }: {
+{
+  config,
+  pkgs,
+  lib,
+  inputs,
+  ...
+}: {
   programs.nixvim = {
     keymaps = [
       {
@@ -40,6 +46,6 @@
         };
       };
     };
-    extraPackages = with pkgs; [ ripgrep ];
+    extraPackages = with pkgs; [ripgrep];
   };
 }

@@ -1,4 +1,10 @@
-{ config, pkgs, lib, inputs, ... }: {
+{
+  config,
+  pkgs,
+  lib,
+  inputs,
+  ...
+}: {
   home.pointerCursor = {
     package = pkgs.catppuccin-cursors.mochaPink;
     name = "Catppuccin-Mocha-Pink-Cursors";
@@ -11,9 +17,9 @@
     gtk4.extraConfig.gtk-application-prefer-dark-theme = true;
     theme = {
       package = pkgs.catppuccin-gtk.override {
-        accents = [ "pink" ];
+        accents = ["pink"];
         size = "compact";
-        tweaks = [ "rimless" ];
+        tweaks = ["rimless" "normal"];
         variant = "mocha";
       };
       name = "Catppuccin-Mocha-Compact-Pink-Dark";

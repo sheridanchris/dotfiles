@@ -1,4 +1,10 @@
-{ config, pkgs, lib, inputs, ... }: {
+{
+  config,
+  pkgs,
+  lib,
+  inputs,
+  ...
+}: {
   programs.nixvim = {
     globals = {
       mapleader = " ";
@@ -11,6 +17,7 @@
       expandtab = true;
       shiftwidth = 2;
       tabstop = 2;
+      signcolumn = "yes";
     };
   };
 }

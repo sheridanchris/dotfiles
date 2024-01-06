@@ -1,19 +1,22 @@
 # TODO: Modularize!
-{ config, pkgs, inputs, ... }:
 {
-  imports =
-    [
-      ./hardware-configuration.nix
-      ../modules/system/base
-      ../modules/system/runtimes
-      ../modules/system/virtualisation
-    ];
+  config,
+  pkgs,
+  inputs,
+  ...
+}: {
+  imports = [
+    ./hardware-configuration.nix
+    ../modules/system/base
+    ../modules/system/runtimes
+    ../modules/system/virtualisation
+  ];
 
   # Home manager
   home-manager = {
     useGlobalPkgs = true;
     useUserPackages = true;
-    extraSpecialArgs = { inherit inputs; };
+    extraSpecialArgs = {inherit inputs;};
     users = {
       christian = import ./users/christian/home.nix;
     };
@@ -48,7 +51,7 @@
   services.xserver = {
     enable = true;
     layout = "us";
-    videoDrivers = [ "nvidia" ];
+    videoDrivers = ["nvidia"];
     displayManager = {
       gdm = {
         enable = true;
@@ -76,7 +79,7 @@
   users.users.christian = {
     isNormalUser = true;
     description = "Christian Sheridan";
-    extraGroups = [ "docker" "networkmanager" "wheel" "libvirtd" ];
+    extraGroups = ["docker" "networkmanager" "wheel" "libvirtd"];
   };
 
   # Workaround for GNOME autologin: https://github.com/NixOS/nixpkgs/issues/103746#issuecomment-945091229
@@ -88,12 +91,15 @@
   environment.systemPackages = with pkgs; [
     virt-manager
     pavucontrol
+
+    # Not sure where to put this.
+    alejandra
   ];
 
   # Imagine only using Java for Minecraft!
   programs.java = {
     enable = true;
-    additionalRuntimes = { inherit (pkgs) jdk17 jdk11 jdk8; };
+    additionalRuntimes = {inherit (pkgs) jdk17 jdk11 jdk8;};
     package = pkgs.jdk17;
   };
 
@@ -114,21 +120,15 @@
     autostart.enable = true;
     portal = {
       enable = true;
-      extraPortals = with pkgs; [ xdg-desktop-portal-gtk ];
+      extraPortals = with pkgs; [xdg-desktop-portal-gtk];
+      config.common.default = "gtk";
     };
-    mime.defaultApplications =
-      let browser = "librewolf.desktop";
-      in {
-        "text/html" = browser;
-        "x-scheme-handler/http" = browser;
-        "x-scheme-handler/https" = browser;
-        "x-scheme-handler/about" = browser;
-        "x-scheme-handler/unknown" = browser;
-        "application/pdf" = "org.pwmt.zathura.desktop";
-        "image/*" = "feh.desktop";
-        "video/*" = "mpv.desktop";
-        "audio/*" = "mpv.desktop";
-      };
+    mime.defaultApplications = {
+      "application/pdf" = "org.pwmt.zathura.desktop";
+      "image/*" = "feh.desktop";
+      "video/*" = "mpv.desktop";
+      "audio/*" = "mpv.desktop";
+    };
   };
 
   system = {

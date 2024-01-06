@@ -1,4 +1,10 @@
-{ config, pkgs, lib, inputs, ... }: {
+{
+  config,
+  pkgs,
+  lib,
+  inputs,
+  ...
+}: {
   programs.nixvim.plugins = {
     cmp-buffer.enable = true;
     cmp-path.enable = true;
@@ -7,9 +13,9 @@
     nvim-cmp = {
       enable = true;
       sources = [
-        { name = "buffer"; }
-        { name = "path"; }
-        { name = "nvim_lsp"; }
+        {name = "buffer";}
+        {name = "path";}
+        {name = "nvim_lsp";}
       ];
       mapping = {
         "<C-k>" = "cmp.mapping.select_prev_item()";

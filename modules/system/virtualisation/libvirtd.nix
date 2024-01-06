@@ -1,6 +1,14 @@
-{ config, pkgs, lib, inputs, ... }: {
+{
+  config,
+  pkgs,
+  lib,
+  inputs,
+  ...
+}: {
   virtualisation.libvirtd = {
     enable = true;
+    onBoot = "start";
+    onShutdown = "shutdown";
     qemu = {
       package = pkgs.qemu_kvm;
       runAsRoot = true;
@@ -11,11 +19,12 @@
           (OVMFFull.override {
             secureBoot = true;
             tpmSupport = true;
-          }).fd
+          })
+          .fd
         ];
       };
     };
   };
 
-  users.users.christian.extraGroups = [ "libvirtd" ];
+  users.users.christian.extraGroups = ["libvirtd"];
 }

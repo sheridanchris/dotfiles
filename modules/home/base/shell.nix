@@ -1,4 +1,10 @@
-{ config, pkgs, lib, inputs, ... }: {
+{
+  config,
+  pkgs,
+  lib,
+  inputs,
+  ...
+}: {
   programs.zsh = {
     enable = true;
     enableAutosuggestions = true;
@@ -8,17 +14,20 @@
   programs.starship = {
     enable = true;
     enableZshIntegration = true;
-    settings = {
-      format = "$all";
-      palette = "catppuccin_mocha";
-    } // builtins.fromTOML (builtins.readFile
-      (pkgs.fetchFromGitHub
-        {
-          owner = "catppuccin";
-          repo = "starship";
-          rev = "5629d2356f62a9f2f8efad3ff37476c19969bd4f";
-          sha256 = "sha256-nsRuxQFKbQkyEI4TXgvAjcroVdG+heKX5Pauq/4Ota0=";
-        } + /palettes/mocha.toml));
+    settings =
+      {
+        format = "$all";
+        palette = "catppuccin_mocha";
+      }
+      // builtins.fromTOML (builtins.readFile
+        (pkgs.fetchFromGitHub
+          {
+            owner = "catppuccin";
+            repo = "starship";
+            rev = "5629d2356f62a9f2f8efad3ff37476c19969bd4f";
+            sha256 = "sha256-nsRuxQFKbQkyEI4TXgvAjcroVdG+heKX5Pauq/4Ota0=";
+          }
+          + /palettes/mocha.toml));
   };
 
   programs.eza = {

@@ -1,19 +1,23 @@
-{ config, pkgs, lib, inputs, ... }:
-let
+{
+  config,
+  pkgs,
+  lib,
+  inputs,
+  ...
+}: let
   theme =
     pkgs.fetchFromGitHub
-      {
-        owner = "catppuccin";
-        repo = "alacritty";
-        rev = "3c808cbb4f9c87be43ba5241bc57373c793d2f17";
-        sha256 = "sha256-w9XVtEe7TqzxxGUCDUR9BFkzLZjG8XrplXJ3lX6f+x0=";
-      };
-in
-{
+    {
+      owner = "catppuccin";
+      repo = "alacritty";
+      rev = "3c808cbb4f9c87be43ba5241bc57373c793d2f17";
+      sha256 = "sha256-w9XVtEe7TqzxxGUCDUR9BFkzLZjG8XrplXJ3lX6f+x0=";
+    };
+in {
   programs.alacritty = {
     enable = true;
     settings = {
-      import = [ "${theme}/catppuccin-mocha.yml" ];
+      import = ["${theme}/catppuccin-mocha.yml"];
       font = {
         size = 15;
         normal = {

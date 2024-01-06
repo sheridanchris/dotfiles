@@ -1,8 +1,28 @@
-{ config, pkgs, lib, inputs, ... }: {
+{
+  config,
+  pkgs,
+  lib,
+  inputs,
+  ...
+}: {
   programs.helix = {
     enable = true;
     package = inputs.helix.packages.${pkgs.system}.default;
     defaultEditor = true;
+    languages = {
+      language = [
+        {
+          name = "markdown";
+          soft-wrap.enable = true;
+        }
+      ];
+      language-server = {
+        nil = {
+          command = lib.getExe pkgs.nil;
+          config.nil.formatting.command = ["${lib.getExe pkgs.alejandra}" "-q"];
+        };
+      };
+    };
     settings = {
       theme = "catppuccin_mocha";
       editor = {
@@ -19,9 +39,9 @@
         };
       };
       keys.normal = {
-        esc = [ "collapse_selection" "keep_primary_selection" ];
-        C-j = [ "extend_to_line_bounds" "delete_selection" "paste_after" ];
-        C-k = [ "extend_to_line_bounds" "delete_selection" "move_line_up" "paste_before" ];
+        esc = ["collapse_selection" "keep_primary_selection"];
+        C-j = ["extend_to_line_bounds" "delete_selection" "paste_after"];
+        C-k = ["extend_to_line_bounds" "delete_selection" "move_line_up" "paste_before"];
       };
     };
   };

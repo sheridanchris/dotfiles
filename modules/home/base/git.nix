@@ -1,4 +1,10 @@
-{ config, pkgs, lib, inputs, ... }: {
+{
+  config,
+  pkgs,
+  lib,
+  inputs,
+  ...
+}: {
   programs.git = {
     enable = true;
     userName = "sheridanchris";
@@ -6,6 +12,6 @@
   };
   programs.gh = {
     enable = true;
-    extensions = [ pkgs.gh-dash ];
+    extensions = [pkgs.gh-dash];
   };
 }

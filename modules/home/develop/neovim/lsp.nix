@@ -1,4 +1,10 @@
-{ config, pkgs, lib, inputs, ... }: {
+{
+  config,
+  pkgs,
+  lib,
+  inputs,
+  ...
+}: {
   programs.nixvim = {
     plugins = {
       lsp-format.enable = true;
@@ -24,6 +30,6 @@
         };
       };
     };
-    extraPlugins = with pkgs.vimPlugins; [ Ionide-vim ];
+    extraPlugins = with pkgs.vimPlugins; [Ionide-vim];
   };
 }

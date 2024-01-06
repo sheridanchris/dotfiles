@@ -1,5 +1,10 @@
-{ config, pkgs, lib, inputs, ... }:
 {
+  config,
+  pkgs,
+  lib,
+  inputs,
+  ...
+}: {
   imports = [
     inputs.nixvim.homeManagerModules.nixvim
     inputs.spicetify-nix.homeManagerModule

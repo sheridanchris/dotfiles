@@ -17,37 +17,43 @@
     };
     spicetify-nix.url = "github:the-argus/spicetify-nix";
   };
-  outputs = { self, nixpkgs, home-manager, helix, nixvim, spicetify-nix, ... }@inputs:
-    let
-      system = "x86_64-linux";
-      pkgs = import nixpkgs {
+  outputs = {
+    self,
+    nixpkgs,
+    home-manager,
+    helix,
+    nixvim,
+    spicetify-nix,
+    ...
+  } @ inputs: let
+    system = "x86_64-linux";
+    pkgs = import nixpkgs {
+      inherit system;
+      config = {allowUnfree = true;};
+    };
+    lib = nixpkgs.lib;
+    overlays = [];
+  in {
+    formatter.${system} = pkgs.alejandra;
+
+    nixosConfigurations = {
+      nixos = lib.nixosSystem {
         inherit system;
-        config = { allowUnfree = true; };
-      };
-      lib = nixpkgs.lib;
-      overlays = [ ];
-    in
-    {
-      formatter.x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.nixpkgs-fmt;
+        specialArgs = {inherit inputs;};
+        modules = [
+          {
+            nixpkgs.overlays = overlays;
+          }
 
-      nixosConfigurations = {
-        nixos = lib.nixosSystem {
-          inherit system;
-          specialArgs = { inherit inputs; };
-          modules = [
-            {
-              nixpkgs.overlays = overlays;
-            }
-
-            home-manager.nixosModules.home-manager
-            (import ./system/configuration.nix)
-          ];
-        };
-      };
-      devShell.x86_64-linux = pkgs.mkShell {
-        buildInputs = with pkgs; [
-          nil
+          home-manager.nixosModules.home-manager
+          (import ./system/configuration.nix)
         ];
       };
     };
+    devShell.${system} = pkgs.mkShell {
+      packages = with pkgs; [
+        nil
+      ];
+    };
+  };
 }
