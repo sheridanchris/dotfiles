@@ -3,7 +3,6 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     spicetify-nix.url = "github:the-argus/spicetify-nix";
-    pre-commit-hooks.url = "github:cachix/pre-commit-hooks.nix";
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -24,7 +23,6 @@
     helix,
     nixvim,
     spicetify-nix,
-    pre-commit-hooks,
     ...
   } @ inputs: let
     system = "x86_64-linux";
