@@ -5,10 +5,11 @@
   inputs,
   ...
 }: let
-  defaultBrowser = "librewolf.desktop";
+  defaultBrowser = ["firefox.desktop"];
 in {
   imports = [
-    ./librewolf.nix
+    # ./librewolf.nix
+    # ./chromium.nix
     ./firefox.nix
     ./qutebrowser.nix
   ];

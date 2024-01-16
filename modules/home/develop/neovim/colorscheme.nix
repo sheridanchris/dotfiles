@@ -12,6 +12,8 @@
     integrations = {
       cmp = true;
       telescope.enabled = true;
+      gitsigns = true;
+      which_key = true;
     };
   };
 }

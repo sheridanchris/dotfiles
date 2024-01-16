@@ -37,7 +37,7 @@
         "super + shift + Return" = "thunar";
         "super + p" = "alacritty --command btop";
         "super + o" = "rofi -show drun";
-        "super + shift + w" = "firefox";
+        "super + shift + w" = "xdg-open https://duckduckgo.com";
         "super + shift + c" = "discord";
         "super + Print" = "flameshot gui";
 

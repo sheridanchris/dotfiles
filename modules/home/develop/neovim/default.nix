@@ -7,8 +7,7 @@
 }: {
   imports = [
     ./options.nix
-    ./lsp.nix
-    ./completions.nix
+    ./languages.nix
     ./telescope.nix
     ./treesitter.nix
     ./colorscheme.nix

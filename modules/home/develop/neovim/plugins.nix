@@ -5,18 +5,24 @@
   inputs,
   ...
 }: {
-  programs.nixvim.plugins = {
-    which-key.enable = true;
-    lualine.enable = true;
-    todo-comments.enable = true;
-    floaterm.enable = true;
-    oil = {
-      enable = true;
-      useDefaultKeymaps = true;
-      columns = {
-        icon.enable = true;
-        type.enable = true;
+  programs.nixvim = {
+    plugins = {
+      which-key.enable = true;
+      todo-comments.enable = true;
+      comment-nvim.enable = true;
+      floaterm.enable = true;
+      oil = {
+        enable = true;
+        useDefaultKeymaps = true;
+        columns = {
+          icon.enable = true;
+          type.enable = true;
+        };
       };
+      # lualine = {
+      #   enable = true;
+      # };
     };
+    extraPlugins = with pkgs.vimPlugins; [];
   };
 }
