@@ -44,6 +44,7 @@
           ];
           DOTNET_ROOT = "${dotnet-sdk_8}";
         };
+        # TODO: Not tested
         packages.default = buildDotnetModule rec {
           pname = "<name>";
           version = "<version>";
