@@ -91,6 +91,7 @@
   environment.systemPackages = with pkgs; [
     virt-manager
     pavucontrol
+    pinentry-gtk2
 
     # Not sure where to put this.
     # This could be installed globally or in individual flakes...
@@ -103,6 +104,13 @@
     enable = true;
     additionalRuntimes = {inherit (pkgs) jdk17 jdk11 jdk8;};
     package = pkgs.jdk17;
+  };
+
+  services.pcscd.enable = true;
+  programs.gnupg.agent = {
+    enable = true;
+    pinentryFlavor = "gtk2";
+    # enableSSHSupport = true;
   };
 
   hardware.opengl = {
