@@ -20,49 +20,41 @@
   outputs = {
     self,
     nixpkgs,
-    home-manager,
-    helix,
-    nixvim,
-    spicetify-nix,
     pre-commit-hooks,
     ...
   } @ inputs: let
+    username = "christian";
     system = "x86_64-linux";
     pkgs = import nixpkgs {
       inherit system;
-      config = {allowUnfree = true;};
+      config.allowUnfree = true;
     };
   in
     with pkgs; {
       formatter.${system} = alejandra;
 
-      # TODO: These should be per-system
       nixosConfigurations = {
         nixos = nixpkgs.lib.nixosSystem {
           inherit system;
-          specialArgs = {inherit inputs;};
+          specialArgs = {inherit inputs username;};
           modules = [
-            home-manager.nixosModules.home-manager
-            (import ./system/configuration.nix)
+            #home-manager.nixosModules.home-manager
+            (import ./hosts/nixos/configuration.nix)
           ];
         };
       };
-      #TODO: These should be for all systems.
+
       checks.${system} = {
         pre-commit-check = pre-commit-hooks.lib.${system}.run {
           src = ./.;
           hooks = {
-            # nil.enable = true;
             alejandra.enable = true;
           };
         };
       };
       devShell.${system} = mkShell {
         inherit (self.checks.${system}.pre-commit-check) shellHook;
-        packages = [
-          nixd
-          lua-language-server
-        ];
+        packages = [nixd];
       };
     };
 }
