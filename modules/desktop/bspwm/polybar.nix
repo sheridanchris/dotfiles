@@ -1,18 +1,11 @@
 {
   pkgs,
   username,
+  inputs,
   ...
 }: {
   services.polybar = let
-    colorsConfig =
-      pkgs.fetchFromGitHub
-      {
-        owner = "catppuccin";
-        repo = "polybar";
-        rev = "9ee66f83335404186ce979bac32fcf3cd047396a";
-        sha256 = "sha256-bUbSgMg/sa2faeEUZo80GNmhOX3wn2jLzfA9neF8ERA=";
-      }
-      + /themes/mocha.ini;
+    colorsConfig = "${inputs.catppuccin-polybar}/themes/mocha.ini";
   in {
     enable = true;
     settings = {

@@ -1,6 +1,7 @@
 {
   pkgs,
   config,
+  username,
   ...
 }: {
   boot.loader.systemd-boot.enable = true;
@@ -41,9 +42,14 @@
     alsa.support32Bit = true;
     pulse.enable = true;
   };
-  users.users.christian = {
+
+  programs.zsh.enable = true;
+  users.users.${username} = {
+    shell = pkgs.zsh;
     isNormalUser = true;
     description = "Christian Sheridan";
+
+    # TODO: I can probably remove docker and libvirtd from here.
     extraGroups = ["docker" "networkmanager" "wheel" "libvirtd"];
   };
 

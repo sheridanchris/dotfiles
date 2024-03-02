@@ -16,6 +16,26 @@
       url = "github:nix-community/nixvim";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    catppuccin-alacritty = {
+      url = "github:catppuccin/alacritty";
+      flake = false;
+    };
+    catppuccin-starship = {
+      url = "github:catppuccin/starship";
+      flake = false;
+    };
+    catppuccin-btop = {
+      url = "github:catppuccin/btop";
+      flake = false;
+    };
+    catppuccin-rofi = {
+      url = "github:catppuccin/rofi";
+      flake = false;
+    };
+    catppuccin-polybar = {
+      url = "github:catppuccin/polybar";
+      flake = false;
+    };
   };
   outputs = {
     self,
