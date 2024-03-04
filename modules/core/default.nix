@@ -6,6 +6,7 @@
     ./styles.nix
     ./system.nix
     ./xserver.nix
+    ./hardware.nix
     ./extra.nix
   ];
 }

@@ -48,9 +48,7 @@
     shell = pkgs.zsh;
     isNormalUser = true;
     description = "Christian Sheridan";
-
-    # TODO: I can probably remove docker and libvirtd from here.
-    extraGroups = ["docker" "networkmanager" "wheel" "libvirtd"];
+    extraGroups = ["networkmanager" "wheel"];
   };
 
   # Workaround for GNOME autologin: https://github.com/NixOS/nixpkgs/issues/103746#issuecomment-945091229
@@ -68,20 +66,6 @@
   programs.gnupg.agent = {
     enable = true;
     pinentryFlavor = "gtk2";
-    # enableSSHSupport = true;
-  };
-
-  hardware.opengl = {
-    enable = true;
-    driSupport = true;
-    driSupport32Bit = true;
-  };
-
-  hardware.nvidia = {
-    modesetting.enable = true;
-    nvidiaSettings = true;
-    forceFullCompositionPipeline = true;
-    package = config.boot.kernelPackages.nvidiaPackages.stable;
   };
 
   xdg = {

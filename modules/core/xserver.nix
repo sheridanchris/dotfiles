@@ -2,7 +2,7 @@
   services.xserver = {
     enable = true;
     xkb.layout = "us";
-    videoDrivers = ["nvidia"];
+    # videoDrivers = ["nvidia"];
     displayManager = {
       gdm = {
         enable = true;
