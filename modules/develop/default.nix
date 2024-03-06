@@ -3,6 +3,6 @@
     ./git.nix
     ./helix.nix
     ./vscode.nix
-    ./neovim
+    # ./neovim
   ];
 }

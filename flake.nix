@@ -36,6 +36,10 @@
       url = "github:catppuccin/polybar";
       flake = false;
     };
+    cascade-firefox = {
+      url = "github:cascadefox/cascade";
+      flake = false;
+    };
   };
   outputs = {
     self,

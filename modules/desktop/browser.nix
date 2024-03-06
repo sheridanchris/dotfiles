@@ -1,26 +1,84 @@
 {
   pkgs,
+  lib,
+  inputs,
   username,
   ...
 }: {
   home-manager.users.${username} = {
-    home.packages = with pkgs; [vivaldi];
+    # TODO: catppuccin integration.
+    home.file."cascade-firefox-theme" = {
+      target = ".mozilla/firefox/christian/chrome/includes";
+      source = "${inputs.cascade-firefox}/chrome/includes";
+    };
 
-    programs.librewolf = {
+    home.file."cascade-firefox-theme-catppuccin-integration" = {
+      target = ".mozilla/firefox/christian/chrome/integrations/catppuccin";
+      source = "${inputs.cascade-firefox}/integrations/catppuccin";
+    };
+
+    programs.firefox = {
       enable = true;
-      # Enable WebGL, cookies and history
-      settings = {
-        "webgl.disabled" = false;
-        "privacy.resistFingerprinting" = false;
-        "privacy.clearOnShutdown.history" = false;
-        "privacy.clearOnShutdown.cookies" = false;
-        "network.cookie.lifetimePolicy" = 0;
+      profiles.${username} = {
+        id = 0;
+        isDefault = true;
+        settings = {
+          "browser.startup.homepage" = "https://start.duckduckgo.com/";
+          "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
+        };
+        userChrome = ''
+          @import 'includes/cascade-config-mouse.css';
+          @import 'integrations/catppuccin/cascade-mocha.css';
+
+          @import 'includes/cascade-layout.css';
+          @import 'includes/cascade-responsive.css';
+          @import 'includes/cascade-floating-panel.css';
+
+          @import 'includes/cascade-nav-bar.css';
+          @import 'includes/cascade-tabs.css';
+        '';
+        search = {
+          default = "DuckDuckGo";
+          engines = {
+            "Nix Packages" = {
+              urls = [
+                {
+                  template = "https://search.nixos.org/packages";
+                  params = [
+                    {
+                      name = "type";
+                      value = "packages";
+                    }
+                    {
+                      name = "query";
+                      value = "{searchTerms}";
+                    }
+                  ];
+                }
+              ];
+              icon = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
+              definedAliases = ["@np"];
+            };
+            "NixOS Wiki" = {
+              urls = [{template = "https://nixos.wiki/index.php?search={searchTerms}";}];
+              iconUpdateURL = "https://nixos.wiki/favicon.png";
+              updateInterval = 24 * 60 * 60 * 1000;
+              definedAliases = ["@nw"];
+            };
+            "Home Manager Options Search" = {
+              urls = [{template = "https://mipmip.github.io/home-manager-option-search/?query={searchTerms}";}];
+              iconUpdateURL = "https://mipmip.github.io/home-manager-option-search/images/favicon.png";
+              updateInterval = 24 * 60 * 60 * 1000;
+              definedAliases = ["@hm"];
+            };
+          };
+        };
       };
     };
   };
 
   xdg.mime.defaultApplications = let
-    defaultBrowser = "vivaldi.desktop";
+    defaultBrowser = "firefox.desktop";
   in {
     "text/html" = defaultBrowser;
     "x-scheme-handler/http" = defaultBrowser;
