@@ -46,7 +46,7 @@
       enable = true;
       git = true;
       icons = true;
-      enableAliases = true;
+      enableZshIntegration = true;
     };
     programs.direnv = {
       enable = true;

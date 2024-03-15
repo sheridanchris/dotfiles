@@ -9,7 +9,8 @@
   home-manager.users.${username} = {
     programs.helix = {
       enable = true;
-      package = inputs.helix.packages.${pkgs.system}.default;
+      package = pkgs.helix;
+      #package = inputs.helix.packages.${pkgs.system}.default;
       defaultEditor = true;
       languages = {
         language = [

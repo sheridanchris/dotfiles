@@ -30,5 +30,6 @@
     zathura
     lazygit
     obs-studio
+    zoom-us
   ];
 }
