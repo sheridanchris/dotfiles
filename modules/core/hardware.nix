@@ -1,4 +1,5 @@
 {config, ...}: {
+  # Setup NVIDIA GPU
   hardware.opengl = {
     enable = true;
     driSupport = true;
@@ -13,4 +14,12 @@
   };
 
   services.xserver.videoDrivers = ["nvidia"];
+
+  # Enable printing and discovery
+  services.printing.enable = true;
+  services.avahi = {
+    enable = true;
+    nssmdns4 = true;
+    openFirewall = true;
+  };
 }

@@ -31,5 +31,7 @@
     lazygit
     obs-studio
     zoom-us
+    fortune
+    cowsay
   ];
 }

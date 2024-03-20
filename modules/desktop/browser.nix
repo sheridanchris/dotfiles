@@ -6,16 +6,15 @@
   ...
 }: {
   home-manager.users.${username} = {
-    # TODO: catppuccin integration.
-    home.file."cascade-firefox-theme" = {
-      target = ".mozilla/firefox/christian/chrome/includes";
-      source = "${inputs.cascade-firefox}/chrome/includes";
-    };
+    # home.file."cascade-firefox-theme" = {
+    #   target = ".mozilla/firefox/christian/chrome/includes";
+    #   source = "${inputs.cascade-firefox}/chrome/includes";
+    # };
 
-    home.file."cascade-firefox-theme-catppuccin-integration" = {
-      target = ".mozilla/firefox/christian/chrome/integrations/catppuccin";
-      source = "${inputs.cascade-firefox}/integrations/catppuccin";
-    };
+    # home.file."cascade-firefox-theme-catppuccin-integration" = {
+    #   target = ".mozilla/firefox/christian/chrome/integrations/catppuccin";
+    #   source = "${inputs.cascade-firefox}/integrations/catppuccin";
+    # };
 
     programs.firefox = {
       enable = true;
@@ -24,19 +23,19 @@
         isDefault = true;
         settings = {
           "browser.startup.homepage" = "https://start.duckduckgo.com/";
-          "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
+          # "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
         };
-        userChrome = ''
-          @import 'includes/cascade-config-mouse.css';
-          @import 'integrations/catppuccin/cascade-mocha.css';
+        # userChrome = ''
+        #   @import 'includes/cascade-config-mouse.css';
+        #   @import 'integrations/catppuccin/cascade-mocha.css';
 
-          @import 'includes/cascade-layout.css';
-          @import 'includes/cascade-responsive.css';
-          @import 'includes/cascade-floating-panel.css';
+        #   @import 'includes/cascade-layout.css';
+        #   @import 'includes/cascade-responsive.css';
+        #   @import 'includes/cascade-floating-panel.css';
 
-          @import 'includes/cascade-nav-bar.css';
-          @import 'includes/cascade-tabs.css';
-        '';
+        #   @import 'includes/cascade-nav-bar.css';
+        #   @import 'includes/cascade-tabs.css';
+        # '';
         search = {
           default = "DuckDuckGo";
           engines = {

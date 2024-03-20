@@ -7,7 +7,7 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  networking.hostName = "nixos";
+  networking.hostName = "nixos"; # TODO: This needs to be dynamic
   networking.networkmanager.enable = true;
 
   time.timeZone = "America/North_Dakota/New_Salem";
@@ -30,7 +30,6 @@
   programs.dconf.enable = true;
   security.polkit.enable = true;
 
-  services.printing.enable = true;
   services.dbus.enable = true;
 
   sound.enable = true;

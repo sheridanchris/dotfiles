@@ -62,7 +62,6 @@
           inherit system;
           specialArgs = {inherit inputs username;};
           modules = [
-            #home-manager.nixosModules.home-manager
             (import ./hosts/nixos/configuration.nix)
           ];
         };

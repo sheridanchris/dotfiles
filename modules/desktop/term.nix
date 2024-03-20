@@ -22,9 +22,10 @@
     };
     programs.zsh = {
       enable = true;
-      enableAutosuggestions = true;
+      autosuggestion.enable = true;
       enableCompletion = true;
       syntaxHighlighting.enable = true;
+      initExtra = "fortune | cowsay";
     };
     programs.starship = {
       enable = true;
