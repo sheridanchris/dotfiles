@@ -22,8 +22,8 @@
         border-color = "\${colors.crust}";
         foreground = "\${colors.surface0}";
         modules-left = "bspwm";
-        modules-center = "window";
-        modules-right = "cpu memory date";
+        modules-center = "date time";
+        modules-right = "cpu memory";
         module-margin-right = 2;
         padding-left = 1;
         padding-right = 1;
@@ -57,14 +57,6 @@
         label-empty-foreground = "\${colors.text}";
         label-empty-padding = 1;
       };
-      "module/window" = {
-        type = "internal/xwindow";
-        format = "<label>";
-        format-foreground = "\${colors.text}";
-
-        label = "%title%";
-        label-empty = "No Active Window";
-      };
       "module/cpu" = {
         type = "internal/cpu";
         interval = 1;
@@ -86,10 +78,17 @@
       "module/date" = {
         type = "internal/date";
         interval = 1.0;
-        date = "%m-%d-%Y";
+        date = "%a, %d %h %Y";
+        format = "<label>";
+        label = "%date%";
+        label-foreground = "\${colors.text}";
+      };
+      "module/time" = {
+        type = "internal/date";
+        interval = 1.0;
         time = "%I:%M";
         format = "<label>";
-        label = " %date% %time%";
+        label = "%time%";
         label-foreground = "\${colors.text}";
       };
     };

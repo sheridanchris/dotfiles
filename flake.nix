@@ -8,10 +8,10 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    helix = {
-      url = "github:helix-editor/helix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    # helix = {
+    #   url = "github:helix-editor/helix";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    # };
     nixvim = {
       url = "github:nix-community/nixvim";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -40,6 +40,7 @@
       url = "github:cascadefox/cascade";
       flake = false;
     };
+    discordfetch.url = "github:cody-quinn/discordfetch";
   };
   outputs = {
     self,
@@ -53,31 +54,30 @@
       inherit system;
       config.allowUnfree = true;
     };
-  in
-    with pkgs; {
-      formatter.${system} = alejandra;
+  in {
+    formatter.${system} = pkgs.alejandra;
 
-      nixosConfigurations = {
-        nixos = nixpkgs.lib.nixosSystem {
-          inherit system;
-          specialArgs = {inherit inputs username;};
-          modules = [
-            (import ./hosts/nixos/configuration.nix)
-          ];
-        };
-      };
-
-      checks.${system} = {
-        pre-commit-check = pre-commit-hooks.lib.${system}.run {
-          src = ./.;
-          hooks = {
-            alejandra.enable = true;
-          };
-        };
-      };
-      devShell.${system} = mkShell {
-        inherit (self.checks.${system}.pre-commit-check) shellHook;
-        packages = [nixd];
+    nixosConfigurations = {
+      nixos = nixpkgs.lib.nixosSystem {
+        inherit system;
+        specialArgs = {inherit inputs username;};
+        modules = [
+          (import ./hosts/nixos/configuration.nix)
+        ];
       };
     };
+
+    checks.${system} = {
+      pre-commit-check = pre-commit-hooks.lib.${system}.run {
+        src = ./.;
+        hooks = {
+          alejandra.enable = true;
+        };
+      };
+    };
+    devShell.${system} = pkgs.mkShell {
+      inherit (self.checks.${system}.pre-commit-check) shellHook;
+      packages = with pkgs; [nixd];
+    };
+  };
 }

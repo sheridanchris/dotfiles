@@ -1,4 +1,6 @@
 {pkgs, ...}: {
+  programs.noisetorch.enable = true;
+
   environment.systemPackages = with pkgs; [
     virt-manager
     pavucontrol
@@ -10,7 +12,7 @@
     ark
     bitwarden
     (kodi.withPackages (kodiPkgs: with kodiPkgs; [netflix]))
-    easyeffects
+    # easyeffects
     feh
     xdo
     flameshot
