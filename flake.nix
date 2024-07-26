@@ -2,20 +2,19 @@
   description = "Christian Sheridan's NixOS System and User Configuration";
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-    spicetify-nix.url = "github:the-argus/spicetify-nix";
     pre-commit-hooks.url = "github:cachix/pre-commit-hooks.nix";
     home-manager = {
       url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    spicetify-nix = {
+      url = "github:Gerg-L/spicetify-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     # helix = {
     #   url = "github:helix-editor/helix";
     #   inputs.nixpkgs.follows = "nixpkgs";
     # };
-    nixvim = {
-      url = "github:nix-community/nixvim";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     catppuccin-alacritty = {
       url = "github:catppuccin/alacritty";
       flake = false;
@@ -36,10 +35,10 @@
       url = "github:catppuccin/polybar";
       flake = false;
     };
-    cascade-firefox = {
-      url = "github:cascadefox/cascade";
-      flake = false;
-    };
+    # cascade-firefox = {
+    #   url = "github:cascadefox/cascade";
+    #   flake = false;
+    # };
     discordfetch.url = "github:cody-quinn/discordfetch";
   };
   outputs = {

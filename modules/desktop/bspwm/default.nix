@@ -24,8 +24,8 @@
         normal_border_color = "#1e1e2e"; # Catppuccin base
       };
       startupPrograms = [
-        "xrandr --output DP-0 --primary --mode 1920x1080 --rate 144.00"
-        "feh --bg-fill ~/dotfiles/wallpapers/cat_pacman.png"
+        "xrandr --output DP-0 --primary --mode 3440x1440 --rate 144.00"
+        "feh --bg-fill ~/dotfiles/wallpapers/cat_car.jpg"
         "polybar"
       ];
     };

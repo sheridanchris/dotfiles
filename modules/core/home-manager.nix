@@ -12,8 +12,7 @@
     extraSpecialArgs = {inherit inputs username;};
     users.${username} = {
       imports = [
-        inputs.nixvim.homeManagerModules.nixvim
-        inputs.spicetify-nix.homeManagerModule
+        inputs.spicetify-nix.homeManagerModules.default
       ];
       home = {
         username = username;
