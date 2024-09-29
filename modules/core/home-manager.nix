@@ -10,6 +10,7 @@
     useGlobalPkgs = true;
     useUserPackages = true;
     extraSpecialArgs = {inherit inputs username;};
+    backupFileExtension = "backup";
     users.${username} = {
       imports = [
         inputs.spicetify-nix.homeManagerModules.default

@@ -1,6 +1,11 @@
 {pkgs, ...}: {
   programs.noisetorch.enable = true;
 
+  services.mullvad-vpn = {
+    enable = true;
+    package = pkgs.mullvad-vpn;
+  };
+
   environment.systemPackages = with pkgs; [
     virt-manager
     pavucontrol
@@ -20,7 +25,7 @@
     yt-dlp
     lazydocker
     prismlauncher
-    ngrok
+    # ngrok
     libreoffice
     element-desktop
     entr
@@ -35,5 +40,7 @@
     zoom-us
     fortune
     cowsay
+    dbeaver-bin
+    arandr
   ];
 }

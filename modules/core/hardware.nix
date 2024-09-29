@@ -6,6 +6,7 @@
   };
 
   hardware.nvidia = {
+    open = false; # do not enable the open source nvidia kernel module (for now).
     modesetting.enable = true;
     nvidiaSettings = true;
     forceFullCompositionPipeline = true;

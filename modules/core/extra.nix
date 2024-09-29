@@ -44,7 +44,6 @@
 
   programs.zsh.enable = true;
   users.users.${username} = {
-    shell = pkgs.zsh;
     isNormalUser = true;
     description = "Christian Sheridan";
     extraGroups = ["networkmanager" "wheel"];
@@ -80,20 +79,5 @@
       "video/*" = "mpv.desktop";
       "audio/*" = "mpv.desktop";
     };
-  };
-
-  systemd.user.services.discordfetch = {
-    enable = true;
-    description = "discordfetch";
-    serviceConfig = {
-      Type = "simple";
-      ExecStart = ''
-        ${inputs.discordfetch.packages.${pkgs.system}.default}/bin/discordfetch \
-          --button "GitHub" "https://github.com/sheridanchris" \
-          --button "I use NixOS btw" "https://nixos.org"
-      '';
-    };
-    after = ["network.target"];
-    wantedBy = ["default.target"];
   };
 }

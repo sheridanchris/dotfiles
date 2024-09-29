@@ -7,6 +7,7 @@
     ./system.nix
     ./xserver.nix
     ./hardware.nix
+    ./services.nix
     ./extra.nix
   ];
 }

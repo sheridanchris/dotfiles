@@ -11,10 +11,6 @@
       url = "github:Gerg-L/spicetify-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    # helix = {
-    #   url = "github:helix-editor/helix";
-    #   inputs.nixpkgs.follows = "nixpkgs";
-    # };
     catppuccin-alacritty = {
       url = "github:catppuccin/alacritty";
       flake = false;
@@ -35,11 +31,8 @@
       url = "github:catppuccin/polybar";
       flake = false;
     };
-    # cascade-firefox = {
-    #   url = "github:cascadefox/cascade";
-    #   flake = false;
-    # };
     discordfetch.url = "github:cody-quinn/discordfetch";
+    zen-browser.url = "github:MarceColl/zen-browser-flake";
   };
   outputs = {
     self,

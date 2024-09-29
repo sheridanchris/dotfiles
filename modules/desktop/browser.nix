@@ -1,21 +1,12 @@
 {
   pkgs,
-  lib,
   inputs,
   username,
   ...
 }: {
+  environment.systemPackages = [inputs.zen-browser.packages."${pkgs.system}".default];
+
   home-manager.users.${username} = {
-    # home.file."cascade-firefox-theme" = {
-    #   target = ".mozilla/firefox/christian/chrome/includes";
-    #   source = "${inputs.cascade-firefox}/chrome/includes";
-    # };
-
-    # home.file."cascade-firefox-theme-catppuccin-integration" = {
-    #   target = ".mozilla/firefox/christian/chrome/integrations/catppuccin";
-    #   source = "${inputs.cascade-firefox}/integrations/catppuccin";
-    # };
-
     programs.firefox = {
       enable = true;
       profiles.${username} = {
@@ -23,19 +14,7 @@
         isDefault = true;
         settings = {
           "browser.startup.homepage" = "https://start.duckduckgo.com/";
-          # "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
         };
-        # userChrome = ''
-        #   @import 'includes/cascade-config-mouse.css';
-        #   @import 'integrations/catppuccin/cascade-mocha.css';
-
-        #   @import 'includes/cascade-layout.css';
-        #   @import 'includes/cascade-responsive.css';
-        #   @import 'includes/cascade-floating-panel.css';
-
-        #   @import 'includes/cascade-nav-bar.css';
-        #   @import 'includes/cascade-tabs.css';
-        # '';
         search = {
           default = "DuckDuckGo";
           force = true;
@@ -59,6 +38,11 @@
               icon = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
               definedAliases = ["@np"];
             };
+            "NixOS Options Search" = {
+              urls = [{template = "https://search.nixos.org/options?channel=unstable&from=0&size=50&sort=relevance&type=packages&query={searchTerms}";}];
+              icon = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
+              definedAliases = ["@no"];
+            };
             "NixOS Wiki" = {
               urls = [{template = "https://nixos.wiki/index.php?search={searchTerms}";}];
               iconUpdateURL = "https://nixos.wiki/favicon.png";
@@ -70,6 +54,12 @@
               iconUpdateURL = "https://home-manager-options.extranix.com/images/favicon.png";
               updateInterval = 24 * 60 * 60 * 1000;
               definedAliases = ["@hm"];
+            };
+            "GitHub" = {
+              urls = [{template = "https://github.com/search?q={searchTerms}&type=Everything";}];
+              iconUpdateURL = "https://github.com/favicon.ico";
+              updateInterval = 24 * 60 * 60 * 1000;
+              definedAliases = ["@gh"];
             };
           };
         };
