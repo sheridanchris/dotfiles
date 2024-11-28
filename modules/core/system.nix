@@ -1,6 +1,6 @@
 {pkgs, ...}: {
   nix = {
-    package = pkgs.nixFlakes;
+    # package = pkgs.nixFlakes;
     settings = {
       auto-optimise-store = true;
       experimental-features = ["nix-command" "flakes"];

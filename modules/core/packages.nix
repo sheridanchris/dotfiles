@@ -42,5 +42,6 @@
     cowsay
     dbeaver-bin
     arandr
+    transmission_4-gtk
   ];
 }
