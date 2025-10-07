@@ -23,6 +23,11 @@
     catppuccin.hyprland.enable = true;
     catppuccin.hyprland.flavor = "mocha";
 
+    home.file.".config/hypr/hyprpaper.conf".text = ''
+      preload = /home/${username}/Pictures/wallpaper.png
+      wallpaper = ,/home/${username}/Pictures/wallpaper.png
+    '';
+
     wayland.windowManager.hyprland = {
       enable = true;
       xwayland.enable = true;
@@ -87,6 +92,7 @@
         ];
         "exec-once" = [
           "waybar"
+          "hyprpaper"
         ];
       };
     };
