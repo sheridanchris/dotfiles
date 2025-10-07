@@ -33,7 +33,7 @@
 
   services.dbus.enable = true;
 
-  hardware.pulseaudio.enable = false;
+  services.pulseaudio.enable = false;
   security.rtkit.enable = true;
   services.pipewire = {
     enable = true;
@@ -68,11 +68,6 @@
 
   xdg = {
     autostart.enable = true;
-    portal = {
-      enable = true;
-      extraPortals = with pkgs; [xdg-desktop-portal-gtk];
-      config.common.default = "gtk";
-    };
     mime.defaultApplications = {
       "application/pdf" = "org.pwmt.zathura.desktop";
       "image/*" = "feh.desktop";

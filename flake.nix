@@ -11,28 +11,18 @@
       url = "github:Gerg-L/spicetify-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    catppuccin-alacritty = {
-      url = "github:catppuccin/alacritty";
-      flake = false;
-    };
-    catppuccin-starship = {
-      url = "github:catppuccin/starship";
-      flake = false;
-    };
-    catppuccin-btop = {
-      url = "github:catppuccin/btop";
-      flake = false;
-    };
-    catppuccin-rofi = {
-      url = "github:catppuccin/rofi";
-      flake = false;
-    };
-    catppuccin-polybar = {
-      url = "github:catppuccin/polybar";
-      flake = false;
-    };
+    catppuccin.url = "github:catppuccin/nix";
     discordfetch.url = "github:cody-quinn/discordfetch";
     zen-browser.url = "github:MarceColl/zen-browser-flake";
+    hyprland.url = "github:hyprwm/Hyprland";
+    hyprland-plugins = {
+      url = "github:hyprwm/hyprland-plugins";
+      inputs.hyprland.follows = "hyprland";
+    };
+    split-monitor-workspaces = {
+      url = "github:Duckonaut/split-monitor-workspaces";
+      inputs.hyprland.follows = "hyprland";
+    };
   };
   outputs = {
     self,

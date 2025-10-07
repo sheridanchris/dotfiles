@@ -1,10 +1,9 @@
 {...}: {
   imports = [
-    ./dunst.nix
-    ./rofi.nix
+    ./wayland
     ./spotify.nix
     ./browser.nix
     ./term.nix
-    ./bspwm
+    ./rofi.nix
   ];
 }

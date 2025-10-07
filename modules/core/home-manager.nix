@@ -14,6 +14,7 @@
     users.${username} = {
       imports = [
         inputs.spicetify-nix.homeManagerModules.default
+        inputs.catppuccin.homeModules.catppuccin
       ];
       home = {
         username = username;

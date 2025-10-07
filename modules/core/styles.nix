@@ -10,15 +10,12 @@
       dejavu_fonts
       noto-fonts
       noto-fonts-lgc-plus
-      jetbrains-mono
       twitter-color-emoji
       font-awesome
       commit-mono
       monaspace
       geist-font
-      (nerdfonts.override {
-        fonts = ["JetBrainsMono"];
-      })
+      nerd-fonts.jetbrains-mono
     ];
 
     fontconfig = {
@@ -32,32 +29,38 @@
   };
 
   home-manager.users.${username} = {
-    home.pointerCursor = {
-      package = pkgs.catppuccin-cursors.mochaPink;
-      name = "Catppuccin-Mocha-Pink-Cursors";
-      size = 32;
-    };
+    # home.pointerCursor = {
+    #   package = pkgs.catppuccin-cursors.mochaPink;
+    #   name = "Catppuccin-Mocha-Pink-Cursors";
+    #   size = 32;
+    # };
+
+    catppuccin.cursors.enable = true;
+    catppuccin.cursors.flavor = "mocha";
+
+    catppuccin.gtk.icon.enable = true;
+    catppuccin.gtk.icon.flavor = "mocha";
 
     gtk = {
       enable = true;
       gtk3.extraConfig.gtk-application-prefer-dark-theme = true;
       gtk4.extraConfig.gtk-application-prefer-dark-theme = true;
-      theme = {
-        package = pkgs.catppuccin-gtk.override {
-          accents = ["pink"];
-          size = "compact";
-          tweaks = ["rimless" "normal"];
-          variant = "mocha";
-        };
-        name = "Catppuccin-Mocha-Compact-Pink-Dark";
-      };
-      iconTheme = {
-        package = pkgs.catppuccin-papirus-folders.override {
-          accent = "pink";
-          flavor = "mocha";
-        };
-        name = "Papirus-Dark";
-      };
+      # theme = {
+      #   name = "Catppuccin-Mocha-Compact-Pink-Dark";
+      #   package = pkgs.catppuccin-gtk.override {
+      #     accents = ["pink"];
+      #     size = "compact";
+      #     tweaks = ["rimless" "normal"];
+      #     variant = "mocha";
+      #   };
+      # };
+      # iconTheme = {
+      #   package = pkgs.catppuccin-papirus-folders.override {
+      #     accent = "pink";
+      #     flavor = "mocha";
+      #   };
+      #   name = "Papirus-Dark";
+      # };
     };
 
     # TODO: Catppuccin

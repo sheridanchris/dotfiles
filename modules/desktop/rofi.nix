@@ -7,6 +7,8 @@
   ...
 }: {
   home-manager.users.${username} = {
+    catppuccin.rofi.enable = true;
+    catppuccin.rofi.flavor = "mocha";
     programs.rofi = {
       enable = true;
       extraConfig = {
@@ -20,7 +22,6 @@
         display-drun = "  Apps ";
         sidebar-mode = true;
       };
-      theme = "${inputs.catppuccin-rofi}/basic/.local/share/rofi/themes/catppuccin-mocha.rasi";
     };
   };
 }

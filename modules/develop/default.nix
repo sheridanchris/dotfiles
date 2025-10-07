@@ -5,5 +5,5 @@
     ./vscode.nix
   ];
 
-  environment.systemPackages = with pkgs; [jetbrains.rider];
+  # environment.systemPackages = with pkgs; [jetbrains.rider];
 }

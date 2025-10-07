@@ -1,5 +1,4 @@
 {
-  config,
   pkgs,
   username,
   lib,
@@ -9,12 +8,13 @@
   users.users.${username}.shell = pkgs.zsh;
 
   home-manager.users.${username} = {
+    catppuccin.alacritty.enable = true;
+    catppuccin.alacritty.flavor = "mocha";
+
     programs.alacritty = {
       enable = true;
       settings = {
-        import = ["${inputs.catppuccin-alacritty}/catppuccin-mocha.toml"];
-        # shell.program = "zsh";
-        shell.program = "nu";
+        terminal.shell.program = "nu";
         font = {
           size = 15;
           normal = {
@@ -28,7 +28,6 @@
       autosuggestion.enable = true;
       enableCompletion = true;
       syntaxHighlighting.enable = true;
-      # initExtra = "fortune | cowsay";
     };
     programs.nushell = {
       enable = true;
@@ -42,21 +41,22 @@
         gp = "${git} push origin main";
       };
     };
+    catppuccin.starship.enable = true;
+    catppuccin.starship.flavor = "mocha";
     programs.starship = {
       enable = true;
       enableNushellIntegration = true;
       enableZshIntegration = true;
-      settings =
-        {
-          format = "$all";
-          palette = "catppuccin_mocha";
-          character = {
-            success_symbol = "[➜](bold green)";
-            error_symbol = "[➜](bold red)";
-          };
-        }
-        // builtins.fromTOML (builtins.readFile
-          "${inputs.catppuccin-starship}/themes/mocha.toml");
+      settings = {
+        format = "$all";
+        # palette = "catppuccin_mocha";
+        character = {
+          success_symbol = "[➜](bold green)";
+          error_symbol = "[➜](bold red)";
+        };
+      };
+      # // builtins.fromTOML (builtins.readFile
+      #   "${inputs.catppuccin-starship}/themes/mocha.toml");
     };
 
     programs.eza = {
@@ -64,7 +64,6 @@
       git = true;
       icons = "auto";
       enableZshIntegration = true;
-      # enableNushellIntegration = true;
     };
     programs.direnv = {
       enable = true;
@@ -73,12 +72,14 @@
       enableNushellIntegration = true;
     };
 
-    xdg.configFile."btop/themes/catppuccin_mocha.theme".source = "${inputs.catppuccin-btop}/themes/catppuccin_mocha.theme";
+    # xdg.configFile."btop/themes/catppuccin_mocha.theme".source = "${inputs.catppuccin-btop}/themes/catppuccin_mocha.theme";
+    catppuccin.btop.enable = true;
+    catppuccin.btop.flavor = "mocha";
     programs.btop = {
       enable = true;
-      settings = {
-        color_theme = "catppuccin_mocha.theme";
-      };
+      # settings = {
+      #   color_theme = "catppuccin_mocha.theme";
+      # };
     };
   };
 }

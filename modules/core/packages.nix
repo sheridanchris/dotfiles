@@ -14,7 +14,7 @@
     discord
     thunderbird
     xfce.thunar
-    ark
+    kdePackages.ark
     bitwarden
     (kodi.withPackages (kodiPkgs: with kodiPkgs; [netflix]))
     # easyeffects
