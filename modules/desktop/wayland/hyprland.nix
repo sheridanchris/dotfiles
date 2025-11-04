@@ -4,19 +4,7 @@
   username,
   ...
 }: {
-  # TODO: NVIDIA, BINDS, MULTI-MONITOR WORKSPACES, STARTUP PROGRAMS, ...
-
   programs.hyprland.enable = true;
-  # programs.hyprland.package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
-  # programs.hyprland.xwayland.enable = true;
-  # programs.hyprland.enableNvidiaPatches = true;
-
-  # xdg.portal = {
-  #   enable = true;
-  #   extraPortals = [
-  #     inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland
-  #   ];
-  # };
 
   # https://nix-community.github.io/home-manager/options.xhtml#opt-wayland.windowManager.hyprland.enable
   home-manager.users.${username} = {
@@ -55,8 +43,9 @@
 
             "$mod_shift, W, exec, xdg-open https://duckduckgo.com"
             "$mod, Return, exec, alacritty"
-            "$mod_shift, Return, exec, thunar"
-            "$mod, O, exec, rofi -show drun"
+            "$mod_shift, Return, exec, alacritty --command yazi"
+            "$mod, O, exec, walker"
+            "$mod, Print, exec, grim -g \"\$(slurp)\" - | wl-copy"
           ]
           ++ (
             builtins.concatLists (builtins.genList (
@@ -93,6 +82,7 @@
         "exec-once" = [
           "waybar"
           "hyprpaper"
+          "walker --gapplication-service"
         ];
       };
     };

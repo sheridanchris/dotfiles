@@ -15,6 +15,7 @@
       imports = [
         inputs.spicetify-nix.homeManagerModules.default
         inputs.catppuccin.homeModules.catppuccin
+        inputs.walker.homeManagerModules.default
       ];
       home = {
         username = username;

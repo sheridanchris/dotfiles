@@ -1,9 +1,13 @@
-{pkgs, ...}: {
+{username, ...}: {
   imports = [
     ./git.nix
-    # ./helix.nix
+    ./helix.nix
     ./vscode.nix
   ];
 
-  # environment.systemPackages = with pkgs; [jetbrains.rider];
+  # environment.sessionVariables.EDITOR = "hx";
+
+  home-manager.users.${username} = {
+    home.sessionVariables.EDITOR = "hx";
+  };
 }

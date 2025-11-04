@@ -7,8 +7,12 @@
     # TODO: Path-based user-name and email address for Work. (if required)
     programs.git = {
       enable = true;
-      userName = "sheridanchris";
-      userEmail = "christiansheridan@outlook.com";
+      settings = {
+        user = {
+          name = "sheridanchris";
+          email = "christiansheridan@outlook.com";
+        };
+      };
       signing = {
         key = "85BC3B03CAF4E5CD";
         signByDefault = true;

@@ -15,33 +15,21 @@
     thunderbird
     xfce.thunar
     kdePackages.ark
-    bitwarden
-    (kodi.withPackages (kodiPkgs: with kodiPkgs; [netflix]))
-    # easyeffects
+    bitwarden-desktop
     feh
     xdo
-    flameshot
     mpv
     yt-dlp
     lazydocker
-    prismlauncher
-    # ngrok
+    (prismlauncher.override {jdks = [jdk8 jdk11 jdk17 jdk];})
     libreoffice
     element-desktop
-    entr
     slack
-    slides
-    cmus
     ripgrep
-    feh
-    zathura
     lazygit
     obs-studio
     zoom-us
-    fortune
-    cowsay
     dbeaver-bin
-    arandr
     transmission_4-gtk
   ];
 }

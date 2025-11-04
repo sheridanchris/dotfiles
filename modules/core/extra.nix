@@ -53,13 +53,6 @@
   systemd.services."getty@tty1".enable = false;
   systemd.services."autovt@tty1".enable = false;
 
-  # Imagine only using Java for Minecraft!
-  programs.java = {
-    enable = true;
-    additionalRuntimes = {inherit (pkgs) jdk17 jdk11 jdk8;};
-    package = pkgs.jdk17;
-  };
-
   services.pcscd.enable = true;
   programs.gnupg.agent = {
     enable = true;
@@ -69,7 +62,7 @@
   xdg = {
     autostart.enable = true;
     mime.defaultApplications = {
-      "application/pdf" = "org.pwmt.zathura.desktop";
+      # "application/pdf" = "org.pwmt.zathura.desktop";
       "image/*" = "feh.desktop";
       "video/*" = "mpv.desktop";
       "audio/*" = "mpv.desktop";

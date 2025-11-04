@@ -7,12 +7,8 @@
   # https://github.com/hyprland-community/awesome-hyprland
 
   # TODO:
-  # Bar (Waybar? HyprPanel?) Went with Hyprpanel which also uses its own notification daemon...
-  # Launcher (Wofi? Tofi? Anyrun?)
-  # Arandr? (wayland xrandr)
-  # Screenshots (grim + slurp?)
-  # Notification Daemon (dunst?, mako?) Hyprpanel's notification daemon, for now...
   # Screensharing
+  # Hyprlock
   imports = [
     ./hyprland.nix
     ./waybar.nix
@@ -27,4 +23,15 @@
     grim
     slurp
   ];
+
+  home-manager.users.${username} = {
+    catppuccin.mako.enable = true;
+    catppuccin.mako.flavor = "mocha";
+    services.mako.enable = true;
+
+    programs.walker = {
+      enable = true;
+      runAsService = true;
+    };
+  };
 }
