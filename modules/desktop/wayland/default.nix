@@ -5,10 +5,6 @@
 }: {
   # https://wiki.hypr.land/
   # https://github.com/hyprland-community/awesome-hyprland
-
-  # TODO:
-  # Screensharing
-  # Hyprlock
   imports = [
     ./hyprland.nix
     ./waybar.nix
@@ -29,9 +25,10 @@
     catppuccin.mako.flavor = "mocha";
     services.mako.enable = true;
 
-    programs.walker = {
-      enable = true;
-      runAsService = true;
-    };
+    catppuccin.fuzzel.enable = true;
+    catppuccin.fuzzel.flavor = "mocha";
+    programs.fuzzel.enable = true;
+
+    services.cliphist.enable = true;
   };
 }

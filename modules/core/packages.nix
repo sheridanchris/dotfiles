@@ -31,5 +31,6 @@
     zoom-us
     dbeaver-bin
     transmission_4-gtk
+    (pkgs.writeShellScriptBin "open-url" (builtins.readFile ../../scripts/open-url.sh))
   ];
 }

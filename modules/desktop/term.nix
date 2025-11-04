@@ -1,7 +1,6 @@
 {
   pkgs,
   username,
-  lib,
   ...
 }: {
   users.users.${username}.shell = pkgs.zsh;
@@ -27,24 +26,18 @@
       autosuggestion.enable = true;
       enableCompletion = true;
       syntaxHighlighting.enable = true;
+      shellAliases = {
+        ga = "git add";
+        gc = "git commit";
+        gs = "git status";
+        gl = "git log";
+        gp = "git push origin main";
+      };
     };
-    # programs.nushell = {
-    #   enable = true;
-    #   shellAliases = let
-    #     git = lib.getExe pkgs.git;
-    #   in {
-    #     ga = "${git} add";
-    #     gc = "${git} commit";
-    #     gs = "${git} status";
-    #     gl = "${git} log";
-    #     gp = "${git} push origin main";
-    #   };
-    # };
     catppuccin.starship.enable = true;
     catppuccin.starship.flavor = "mocha";
     programs.starship = {
       enable = true;
-      enableNushellIntegration = true;
       enableZshIntegration = true;
       settings = {
         format = "$all";
@@ -65,7 +58,6 @@
       enable = true;
       nix-direnv.enable = true;
       enableZshIntegration = true;
-      enableNushellIntegration = true;
     };
 
     catppuccin.yazi.enable = true;
@@ -73,11 +65,14 @@
     programs.yazi = {
       enable = true;
       enableZshIntegration = true;
-      enableNushellIntegration = true;
     };
 
     catppuccin.btop.enable = true;
     catppuccin.btop.flavor = "mocha";
     programs.btop.enable = true;
+
+    catppuccin.bat.enable = true;
+    catppuccin.bat.flavor = "mocha";
+    programs.bat.enable = true;
   };
 }

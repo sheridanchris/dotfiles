@@ -44,7 +44,9 @@
             "$mod_shift, W, exec, xdg-open https://duckduckgo.com"
             "$mod, Return, exec, alacritty"
             "$mod_shift, Return, exec, alacritty --command yazi"
-            "$mod, O, exec, walker"
+            "$mod, O, exec, fuzzel"
+            "$mod, S, exec, open-url \"\$(fuzzel --dmenu --prompt-only 'Enter Search Query: ')\""
+            "$mod, C, exec, cliphist list | fuzzel --dmenu | cliphist decode | wl-copy"
             "$mod, Print, exec, grim -g \"\$(slurp)\" - | wl-copy"
           ]
           ++ (
@@ -82,7 +84,7 @@
         "exec-once" = [
           "waybar"
           "hyprpaper"
-          "walker --gapplication-service"
+          "wl-paste --type text --watch cliphist store"
         ];
       };
     };
