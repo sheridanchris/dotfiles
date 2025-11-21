@@ -32,18 +32,24 @@
         gs = "git status";
         gl = "git log";
         gp = "git push origin main";
+        cat = "bat";
       };
     };
-    catppuccin.starship.enable = true;
-    catppuccin.starship.flavor = "mocha";
+    # catppuccin.starship.enable = true;
+    # catppuccin.starship.flavor = "mocha";
     programs.starship = {
       enable = true;
       enableZshIntegration = true;
       settings = {
-        format = "$all";
-        character = {
-          success_symbol = "[➜](bold green)";
-          error_symbol = "[➜](bold red)";
+        format = "[λ ](fg:#a6e3a1)";
+        right_format = "$language_icon $git_metrics $directory";
+        add_newline = false;
+        git_metrics = {
+          disabled = false;
+          format = "[  ](fg:#89b4fa bg:#313244)[|](fg:#585b70 bg:#313244)[ +$added](bg:#313244 fg:#a6e3a1)[ -$deleted ](bg:#313244 fg:#f38ba8)";
+        };
+        directory = {
+          format = "[  ](fg:#89b4fa bg:#313244)[|](fg:#585b70 bg:#313244)[ $path ](bg:#313244 fg:#cdd6f4)";
         };
       };
     };

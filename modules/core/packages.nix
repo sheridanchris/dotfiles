@@ -31,6 +31,9 @@
     zoom-us
     dbeaver-bin
     transmission_4-gtk
+    fzf
+    imagemagick
     (pkgs.writeShellScriptBin "open-url" (builtins.readFile ../../scripts/open-url.sh))
+    (pkgs.writeShellScriptBin "cliphist-fuzzel-img" (builtins.readFile ../../scripts/cliphist-fuzzel-img.sh))
   ];
 }

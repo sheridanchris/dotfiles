@@ -4,17 +4,26 @@
   username,
   ...
 }: {
+  # https://wiki.hypr.land/
+  # https://github.com/hyprland-community/awesome-hyprland
+  imports = [
+    (import ./waybar.nix {
+      username = username;
+      workspace-module = "hyprland/workspaces";
+    })
+  ];
+
+  environment.systemPackages = with pkgs; [
+    grim
+    slurp
+  ];
+
   programs.hyprland.enable = true;
 
   # https://nix-community.github.io/home-manager/options.xhtml#opt-wayland.windowManager.hyprland.enable
   home-manager.users.${username} = {
     catppuccin.hyprland.enable = true;
     catppuccin.hyprland.flavor = "mocha";
-
-    home.file.".config/hypr/hyprpaper.conf".text = ''
-      preload = /home/${username}/Pictures/wallpaper.png
-      wallpaper = ,/home/${username}/Pictures/wallpaper.png
-    '';
 
     wayland.windowManager.hyprland = {
       enable = true;
@@ -29,7 +38,7 @@
 
       plugins = [
         # https://github.com/Duckonaut/split-monitor-workspaces
-        inputs.split-monitor-workspaces.packages.${pkgs.system}.split-monitor-workspaces
+        inputs.split-monitor-workspaces.packages.${pkgs.stdenv.hostPlatform.system}.split-monitor-workspaces
       ];
 
       settings = {
@@ -44,9 +53,10 @@
             "$mod_shift, W, exec, xdg-open https://duckduckgo.com"
             "$mod, Return, exec, alacritty"
             "$mod_shift, Return, exec, alacritty --command yazi"
-            "$mod, O, exec, fuzzel"
-            "$mod, S, exec, open-url \"\$(fuzzel --dmenu --prompt-only 'Enter Search Query: ')\""
-            "$mod, C, exec, cliphist list | fuzzel --dmenu | cliphist decode | wl-copy"
+            "$mod_shift, P, exec, alacritty --command btop"
+            "$mod, O, exec, fuzzel --no-icons"
+            "$mod, S, exec, open-url \"\$(fuzzel --dmenu --placeholder 'Enter Search Query' --prompt-only '> ')\""
+            "$mod, C, exec, cliphist-fuzzel-img"
             "$mod, Print, exec, grim -g \"\$(slurp)\" - | wl-copy"
           ]
           ++ (
@@ -76,15 +86,16 @@
           "DP-1, 3440x1440@144.00, 1920x0, 1"
           "DP-2, 1920x1080@144.00, 0x0, 1"
         ];
-        env = [
-          "LIBVA_DRIVER_NAME,nvidia"
-          "__GLX_VENDOR_LIBRARY_NAME,nvidia"
-          "ELECTRON_OZONE_PLATFORM_HINT,auto"
-        ];
+        # env = [
+        #   "LIBVA_DRIVER_NAME,nvidia"
+        #   "__GLX_VENDOR_LIBRARY_NAME,nvidia"
+        #   "ELECTRON_OZONE_PLATFORM_HINT,auto"
+        # ];
         "exec-once" = [
           "waybar"
-          "hyprpaper"
-          "wl-paste --type text --watch cliphist store"
+          "random-bible-verse-bg"
+          "wl-paste --watch cliphist store"
+          # "wl-paste --type text --watch cliphist store"
         ];
       };
     };

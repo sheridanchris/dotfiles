@@ -1,6 +1,6 @@
 {
-  pkgs,
   username,
+  workspace-module,
   ...
 }: {
   home-manager.users.${username} = {
@@ -17,15 +17,13 @@
             "DP-1"
             "DP-2"
           ];
-          modules-left = ["hyprland/workspaces"];
+          modules-left = [workspace-module];
           modules-center = [];
           modules-right = ["clock"];
 
-          "hyprland/workspaces" = {
+          "${workspace-module}" = {
             format = "{icon}";
             format-icons = {
-              # active = "";
-              # empty = "";
               default = "";
               urgent = "";
             };

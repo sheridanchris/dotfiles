@@ -9,7 +9,7 @@
     serviceConfig = {
       Type = "simple";
       ExecStart = ''
-        ${inputs.discordfetch.packages.${pkgs.system}.default}/bin/discordfetch \
+        ${inputs.discordfetch.packages.${pkgs.stdenv.hostPlatform.system}.default}/bin/discordfetch \
           --button "GitHub" "https://github.com/sheridanchris" \
           --button "I use NixOS btw" "https://nixos.org"
       '';

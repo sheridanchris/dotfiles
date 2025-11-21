@@ -1,23 +1,26 @@
 {
   pkgs,
   username,
+  inputs,
   ...
 }: {
-  # https://wiki.hypr.land/
-  # https://github.com/hyprland-community/awesome-hyprland
   imports = [
-    ./hyprland.nix
-    ./waybar.nix
+    ./niri
+    # ./hyprland.nix
   ];
 
-  environment.sessionVariables.NIXOS_OZONE_WL = "1";
-  environment.sessionVariables.WLR_NO_HARDWARE_CURSORS = "1";
+  environment.sessionVariables = {
+    NIXOS_OZONE_WL = "1";
+    WLR_NO_HARDWARE_CURSORS = "1";
+    LIBVA_DRIVER_NAME = "nvidia";
+    __GLX_VENDOR_LIBRARY_NAME = "nvidia";
+    ELECTRON_OZONE_PLATFORM_HINT = "auto";
+  };
 
   environment.systemPackages = with pkgs; [
-    hyprpaper
     wl-clipboard
-    grim
-    slurp
+    wbg
+    (pkgs.writeShellScriptBin "random-wallpaper" (builtins.readFile ../../../scripts/random-wallpaper.sh))
   ];
 
   home-manager.users.${username} = {
