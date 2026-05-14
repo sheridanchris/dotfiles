@@ -2,7 +2,6 @@
   description = "Christian Sheridan's NixOS System and User Configuration";
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-    pre-commit-hooks.url = "github:cachix/pre-commit-hooks.nix";
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -30,16 +29,10 @@
       url = "github:helix-editor/helix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    elephant.url = "github:abenz1267/elephant";
-    walker = {
-      url = "github:abenz1267/walker";
-      inputs.elephant.follows = "elephant";
-    };
   };
   outputs = {
     self,
     nixpkgs,
-    pre-commit-hooks,
     ...
   } @ inputs: let
     username = "christian";
@@ -61,16 +54,7 @@
       };
     };
 
-    checks.${system} = {
-      pre-commit-check = pre-commit-hooks.lib.${system}.run {
-        src = ./.;
-        hooks = {
-          alejandra.enable = true;
-        };
-      };
-    };
     devShell.${system} = pkgs.mkShell {
-      inherit (self.checks.${system}.pre-commit-check) shellHook;
       packages = with pkgs; [nixd];
     };
   };

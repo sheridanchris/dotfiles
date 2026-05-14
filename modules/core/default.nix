@@ -8,6 +8,7 @@
     ./xserver.nix
     ./hardware.nix
     ./services.nix
+    ./dconf.nix
     ./extra.nix
   ];
 }

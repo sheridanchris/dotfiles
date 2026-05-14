@@ -28,7 +28,6 @@
     LC_TIME = "en_US.UTF-8";
   };
 
-  programs.dconf.enable = true;
   security.polkit.enable = true;
 
   services.dbus.enable = true;
@@ -62,7 +61,7 @@
   xdg = {
     autostart.enable = true;
     mime.defaultApplications = {
-      # "application/pdf" = "org.pwmt.zathura.desktop";
+      "application/pdf" = "org.pwmt.zathura.desktop";
       "image/*" = "feh.desktop";
       "video/*" = "mpv.desktop";
       "audio/*" = "mpv.desktop";

@@ -23,7 +23,7 @@
         serif = ["DejaVu Math TeX Gyre" "DejaVu Serif" "Noto Serif"];
         sansSerif = ["DejaVu Sans" "Noto Sans"];
         monospace = ["JetBrainsMono Nerd Font" "CommitMono" "DejaVu Sans Mono"];
-        emoji = ["Twitter Color Emoji" "Noto Color Emoji" "Noto Emoji"];
+        emoji = ["Noto Color Emoji" "Noto Emoji" "Twitter Color Emoji"];
       };
     };
   };

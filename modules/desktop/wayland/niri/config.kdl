@@ -52,7 +52,7 @@ hotkey-overlay { skip-at-startup; }
 // https://yalter.github.io/niri/Configuration%3A-Window-Rules.html
 // Use `niri msg windows` to view a list of open windows.
 window-rule {
-    match app-id="zen-twilight"
+    match app-id="zen-beta"
     match app-id="discord"
     match app-id="spotify"
     match app-id="Alacritty" title="btop"
@@ -80,9 +80,9 @@ binds {
     Mod+Shift+Slash { show-hotkey-overlay; }
 
     Mod+Return hotkey-overlay-title="Open Alacritty" { spawn "alacritty"; }
-    Mod+Shift+Return hotkey-overlay-title="Open File Manager" { spawn "thunar"; }
+    Mod+Shift+Return hotkey-overlay-title="Open File Manager" { spawn "nautilus"; }
     Mod+O hotkey-overlay-title="Open Application Launcher" { spawn-sh "fuzzel --no-icons"; }
-    Mod+Shift+W hotkey-overlay-title="Open Web Browser" { spawn-sh "zen"; }
+    Mod+Shift+W hotkey-overlay-title="Open Web Browser" { spawn-sh "zen-beta"; }
     Mod+P hotkey-overlay-title="Open Process Manager" { spawn-sh "alacritty -T btop --command btop"; }
     Mod+S hotkey-overlay-title="Search the Web" { spawn-sh "open-url \"$(fuzzel --dmenu --placeholder 'Enter Search Query' --prompt-only '> ')\""; }
 

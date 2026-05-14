@@ -21,6 +21,21 @@
         };
       };
     };
+
+    catppuccin.kitty.enable = true;
+    catppuccin.kitty.flavor = "mocha";
+
+    programs.kitty = {
+      enable = true;
+      font = {
+        name = "CommitMono";
+        size = 15;
+      };
+      settings = {
+        shell = "zsh";
+      };
+    };
+
     programs.zsh = {
       enable = true;
       autosuggestion.enable = true;
@@ -35,8 +50,6 @@
         cat = "bat";
       };
     };
-    # catppuccin.starship.enable = true;
-    # catppuccin.starship.flavor = "mocha";
     programs.starship = {
       enable = true;
       enableZshIntegration = true;

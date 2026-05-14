@@ -1,7 +1,6 @@
 {
   pkgs,
   username,
-  inputs,
   ...
 }: {
   imports = [
@@ -20,6 +19,8 @@
   environment.systemPackages = with pkgs; [
     wl-clipboard
     wbg
+    grim
+    slurp
     (pkgs.writeShellScriptBin "random-wallpaper" (builtins.readFile ../../../scripts/random-wallpaper.sh))
   ];
 

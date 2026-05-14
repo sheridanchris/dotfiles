@@ -4,7 +4,7 @@
     keybindings = {
       # Application Keybindings
       "super + Return" = "alacritty";
-      "super + shift + Return" = "thunar";
+      "super + shift + Return" = "nautilus";
       "super + p" = "alacritty --command btop";
       "super + o" = "rofi -show drun";
       "super + shift + w" = "xdg-open https://duckduckgo.com";
