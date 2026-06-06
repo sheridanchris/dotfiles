@@ -10,6 +10,9 @@
       profiles.default.userSettings = {
         "editor.mouseWheelZoom" = true;
         "editor.semanticHighlighting.enabled" = true;
+        "editor.bracketPairColorization.enabled" = true;
+        "editor.guides.bracketPairs" = "active";
+        "editor.guides.bracketPairsHorizontal" = true;
       };
     };
     stylix.targets.vscode = {

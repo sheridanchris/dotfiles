@@ -74,20 +74,27 @@
       colors.enable = true;
     };
 
-    # TODO: Use stylix???
     programs.starship = {
       enable = true;
       enableZshIntegration = true;
       settings = {
-        format = "[λ ](fg:#a6e3a1)";
-        right_format = "$language_icon $git_metrics $directory";
+        format = "$character";
+        right_format = "$git_branch $git_metrics | $directory";
         add_newline = false;
+        character = {
+          success_symbol = "[λ](bold green)";
+          error_symbol = "[λ](bold red)";
+        };
+        git_branch = {
+          symbol = "";
+          format = "$symbol $branch";
+        };
         git_metrics = {
           disabled = false;
-          format = "[  ](fg:base0D bg:base02)[|](fg:base05 bg:base02)[ +$added](bg:base02 fg:green)[ -$deleted ](bg:base02 fg:red)";
+          format = "[+$added](fg:green) [-$deleted](fg:red)";
         };
         directory = {
-          format = "[  ](fg:base0D bg:base02)[|](fg:base05 bg:base02)[ $path ](bg:base02 fg:base05)";
+          format = " $path";
         };
       };
     };
