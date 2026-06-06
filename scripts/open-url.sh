@@ -11,7 +11,7 @@ if [[ "$input" =~ ^www\. ]]; then
 elif [[ "$input" =~ ^https?:// ]]; then
   url="$input"
 else
-  url="https://unduck.link?q=$input"
+  url="https://duckduckgo.com/?q=$input"
 fi
 
 xdg-open "$url"

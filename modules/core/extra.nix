@@ -7,6 +7,7 @@
 }: {
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
+  boot.kernelPackages = pkgs.linuxPackages_latest;
 
   networking.hostName = "nixos"; # TODO: This needs to be dynamic
   networking.networkmanager.enable = true;
@@ -58,13 +59,10 @@
     pinentryPackage = pkgs.pinentry-gtk2;
   };
 
-  xdg = {
-    autostart.enable = true;
-    mime.defaultApplications = {
-      "application/pdf" = "org.pwmt.zathura.desktop";
-      "image/*" = "feh.desktop";
-      "video/*" = "mpv.desktop";
-      "audio/*" = "mpv.desktop";
-    };
+  xdg.autostart.enable = true;
+
+  services.xserver = {
+    enable = true;
+    xkb.layout = "us";
   };
 }

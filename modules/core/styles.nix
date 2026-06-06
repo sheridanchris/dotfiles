@@ -16,6 +16,7 @@
       monaspace
       geist-font
       nerd-fonts.jetbrains-mono
+      ubuntu-classic
     ];
 
     fontconfig = {
@@ -28,49 +29,49 @@
     };
   };
 
+  stylix.targets.gtk.enable = true;
+  stylix.targets.qt.enable = true;
+
   home-manager.users.${username} = {
-    # home.pointerCursor = {
-    #   package = pkgs.catppuccin-cursors.mochaPink;
-    #   name = "Catppuccin-Mocha-Pink-Cursors";
-    #   size = 32;
-    # };
+    stylix.enable = true;
+    stylix.autoEnable = false;
+    stylix.base16Scheme = "${pkgs.base16-schemes}/share/themes/catppuccin-mocha.yaml";
+    stylix.fonts = {
+      serif = {
+        package = pkgs.dejavu_fonts;
+        name = "DejaVu Serif";
+      };
+      sansSerif = {
+        package = pkgs.dejavu_fonts;
+        name = "DejaVu Sans";
+      };
+      monospace = {
+        package = pkgs.dejavu_fonts;
+        name = "DejaVu Sans Mono";
+      };
+      emoji = {
+        package = pkgs.noto-fonts-color-emoji;
+        name = "Noto Color Emoji";
+      };
+    };
 
-    catppuccin.cursors.enable = true;
-    catppuccin.cursors.flavor = "mocha";
-
-    catppuccin.gtk.icon.enable = true;
-    catppuccin.gtk.icon.flavor = "mocha";
+    dconf.settings."org/gnome/desktop/interface".color-scheme = "prefer-dark";
 
     gtk = {
       enable = true;
       gtk3.extraConfig.gtk-application-prefer-dark-theme = true;
       gtk4.extraConfig.gtk-application-prefer-dark-theme = true;
-      # theme = {
-      #   name = "Catppuccin-Mocha-Compact-Pink-Dark";
-      #   package = pkgs.catppuccin-gtk.override {
-      #     accents = ["pink"];
-      #     size = "compact";
-      #     tweaks = ["rimless" "normal"];
-      #     variant = "mocha";
-      #   };
-      # };
-      # iconTheme = {
-      #   package = pkgs.catppuccin-papirus-folders.override {
-      #     accent = "pink";
-      #     flavor = "mocha";
-      #   };
-      #   name = "Papirus-Dark";
-      # };
     };
 
-    # TODO: Catppuccin
-    qt = {
+    stylix.targets.gtk = {
       enable = true;
-      platformTheme.name = "adwaita";
-      style = {
-        package = pkgs.adwaita-qt;
-        name = "Adwaita-dark";
-      };
+      colors.enable = true;
+      fonts.enable = true;
+    };
+
+    stylix.targets.qt = {
+      enable = true;
+      standardDialogs = "xdgdesktopportal";
     };
   };
 }

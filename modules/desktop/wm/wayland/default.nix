@@ -5,7 +5,6 @@
 }: {
   imports = [
     ./niri
-    # ./hyprland.nix
   ];
 
   environment.sessionVariables = {
@@ -21,17 +20,23 @@
     wbg
     grim
     slurp
-    (pkgs.writeShellScriptBin "random-wallpaper" (builtins.readFile ../../../scripts/random-wallpaper.sh))
+    (pkgs.writeShellScriptBin "random-wallpaper" (builtins.readFile ../../../../scripts/random-wallpaper.sh))
   ];
 
   home-manager.users.${username} = {
-    catppuccin.mako.enable = true;
-    catppuccin.mako.flavor = "mocha";
     services.mako.enable = true;
+    stylix.targets.mako = {
+      enable = true;
+      colors.enable = true;
+      fonts.enable = true;
+    };
 
-    catppuccin.fuzzel.enable = true;
-    catppuccin.fuzzel.flavor = "mocha";
     programs.fuzzel.enable = true;
+    stylix.targets.fuzzel = {
+      enable = true;
+      colors.enable = true;
+      fonts.enable = true;
+    };
 
     services.cliphist.enable = true;
   };

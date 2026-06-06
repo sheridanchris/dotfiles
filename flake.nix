@@ -10,7 +10,6 @@
       url = "github:Gerg-L/spicetify-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    catppuccin.url = "github:catppuccin/nix";
     discordfetch.url = "github:cody-quinn/discordfetch";
     hyprland.url = "github:hyprwm/Hyprland";
     hyprland-plugins = {
@@ -27,6 +26,10 @@
     };
     helix = {
       url = "github:helix-editor/helix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    stylix = {
+      url = "github:nix-community/stylix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };

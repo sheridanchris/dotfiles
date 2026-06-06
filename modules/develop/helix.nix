@@ -6,9 +6,6 @@
   ...
 }: {
   home-manager.users.${username} = {
-    catppuccin.helix.enable = true;
-    catppuccin.helix.flavor = "mocha";
-
     programs.helix = {
       enable = true;
       package = inputs.helix.packages.${pkgs.stdenv.hostPlatform.system}.default;
@@ -43,7 +40,6 @@
         };
       };
       settings = {
-        #theme = "catppuccin_mocha";
         editor = {
           mouse = false;
           cursorline = true;

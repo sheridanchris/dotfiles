@@ -4,7 +4,6 @@
   ...
 }: {
   home-manager.users.${username} = {
-    # TODO: Path-based user-name and email address for Work. (if required)
     programs.git = {
       enable = true;
       settings = {

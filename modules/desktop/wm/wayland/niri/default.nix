@@ -3,24 +3,30 @@
   username,
   ...
 }: {
+  # TODO: Should I move something like polkit.enable = true; to the individual environments?
+  # https://wiki.nixos.org/wiki/Niri
   environment.systemPackages = [
-    pkgs.niri
     pkgs.polkit_gnome
     pkgs.xwayland-satellite
   ];
 
+  programs.niri.enable = true;
   services.gnome.gnome-keyring.enable = true;
-  services.displayManager.sessionPackages = [pkgs.niri];
 
-  xdg.portal = {
+  services.greetd = {
     enable = true;
-    config.common.default = "gnome";
-    extraPortals = [
-      pkgs.xdg-desktop-portal-gtk
-      pkgs.xdg-desktop-portal-gnome
-    ];
-    configPackages = [pkgs.niri];
+    settings = let
+      session = {
+        command = "${pkgs.niri}/bin/niri-session";
+        user = username;
+      };
+    in {
+      initial_session = session;
+      default_session = session;
+    };
   };
+
+  systemd.user.services.niri.enableDefaultPath = false;
 
   systemd.user.services.polkit-gnome-authentication-agent-1 = {
     description = "polkit-gnome-authentication-agent-1";

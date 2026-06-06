@@ -5,6 +5,7 @@
 }: {
   imports = [
     inputs.home-manager.nixosModules.home-manager
+    inputs.stylix.nixosModules.stylix
   ];
   home-manager = {
     useGlobalPkgs = true;
@@ -13,7 +14,7 @@
     backupFileExtension = "backup";
     users.${username} = {
       imports = [
-        inputs.catppuccin.homeModules.catppuccin
+        inputs.stylix.homeModules.stylix
       ];
       home = {
         username = username;

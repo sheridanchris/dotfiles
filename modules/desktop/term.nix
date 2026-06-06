@@ -1,45 +1,31 @@
 {
   pkgs,
+  lib,
   username,
   ...
 }: {
   users.users.${username}.shell = pkgs.zsh;
 
-  home-manager.users.${username} = {
-    catppuccin.alacritty.enable = true;
-    catppuccin.alacritty.flavor = "mocha";
+  environment.systemPackages = with pkgs; [
+    zsh-fzf-tab
+  ];
 
+  home-manager.users.${username} = {
     programs.alacritty = {
       enable = true;
-      settings = {
-        terminal.shell.program = "zsh";
-        font = {
-          size = 15;
-          normal = {
-            family = "CommitMono";
-          };
-        };
-      };
+      settings.terminal.shell.program = "zsh";
     };
 
-    catppuccin.kitty.enable = true;
-    catppuccin.kitty.flavor = "mocha";
-
-    programs.kitty = {
+    stylix.targets.alacritty = {
       enable = true;
-      font = {
-        name = "CommitMono";
-        size = 15;
-      };
-      settings = {
-        shell = "zsh";
-      };
+      colors.enable = true;
+      fonts.enable = true;
     };
 
     programs.zsh = {
       enable = true;
-      autosuggestion.enable = true;
       enableCompletion = true;
+      autosuggestion.enable = true;
       syntaxHighlighting.enable = true;
       shellAliases = {
         ga = "git add";
@@ -48,8 +34,47 @@
         gl = "git log";
         gp = "git push origin main";
         cat = "bat";
+        mkdir = "mkdir -p";
       };
+      plugins = [
+        {
+          name = "fzf-tab";
+          src = "${pkgs.zsh-fzf-tab}/share/fzf-tab";
+        }
+      ];
+      initContent = ''
+        zstyle ':completion:*' menu no
+        zstyle ':completion:*' list-colors ''${(s.:.)LS_COLORS}
+        zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza --tree --color=always --level=2 $realpath'
+        zstyle ':fzf-tab:*' fzf-flags --height=60% --layout=reverse --border --ansi
+      '';
     };
+
+    programs.fzf = {
+      enable = true;
+      enableZshIntegration = true;
+    };
+    stylix.targets.fzf = {
+      enable = true;
+      colors.enable = true;
+    };
+
+    programs.carapace = {
+      enable = true;
+      ignoreCase = true;
+      enableZshIntegration = true;
+    };
+
+    programs.vivid = {
+      enable = true;
+      enableZshIntegration = true;
+    };
+    stylix.targets.vivid = {
+      enable = true;
+      colors.enable = true;
+    };
+
+    # TODO: Use stylix???
     programs.starship = {
       enable = true;
       enableZshIntegration = true;
@@ -79,19 +104,16 @@
       enableZshIntegration = true;
     };
 
-    catppuccin.yazi.enable = true;
-    catppuccin.yazi.flavor = "mocha";
-    programs.yazi = {
+    programs.btop.enable = true;
+    stylix.targets.btop = {
       enable = true;
-      enableZshIntegration = true;
+      colors.enable = true;
     };
 
-    catppuccin.btop.enable = true;
-    catppuccin.btop.flavor = "mocha";
-    programs.btop.enable = true;
-
-    catppuccin.bat.enable = true;
-    catppuccin.bat.flavor = "mocha";
     programs.bat.enable = true;
+    stylix.targets.bat = {
+      enable = true;
+      colors.enable = true;
+    };
   };
 }

@@ -1,11 +1,9 @@
 {
-  config,
   pkgs,
-  lib,
-  inputs,
   username,
   ...
 }: {
+  environment.systemPackages = with pkgs; [virt-manager];
   virtualisation.libvirtd = {
     enable = true;
     onBoot = "start";

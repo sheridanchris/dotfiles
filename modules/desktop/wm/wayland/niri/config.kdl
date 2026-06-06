@@ -26,13 +26,13 @@ output "DP-1" {
 
 // https://yalter.github.io/niri/Configuration:-Layout
 layout {
-    gaps 16
+    gaps 4
     center-focused-column "never"
 
     default-column-width { proportion 0.5; }
 
     focus-ring {
-        width 4
+        width 1.5
         active-color "#7fc8ff"
         inactive-color "#505050"
     }
