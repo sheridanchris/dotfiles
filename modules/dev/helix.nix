@@ -20,6 +20,10 @@
             auto-format = true;
             formatter.command = "alejandra";
           }
+          {
+            name = "gleam";
+            auto-format = true;
+          }
         ];
         language-server = {
           nixd = {
@@ -59,6 +63,10 @@
           C-k = ["extend_to_line_bounds" "delete_selection" "move_line_up" "paste_before"];
         };
       };
+    };
+    stylix.targets.helix = {
+      enable = true;
+      colors.enable = true;
     };
   };
 }

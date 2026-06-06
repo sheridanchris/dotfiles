@@ -91,6 +91,7 @@
         };
         git_metrics = {
           disabled = false;
+          only_nonzero_diffs = false;
           format = "[+$added](fg:green) [-$deleted](fg:red)";
         };
         directory = {

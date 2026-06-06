@@ -13,6 +13,10 @@
         "editor.bracketPairColorization.enabled" = true;
         "editor.guides.bracketPairs" = "active";
         "editor.guides.bracketPairsHorizontal" = true;
+
+        "FSharp.inlayHints.parameterNames" = false;
+        "FSharp.inlayHints.typeAnnotations" = false;
+        "FSharp.pipelineHints.enabled" = false;
       };
     };
     stylix.targets.vscode = {
