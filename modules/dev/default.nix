@@ -5,6 +5,6 @@
   ];
 
   home-manager.users.${username} = {
-    home.sessionVariables.EDITOR = "hx";
+    home.sessionVariables.EDITOR = "code";
   };
 }

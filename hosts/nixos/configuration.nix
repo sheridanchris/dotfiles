@@ -3,7 +3,7 @@
     ./hardware-configuration.nix
     ../../modules/core
     ../../modules/desktop
-    ../../modules/develop
+    ../../modules/dev
     ../../modules/virtualisation
   ];
 }

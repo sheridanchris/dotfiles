@@ -4,6 +4,8 @@
     package = pkgs.mullvad-vpn;
   };
 
+  programs.obs-studio.enable = true;
+
   environment.systemPackages = with pkgs; [
     pavucontrol
     pinentry-gtk2
