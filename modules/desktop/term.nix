@@ -46,7 +46,7 @@
         zstyle ':completion:*' menu no
         zstyle ':completion:*' list-colors ''${(s.:.)LS_COLORS}
         zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza --tree --color=always --level=2 $realpath'
-        zstyle ':fzf-tab:*' fzf-flags --height=60% --layout=reverse --border --ansi
+        zstyle ':fzf-tab:*' use-fzf-default-opts
       '';
     };
 
@@ -84,12 +84,16 @@
         add_newline = false;
         git_metrics = {
           disabled = false;
-          format = "[  ](fg:#89b4fa bg:#313244)[|](fg:#585b70 bg:#313244)[ +$added](bg:#313244 fg:#a6e3a1)[ -$deleted ](bg:#313244 fg:#f38ba8)";
+          format = "[  ](fg:base0D bg:base02)[|](fg:base05 bg:base02)[ +$added](bg:base02 fg:green)[ -$deleted ](bg:base02 fg:red)";
         };
         directory = {
-          format = "[  ](fg:#89b4fa bg:#313244)[|](fg:#585b70 bg:#313244)[ $path ](bg:#313244 fg:#cdd6f4)";
+          format = "[  ](fg:base0D bg:base02)[|](fg:base05 bg:base02)[ $path ](bg:base02 fg:base05)";
         };
       };
+    };
+    stylix.targets.starship = {
+      enable = true;
+      colors.enable = true;
     };
 
     programs.eza = {
